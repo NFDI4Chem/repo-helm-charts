@@ -4,11 +4,42 @@
 
 replicaCount: 1
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+appProperties:
+  name: nmrXiv
+  key: YmFzZTY0OjNaeEJuRFVnZldBTGhyWTZnWE01aEFUTlh4b1lKU2hNaXF6ejhDZjJMc0E9
+  env: development
+  debug: "true"
+  url: https://dev.nmrxiv.org/
+
+oauthProperties:
+  enabled: true
+  twitterClientID: qwewerfgfdhttfghfg
+  twitterClientSecret: jdkdjfkjskdfjskf
+  twitterRedirectUrl: https://dev.nmrxiv.org/auth/login/twitter/callback
+  githubClientID: qwewerfgfdhttfghfg
+  githubClientSecret: jdkdjfkjskdfjskf
+  githubRedirectUrl: https://dev.nmrxiv.org/auth/login/github/callback
+
+appImage:
+  name: php
+  repository: eu.gcr.io/nmrxiv/app
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
+
+nginxImage:
+  name: nginx
+  repository: eu.gcr.io/nmrxiv/nginx
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+EnvConfigMapRef:
+  name: "nmrxiv-config-map"
+  enabled: true
+EnvSecretRef:
+  name: "nmrxiv-secret"
+  enabled: true
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,7 +47,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -25,16 +56,15 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext: {
+  fsGroup: 82
+}
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext: {
+  readOnlyRootFilesystem: true,
+  runAsUser: 82
+}
+
 
 service:
   type: ClusterIP
@@ -56,22 +86,63 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 50M
+
+mail: 
+  enabled: true
+  host: 'smtp.uni-jena.de'
+  port: 587
+  from: 'info.nmrxiv@uni-jena.de'
+  fromName: "nmrXiv-dev"
+  user: 'do86dir'
+  password: "NFD!4Chem"
+  mailer: smtp
+
+database:
+  enabled: true
+  image:
+    tag: 11.14ian-10-r1.0-deb7 # immutable tags are recommended
+  connection: pgsql
+  username: "nmrxiv-dev"
+  password: "nmrxivdev2021@nfdi4chem"
+  database: "nmrxiv"
+  port: 5432
+  host: "postgres"
+  global:
+    storageClass: 'longhorn'
+  persistence:
+    enabled: false
+    existingClaim: ""
+    size: 1Gi
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 20m
+    limits:
+      memory: 150Mi
+      cpu: 200m
+
+storage:
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    enabled: true
+    existingClaim: ''
+    storage: 2Gi
+    storageClassName: standard
 
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 

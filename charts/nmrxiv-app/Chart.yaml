@@ -1,6 +1,9 @@
 apiVersion: v2
 name: nmrxiv-app
 description: A Helm chart for Kubernetes
+maintainers:
+  - name: Nisha Sharma
+    email: nisha.sharma@uni-jena.de
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,3 +25,9 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+
+dependencies:
+- name: postgresql
+  version: "10.13.11"
+  repository: "https://charts.bitnami.com/bitnami"
+  condition: database.enabled

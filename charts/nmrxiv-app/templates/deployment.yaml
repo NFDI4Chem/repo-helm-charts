@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "nmrxiv-app.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
+  {{- if .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
@@ -14,48 +14,72 @@ spec:
   template:
     metadata:
       {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      # annotations:
+      #   {{- toYaml . | nindent 8 }}
+      # {{- end }}
       labels:
         {{- include "nmrxiv-app.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "nmrxiv-app.serviceAccountName" . }}
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: testing
+          emptyDir: {}
+        - name: sessions
+          emptyDir: {}
+        - name: views
+          emptyDir: {}
+      #serviceAccountName: {{ include "nmrxiv-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: database-migrations
+          image: "{{ .Values.appImage.app }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
+            - secretRef:
+                name: {{ .Values.EnvSecretRef.name }}
+          command:
+            - "php"
+          args:
+            - "artisan"
+            - "migrate"
+            - "--force"
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+        - name: {{ .Values.nginxImage.name }}
+          imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
+          image: "{{ .Values.nginxImage.app }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+          ports:
+            - containerPort: 80
+
+        - name: {{ .Values.appImage.name }}
+          imagePullPolicy: {{ .Values.appImage.pullPolicy }}
+          image: "{{ .Values.appImage.app }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
+            - secretRef:
+                name: {{ .Values.EnvSecretRef.name }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          volumeMounts:
+            - name: logs
+              mountPath: /var/www/html/storage/logs
+            - name: cache
+              mountPath: /var/www/html/storage/framework/cache
+            - name: sessions
+              mountPath: /var/www/html/storage/framework/sessions
+            - name: views
+              mountPath: /var/www/html/storage/framework/views
+            - name: testing
+              mountPath: /var/www/html/storage/framework/testing
+          resources: {}
+          ports:
+            - containerPort: 9000        
+
+
