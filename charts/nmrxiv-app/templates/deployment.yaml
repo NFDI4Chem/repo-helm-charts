@@ -36,7 +36,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: database-migrations
-          image: "{{ .Values.appImage.app }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
           envFrom:
             - configMapRef:
                 name: {{ .Values.EnvConfigMapRef.name }}
@@ -51,7 +51,7 @@ spec:
       containers:
         - name: {{ .Values.nginxImage.name }}
           imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
-          image: "{{ .Values.nginxImage.app }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.nginxImage.repository }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           ports:
@@ -59,14 +59,14 @@ spec:
 
         - name: {{ .Values.appImage.name }}
           imagePullPolicy: {{ .Values.appImage.pullPolicy }}
-          image: "{{ .Values.appImage.app }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
           envFrom:
             - configMapRef:
                 name: {{ .Values.EnvConfigMapRef.name }}
             - secretRef:
                 name: {{ .Values.EnvSecretRef.name }}
           securityContext:
-            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+            {{- toYaml .Values.securityContext | nindent 12 }}
           volumeMounts:
             - name: logs
               mountPath: /var/www/html/storage/logs
@@ -80,6 +80,4 @@ spec:
               mountPath: /var/www/html/storage/framework/testing
           resources: {}
           ports:
-            - containerPort: 9000        
-
-
+            - containerPort: 9000

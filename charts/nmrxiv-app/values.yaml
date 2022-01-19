@@ -6,10 +6,14 @@ replicaCount: 1
 
 appProperties:
   name: nmrXiv
-  key: YmFzZTY0OjNaeEJuRFVnZldBTGhyWTZnWE01aEFUTlh4b1lKU2hNaXF6ejhDZjJMc0E9
+  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reGe2asr1FNvu1ChA=
   env: development
-  debug: "true"
+  debug: true
   url: https://dev.nmrxiv.org/
+
+logProperties:
+  logChannel: stack
+  logLevel: debug
 
 oauthProperties:
   enabled: true
@@ -25,20 +29,20 @@ appImage:
   repository: eu.gcr.io/nmrxiv/app
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: 8ff278a6a658efc5462d80617da50c6669387da0
 
 nginxImage:
   name: nginx
   repository: eu.gcr.io/nmrxiv/nginx
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: 8ff278a6a658efc5462d80617da50c6669387da0
 
 EnvConfigMapRef:
   name: "nmrxiv-config-map"
   enabled: true
 EnvSecretRef:
-  name: "nmrxiv-secret"
+  name: "nmrxiv-secrets"
   enabled: true
 
 imagePullSecrets: []
@@ -61,13 +65,13 @@ podSecurityContext: {
 }
 
 securityContext: {
-  readOnlyRootFilesystem: true,
-  runAsUser: 82
+  runAsUser: 82,
+  readOnlyRootFilesystem: true
 }
 
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 ingress:
@@ -99,35 +103,35 @@ mail:
   enabled: true
   host: 'smtp.uni-jena.de'
   port: 587
-  from: 'info.nmrxiv@uni-jena.de'
+  from: info.nmrxiv@uni-jena.de
   fromName: "nmrXiv-dev"
-  user: 'do86dir'
-  password: "NFD!4Chem"
+  user: do86dir
+  password: NFD!4Chem
   mailer: smtp
 
-database:
-  enabled: true
+postgresql:
   image:
-    tag: 11.14ian-10-r1.0-deb7 # immutable tags are recommended
-  connection: pgsql
-  username: "nmrxiv-dev"
-  password: "nmrxivdev2021@nfdi4chem"
-  database: "nmrxiv"
-  port: 5432
-  host: "postgres"
+    tag: 11.14.0-debian-10-r17 # immutable tags are recommended
+  enabled: true
   global:
-    storageClass: 'longhorn'
+    storageClass: standard
+  host: nmrxiv-postgresql
+  connection: pgsql
   persistence:
     enabled: false
-    existingClaim: ""
+    existingClaim: ''
     size: 1Gi
+  port: 5432
+  postgresqlDatabase: nmrxiv
+  postgresqlPassword: nmrxivdev2021@nfdi4chem
+  postgresqlUsername: nmrxiv-dev
   resources:
-    requests:
-      memory: 100Mi
-      cpu: 20m
     limits:
-      memory: 150Mi
       cpu: 200m
+      memory: 150Mi
+    requests:
+      cpu: 20m
+      memory: 100Mi
 
 storage:
   pvc:

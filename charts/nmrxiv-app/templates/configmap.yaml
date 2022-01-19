@@ -6,24 +6,23 @@ data:
 #App Properties
   APP_NAME: {{ .Values.appProperties.name }}
   APP_ENV: {{ .Values.appProperties.env }}
-  APP_DEBUG: {{ .Values.appProperties.debug }}
+  APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
-  APP_KEY: {{  .Values.appProperties.key }}
 #Log Properties
-  LOG_CHANNEL: stack
-  LOG_LEVEL: debug
+  LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
+  LOG_LEVEL: {{ .Values.logProperties.logLevel }}
 #DB Properties
-  DB_USERNAME: {{ .Values.database.username }}
-  DB_CONNECTION: "{{ .Values.database.connection }}"
-  DB_HOST: {{ .Values.database.host }}
-  DB_PORT: "{{ .Values.database.port }}"
-  DB_DATABASE: {{ .Values.database.database }}
+  DB_USERNAME: {{ .Values.postgresql.postgresqlUsername }}
+  DB_CONNECTION: {{ .Values.postgresql.connection }}
+  DB_HOST: {{ .Values.postgresql.host }}
+  DB_PORT: "{{ .Values.postgresql.port }}"
+  DB_DATABASE: {{ .Values.postgresql.postgresqlDatabase }}
 #Mail Properties:
   MAIL_MAILER: {{ .Values.mail.mailer }}
   MAIL_HOST: {{ .Values.mail.host }}
   MAIL_PORT: "{{ .Values.mail.port }}"
   MAIL_USERNAME: {{ .Values.mail.user }}
-  MAIL_ENCRYPTION: "null"
+  #MAIL_ENCRYPTION: "null"
   MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
   MAIL_FROM_NAME: {{ .Values.mail.fromName }}
 #OAuth Properties
