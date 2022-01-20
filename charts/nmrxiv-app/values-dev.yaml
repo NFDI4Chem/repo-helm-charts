@@ -1,0 +1,157 @@
+# Default values for nmrxiv-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+appProperties:
+  name: nmrXiv
+  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reGe2asr1FNvu1ChA=
+  env: development
+  debug: true
+  url: https://dev.nmrxiv.org/
+
+logProperties:
+  logChannel: stack
+  logLevel: debug
+
+oauthProperties:
+  enabled: true
+  twitterClientID: qwewerfgfdhttfghfg
+  twitterClientSecret: jdkdjfkjskdfjskf
+  twitterRedirectUrl: https://dev.nmrxiv.org/auth/login/twitter/callback
+  githubClientID: qwewerfgfdhttfghfg
+  githubClientSecret: jdkdjfkjskdfjskf
+  githubRedirectUrl: https://dev.nmrxiv.org/auth/login/github/callback
+
+appImage:
+  name: php
+  repository: eu.gcr.io/nmrxiv/app
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 8ff278a6a658efc5462d80617da50c6669387da0
+
+nginxImage:
+  name: nginx
+  repository: eu.gcr.io/nmrxiv/nginx
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 8ff278a6a658efc5462d80617da50c6669387da0
+
+EnvConfigMapRef:
+  name: "nmrxiv-config-map"
+  enabled: true
+EnvSecretRef:
+  name: "nmrxiv-secrets"
+  enabled: true
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {
+  fsGroup: 82
+}
+
+securityContext: {
+  runAsUser: 82,
+  readOnlyRootFilesystem: true
+}
+
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 500m
+    memory: 50M
+
+mail: 
+  enabled: true
+  host: 'smtp.uni-jena.de'
+  port: 587
+  from: info.nmrxiv@uni-jena.de
+  fromName: "nmrXiv-dev"
+  user: do86dir
+  password: NFD!4Chem
+  mailer: smtp
+
+postgresql:
+  image:
+    tag: 11.14.0-debian-10-r17 # immutable tags are recommended
+  enabled: true
+  global:
+    storageClass: standard
+  host: nmrxiv-postgresql
+  connection: pgsql
+  persistence:
+    enabled: false
+    existingClaim: ''
+    size: 1Gi
+  port: 5432
+  postgresqlDatabase: nmrxiv
+  postgresqlPassword: nmrxivdev2021@nfdi4chem
+  postgresqlUsername: nmrxiv-dev
+  resources:
+    limits:
+      cpu: 200m
+      memory: 150Mi
+    requests:
+      cpu: 20m
+      memory: 100Mi
+
+storage:
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    annotations: {}
+    enabled: true
+    existingClaim: ''
+    storage: 2Gi
+    storageClassName: standard
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
