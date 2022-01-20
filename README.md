@@ -1,5 +1,5 @@
 
-***NOTE - This repo is not ready yet and is still work in progress.
+#### NOTE - The work for this helm-chart is still in progress.
 
 ## Usage
 
