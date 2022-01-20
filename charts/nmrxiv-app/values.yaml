@@ -6,7 +6,7 @@ replicaCount: 1
 
 appProperties:
   name: nmrXiv
-  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reGe2asr1FNvu1ChA=
+  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reyuyuergjdbvgdkjfnd=
   env: development
   debug: true
   url: https://dev.nmrxiv.org/
@@ -26,17 +26,17 @@ oauthProperties:
 
 appImage:
   name: php
-  repository: eu.gcr.io/nmrxiv/app
+  repository: eu.gcr.io/PROJECT_ID/APP_IMAGE
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 8ff278a6a658efc5462d80617da50c6669387da0
+  tag: latest
 
 nginxImage:
   name: nginx
-  repository: eu.gcr.io/nmrxiv/nginx
+  repository: eu.gcr.io/PROJECT_ID/NGINX_IMAGE
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 8ff278a6a658efc5462d80617da50c6669387da0
+  tag: latest
 
 EnvConfigMapRef:
   name: "nmrxiv-config-map"
@@ -105,8 +105,8 @@ mail:
   port: 587
   from: info.nmrxiv@uni-jena.de
   fromName: "nmrXiv-dev"
-  user: do86dir
-  password: NFD!4Chem
+  user: user
+  password: secret
   mailer: smtp
 
 postgresql:
@@ -123,8 +123,8 @@ postgresql:
     size: 1Gi
   port: 5432
   postgresqlDatabase: nmrxiv
-  postgresqlPassword: nmrxivdev2021@nfdi4chem
-  postgresqlUsername: nmrxiv-dev
+  postgresqlPassword: secret
+  postgresqlUsername: user
   resources:
     limits:
       cpu: 200m

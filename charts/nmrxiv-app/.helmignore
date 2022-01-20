@@ -22,3 +22,5 @@
 *.tmproj
 .vscode/
 .nmrxiv-app*.tgz
+values-dev.yaml
+values-prod.yaml
