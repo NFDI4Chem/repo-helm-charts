@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  nmrxiv-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-20T14:27:56.594036716Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.13.11
+    description: A Helm chart for Kubernetes
+    digest: 07a5722a420ec503b47bae822829ebc5c571385f5e80ae1d839547d804c41b57
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/nmrxiv-app-0.1.0/nmrxiv-app-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-01-20T14:27:56.594044416Z"
