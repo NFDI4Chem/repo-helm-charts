@@ -9,6 +9,12 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Add Helm dependency repos
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
+          helm repo update
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
