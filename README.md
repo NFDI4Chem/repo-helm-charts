@@ -2,15 +2,22 @@
 ***NOTE - This repo is not ready yet and is still work in progress.
 
 ## Usage
+
 [Helm](https://helm.sh) must be installed to use the charts.  Please refer to
 Helm's [documentation](https://helm.sh/docs) to get started.
 
-Once Helm has been set up correctly, clone the repo and install as follow:
+Once Helm has been set up correctly, add the repo as follows:
 
-To install the nmrxiv chart:
+  helm repo add nmrxiv-helm-chart https://NFDI4Chem.github.io/helm-charts
 
-    helm install my-nmrxiv nmrxiv-helm-chart/charts/nmrxiv-app
+If you had already added this repo earlier, run `helm repo update` to retrieve
+the latest versions of the packages.  You can then run `helm search repo
+nmrxiv-helm-chart` to see the charts.
+
+To install the nmrxiv-helm-chart chart:
+
+    helm install my-nmrxiv-app nmrxiv-helm-chart/nmrxiv-app
 
 To uninstall the chart:
 
-    helm delete my-nmrxiv
+    helm delete my-nmrxiv-app
