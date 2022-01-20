@@ -21,5 +21,4 @@
 .idea/
 *.tmproj
 .vscode/
-nmrxiv-app*.tgz
-.values-dev.yaml
+.nmrxiv-app*.tgz
