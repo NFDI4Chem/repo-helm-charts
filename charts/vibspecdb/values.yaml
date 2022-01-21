@@ -1,0 +1,220 @@
+# Default values for fpm-laravel.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+app:
+  key: base64:r3qmKktGeBi6Z/5Ax=
+
+# basedir for application
+directory: /app # static from the image now. Can not be changed. 
+name: 'Vibspecdb'
+persistence:
+  enabled: true
+  existingClaim: ""
+  path: storage/app
+  storage: 2Gi
+
+image:
+  repository: privated.docker.registry/vibspecdb_laravel_backend
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: v0.1.0
+
+imagePullSecrets:
+  - name: registrypullsecret
+
+EnvConfigMapRef: 
+  name: "laravel-in-kubernetes"
+  enabled: true
+EnvSecretRef: 
+  enabled: true
+  name: "laravel-in-kubernetes"
+EnvSecretRefServices: 
+  enabled: true
+  name: "laravel-in-kubernetes-services"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: vibspecdb.k8s.photonicdata.science
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+storage:
+  pvc:
+    enabled: true
+    existingClaim: ""
+    annotations: {}
+    storageClassName: "longhorn"
+    accessModes: 
+      - ReadWriteOnce
+    storage: 2Gi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe: 
+  enabled: true
+
+migrate:
+  enabled: false
+  timeout: 180 # <- activeDeadlineSeconds
+  cmd: "php artisan migrate --force"
+
+postgresql:
+  enabled: true
+  image:
+    tag: 11.14.0-debian-10-r17 # immutable tags are recommended
+  postgresqlUsername: "psguser"
+  postgresqlPassword: "secret"
+  postgresqlDatabase: "vibspecdb"
+  port: "5432"
+  host: "postgresql"
+  global:
+    storageClass: 'longhorn'
+  persistence:
+    enabled: false
+    existingClaim: ""
+    size: 1Gi
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 20m
+    limits:
+      memory: 150Mi
+      cpu: 200m
+
+rabbitmq: 
+  enabled: true
+  port: "5672"
+  host: "rabbitmq"
+  auth: 
+    username: 'rabbitmq_user'
+    password: 'password'
+  global:
+    storageClass: 'longhorn'
+  metrics:
+    enabled: false
+  ingress:
+    enabled: false
+    path: '/'
+    hostname: hostnamehere.com
+
+meilisearch: 
+  enabled: true
+  host: 'meilisearch:7700'
+  secretKey: meilikeyhere
+
+redis:
+  enabled: true
+  port: "6379"
+  host: "redis-master"
+  auth: 
+    password: 'redispasshere'
+  global:
+    storageClass: 'longhorn'
+  replica:
+    replicaCount: 1
+  persistence:
+    enabled: false
+    size: 1Gi
+  resources:
+    requests:
+      memory: 30Mi
+      cpu: 10m
+    limits:
+      memory: 30Mi
+      cpu: 50m
+
+minio:
+  enabled: false
+  accessKey: 'MINIO_ROOT_USER'
+  secretAccessKey: 'MINIO_ROOT_PASSWORD'
+  bucket: 'local'
+  endpoint: 'MINIO_ENDPOINT_URL'
+  baseUrl: 'MINIO_ENDPOINT_URL'
+
+gitlab:
+  enabled: false
+  accessKey: 'GITLAB_KEY'
+  secretAccessKey: 'GITLAB_SECRET'
+  redirectUrl: https://pageurl/auth/login/gitlab/callback
+  baseUrl: https://private.gitlab.repo/
+
+keycloak:
+  enabled: false
+  clientId: 'KEYCLOAK_CLIENT_ID'
+  clientSecret: 'KEYCLOAK_CLIENT_SECRET'
+  redirectUrl: 'https://pageurl/auth/login/keycloak/callback'
+  baseUrl: 'https://pageurl/auth/'
+  realm: 'RealmName'
+
+smtp:
+  enabled: false
+  host: 'smtp.mailgun.org'
+  port: 587
+  from: 'from@company.de'
+  user: 'postmaster@dev.com'
+  password: "secret"
+
