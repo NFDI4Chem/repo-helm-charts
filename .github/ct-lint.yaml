@@ -8,5 +8,5 @@ debug: true
 remote: origin
 target-branch: main
 validate-chart-schema: true
-validate-maintainers: true
+validate-maintainers: false
 validate-yaml: true
