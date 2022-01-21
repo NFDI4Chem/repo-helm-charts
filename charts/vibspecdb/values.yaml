@@ -25,13 +25,13 @@ image:
 imagePullSecrets:
   - name: registrypullsecret
 
-EnvConfigMapRef: 
+EnvConfigMapRef:
   name: "laravel-in-kubernetes"
   enabled: true
-EnvSecretRef: 
+EnvSecretRef:
   enabled: true
   name: "laravel-in-kubernetes"
-EnvSecretRefServices: 
+EnvSecretRefServices:
   enabled: true
   name: "laravel-in-kubernetes-services"
 
@@ -68,7 +68,7 @@ storage:
     existingClaim: ""
     annotations: {}
     storageClassName: "longhorn"
-    accessModes: 
+    accessModes:
       - ReadWriteOnce
     storage: 2Gi
 
@@ -84,7 +84,7 @@ tolerations: []
 
 affinity: {}
 
-livenessProbe: 
+livenessProbe:
   enabled: true
 
 migrate:
@@ -115,11 +115,11 @@ postgresql:
       memory: 150Mi
       cpu: 200m
 
-rabbitmq: 
+rabbitmq:
   enabled: true
   port: "5672"
   host: "rabbitmq"
-  auth: 
+  auth:
     username: 'rabbitmq_user'
     password: 'password'
   global:
@@ -131,7 +131,7 @@ rabbitmq:
     path: '/'
     hostname: hostnamehere.com
 
-meilisearch: 
+meilisearch:
   enabled: true
   host: 'meilisearch:7700'
   secretKey: meilikeyhere
@@ -140,7 +140,7 @@ redis:
   enabled: true
   port: "6379"
   host: "redis-master"
-  auth: 
+  auth:
     password: 'redispasshere'
   global:
     storageClass: 'longhorn'
