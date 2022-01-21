@@ -4,7 +4,7 @@ description: A Helm chart of Vibspec-Laravel Application for K8S
 home: https://vibspecdb.k8s.photonicdata.science
 maintainers:
   - name: Nazar Stefaniuk
-    email: stefaniuk.nazar@gmail.com
+    email: nazar.stefaniuk@uni-jena.de
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
