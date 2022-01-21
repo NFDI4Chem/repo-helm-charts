@@ -3,7 +3,7 @@ name: vibspecdb
 description: A Helm chart of Vibspec-Laravel Application for K8S
 home: https://vibspecdb.k8s.photonicdata.science
 maintainers:
-  - name: Stefaniuk Nazar
+  - name: Nazar Stefaniuk
     email: stefaniuk.nazar@gmail.com
 # A chart can be either an 'application' or a 'library' chart.
 #
