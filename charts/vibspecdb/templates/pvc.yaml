@@ -1,0 +1,19 @@
+{{- if and .Values.storage.pvc.enabled (not .Values.storage.pvc.existingClaim) -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "vibspecdb.fullname" . }}-storage
+  {{- with .Values.storage.pvc.annotations }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if typeIs "string" .Values.storage.pvc.storageClassName }}
+  storageClassName: {{ .Values.storage.pvc.storageClassName | quote }}
+  {{- end }}
+  accessModes:
+    {{- .Values.storage.pvc.accessModes | toYaml | nindent 4 }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.pvc.storage | quote }}
+{{- end }}

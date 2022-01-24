@@ -2,10 +2,11 @@ chart-dirs:
   - charts/
 chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
+  - meilisearch=https://meilisearch.github.io/meilisearch-kubernetes
 check-version-increment: true
 debug: true
 remote: origin
 target-branch: main
 validate-chart-schema: true
-validate-maintainers: true
+validate-maintainers: false
 validate-yaml: true
