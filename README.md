@@ -1,5 +1,4 @@
-
-#### NOTE - The work for this helm-chart is still in progress.
+#### This repository packages the nmrxiv and vibspecdb repository application as Helm charts for Kubernetes and is publisehd via [Github Pages](https://nfdi4chem.github.io/repo-helm-charts/).
 
 ## Usage
 
@@ -9,17 +8,29 @@ Helm's [documentation](https://helm.sh/docs) to get started.
 Once Helm has been set up correctly, add the repo as follows:
 
 ```bash
-  helm repo add nmrxiv-helm-chart https://nfdi4chem.github.io/nmrxiv-helm-chart/
+helm repo add repo-helm-charts https://nfdi4chem.github.io/repo-helm-charts/
 ```
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.  You can then run `helm search repo
-nmrxiv-helm-chart` to see the charts.
+repo-helm-charts` to see the charts.
 
-To install the nmrxiv-helm-chart chart:
+#### nmrXiv
 
-    helm install my-nmrxiv-app nmrxiv-helm-chart/nmrxiv-app
+To install the nmrxiv-app chart:
+
+    helm install my-nmrxiv-app repo-helm-charts/nmrxiv-app
 
 To uninstall the chart:
 
     helm delete my-nmrxiv-app
+    
+#### vibspecdb
+
+To install the vibspecdb chart:
+
+    helm install my-vibspecdb-app repo-helm-charts/vibspecdb
+
+To uninstall the chart:
+
+    helm delete my-vibspecdb-app
