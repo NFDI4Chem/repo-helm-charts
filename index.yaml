@@ -3,6 +3,24 @@ entries:
   nmrxiv-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-01-25T11:31:47.663610699Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.13.11
+    description: A  Helm chart of nmrXiv-Laravel Application for K8S.
+    digest: c8168d62b869124e72cec9fe0a6acdeee1ad4e1a6862ebeda9c90e902a337a5a
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-app-0.1.2/nmrxiv-app-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-01-24T14:07:02.063728998Z"
     dependencies:
     - condition: database.enabled
@@ -69,4 +87,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-01-24T14:07:02.063747498Z"
+generated: "2022-01-25T11:31:47.663630699Z"
