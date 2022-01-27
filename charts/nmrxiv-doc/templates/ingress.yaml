@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "nmrxiv-doc.fullname" . }}-ingress
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
+spec:
+  defaultBackend:
+    service:
+      name: {{ include "nmrxiv-doc.fullname" . }}
+      port:
+        number: {{ .Values.service.port }}
