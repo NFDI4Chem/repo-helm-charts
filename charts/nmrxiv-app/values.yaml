@@ -26,14 +26,14 @@ oauthProperties:
 
 appImage:
   name: php
-  repository: eu.gcr.io/PROJECT_ID/APP_IMAGE
+  repository: eu.gcr.io/nmrxiv/app
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
 nginxImage:
   name: nginx
-  repository: eu.gcr.io/PROJECT_ID/NGINX_IMAGE
+  repository: eu.gcr.io/nmrxiv/nginx
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -113,15 +113,15 @@ postgresql:
   image:
     tag: 11.14.0-debian-10-r17 # immutable tags are recommended
   enabled: true
-  global:
-    storageClass: standard
-  host: nmrxiv-postgresql
+#  global:
+#    storageClass: standard
   connection: pgsql
   persistence:
     enabled: false
     existingClaim: ''
     size: 1Gi
-  port: 5432
+  #host: nmrxiv-postgresql
+  #port: 5432
   postgresqlDatabase: nmrxiv
   postgresqlPassword: secret
   postgresqlUsername: user
@@ -141,7 +141,7 @@ storage:
     enabled: true
     existingClaim: ''
     storage: 2Gi
-    storageClassName: standard
+    #storageClassName: standard
 
 autoscaling:
   enabled: false

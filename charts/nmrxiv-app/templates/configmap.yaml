@@ -14,8 +14,8 @@ data:
 #DB Properties
   DB_USERNAME: {{ .Values.postgresql.postgresqlUsername }}
   DB_CONNECTION: {{ .Values.postgresql.connection }}
-  DB_HOST: {{ .Values.postgresql.host }}
-  DB_PORT: "{{ .Values.postgresql.port }}"
+  DB_HOST: {{ printf "%s-postgresql" .Release.Name | quote }}
+  DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
   DB_DATABASE: {{ .Values.postgresql.postgresqlDatabase }}
 #Mail Properties:
   MAIL_MAILER: {{ .Values.mail.mailer }}
