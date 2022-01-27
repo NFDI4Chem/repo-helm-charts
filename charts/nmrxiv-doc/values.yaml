@@ -50,7 +50,7 @@ ingress:
     kubernetes.io/ingress.class: "gce"
   }
   hosts:
-    - host: https://docs.nmrxiv.org/
+    - host: docs.nmrxiv.org
       paths:
         - path: /
           pathType: ImplementationSpecific
