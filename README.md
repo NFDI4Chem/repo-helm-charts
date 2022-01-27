@@ -1,4 +1,4 @@
-#### This repository packages the nmrxiv and vibspecdb repository application as Helm charts for Kubernetes and is publisehd via [Github Pages](https://nfdi4chem.github.io/repo-helm-charts/).
+#### This repository packages the [nmrxiv-app](https://github.com/NFDI4Chem/nmrxiv), [nmrxiv-doc](https://github.com/NFDI4Chem/nmrxiv-docs) and vibspecdb repositories application as Helm charts for Kubernetes and is published via [Github Pages](https://nfdi4chem.github.io/repo-helm-charts/).
 
 ## Usage
 
@@ -24,6 +24,16 @@ To install the nmrxiv-app chart:
 To uninstall the chart:
 
     helm delete my-nmrxiv-app
+
+#### nmrXiv-doc
+
+To install the nmrxiv-doc chart:
+
+    helm install my-nmrxiv-doc repo-helm-charts/nmrxiv-doc
+
+To uninstall the chart:
+
+    helm delete my-nmrxiv-doc
     
 #### vibspecdb
 

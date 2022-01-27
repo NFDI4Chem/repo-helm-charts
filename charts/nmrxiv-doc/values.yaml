@@ -45,8 +45,8 @@ ingress:
   enabled: true
   className: ""
   annotations: {
-    kubernetes.io/ingress.global-static-ip-name: nmrxiv-docs-ip-address
-    networking.gke.io/managed-certificates: nmrxiv-docs-certificate
+    kubernetes.io/ingress.global-static-ip-name: nmrxiv-docs-ip-address,
+    networking.gke.io/managed-certificates: nmrxiv-docs-certificate,
     kubernetes.io/ingress.class: "gce"
   }
   hosts:
