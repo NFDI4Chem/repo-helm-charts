@@ -55,6 +55,20 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/nmrxiv-app-0.1.0/nmrxiv-app-0.1.0.tgz
     version: 0.1.0
+  nmrxiv-doc:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-27T12:06:19.888775451Z"
+    description: A Helm chart of nmrXiv-doc Application for K8S.
+    digest: c8d0e141becc182335f9f16f0de63a5ccff5a88a3d2c442bc691a8ce675fc646
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-doc
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-doc-0.1.0/nmrxiv-doc-0.1.0.tgz
+    version: 0.1.0
   vibspecdb:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -87,4 +101,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-01-25T11:31:47.663630699Z"
+generated: "2022-01-27T12:06:19.888786851Z"
