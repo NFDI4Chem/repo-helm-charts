@@ -6,10 +6,10 @@ replicaCount: 1
 
 appProperties:
   name: nmrXiv
-  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reyuyuergjdbvgdkjfnd=
+  key: 
   env: development
   debug: true
-  url: https://dev.nmrxiv.org/
+  url: https://<your-url>/
 
 logProperties:
   logChannel: stack
@@ -17,23 +17,23 @@ logProperties:
 
 oauthProperties:
   enabled: true
-  twitterClientID: qwewerfgfdhttfghfg
-  twitterClientSecret: jdkdjfkjskdfjskf
-  twitterRedirectUrl: https://dev.nmrxiv.org/auth/login/twitter/callback
-  githubClientID: qwewerfgfdhttfghfg
-  githubClientSecret: jdkdjfkjskdfjskf
-  githubRedirectUrl: https://dev.nmrxiv.org/auth/login/github/callback
+  twitterClientID: 
+  twitterClientSecret: 
+  twitterRedirectUrl: 
+  githubClientID: 
+  githubClientSecret: 
+  githubRedirectUrl: 
 
 appImage:
   name: php
-  repository: eu.gcr.io/PROJECT_ID/APP_IMAGE
+  repository: eu.gcr.io/nmrxiv/app
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
 nginxImage:
   name: nginx
-  repository: eu.gcr.io/PROJECT_ID/NGINX_IMAGE
+  repository: eu.gcr.io/nmrxiv/nginx
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -71,7 +71,7 @@ securityContext: {
 
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 ingress:
@@ -115,7 +115,7 @@ postgresql:
   enabled: true
   global:
     storageClass: standard
-  host: nmrxiv-postgresql
+  host: ''
   connection: pgsql
   persistence:
     enabled: false
@@ -141,7 +141,7 @@ storage:
     enabled: true
     existingClaim: ''
     storage: 2Gi
-    storageClassName: standard
+    storageClassName: ''
 
 autoscaling:
   enabled: false
