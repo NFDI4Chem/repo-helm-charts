@@ -27,6 +27,8 @@ To uninstall the chart:
 
 #### nmrXiv-doc
 
+Before you install generate your own app key and provide that value in the .Values.appProperties.key property.
+
 To install the nmrxiv-doc chart:
 
     helm install my-nmrxiv-doc repo-helm-charts/nmrxiv-doc
