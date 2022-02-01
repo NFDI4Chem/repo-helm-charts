@@ -42,7 +42,7 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   className: ""
   annotations: {
     kubernetes.io/ingress.global-static-ip-name: nmrxiv-docs-ip-address,

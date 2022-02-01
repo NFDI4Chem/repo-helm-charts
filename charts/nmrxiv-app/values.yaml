@@ -6,10 +6,10 @@ replicaCount: 1
 
 appProperties:
   name: nmrXiv
-  key: base64:2MrXp1LimalYG3Q26sh3qSFsk8reyuyuergjdbvgdkjfnd=
+  key: 
   env: development
   debug: true
-  url: https://dev.nmrxiv.org/
+  url: https://<your-url>/
 
 logProperties:
   logChannel: stack
@@ -17,12 +17,12 @@ logProperties:
 
 oauthProperties:
   enabled: true
-  twitterClientID: qwewerfgfdhttfghfg
-  twitterClientSecret: jdkdjfkjskdfjskf
-  twitterRedirectUrl: https://dev.nmrxiv.org/auth/login/twitter/callback
-  githubClientID: qwewerfgfdhttfghfg
-  githubClientSecret: jdkdjfkjskdfjskf
-  githubRedirectUrl: https://dev.nmrxiv.org/auth/login/github/callback
+  twitterClientID: 
+  twitterClientSecret: 
+  twitterRedirectUrl: 
+  githubClientID: 
+  githubClientSecret: 
+  githubRedirectUrl: 
 
 appImage:
   name: php
@@ -71,7 +71,7 @@ securityContext: {
 
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 ingress:
