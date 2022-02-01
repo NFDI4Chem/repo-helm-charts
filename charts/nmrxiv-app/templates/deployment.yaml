@@ -35,6 +35,15 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
+        - name: postgres-wait-ready
+          image: alpine
+          command:
+            - sh
+            - -c
+            - for i in $(seq 1 200); do nc -z -w3 $DB_HOST $DB_PORT && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
         - name: database-migrations
           image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
           envFrom:
@@ -52,6 +61,14 @@ spec:
         - name: {{ .Values.nginxImage.name }}
           imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
           image: "{{ .Values.nginxImage.repository }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
+          livenessProbe:
+            httpGet:
+              path: /css/app.css
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /css/app.css
+              port: 80
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           ports:
