@@ -27,7 +27,7 @@ To uninstall the chart:
 
 #### nmrXiv-doc
 
-Before you install generate your own app key and provide that value in the .Values.appProperties.key property.
+Before you install [generate your own application key](https://stackoverflow.com/questions/33370134/when-to-generate-a-new-application-key-in-laravel) and provide that value in the .Values.appProperties.key property.
 
 To install the nmrxiv-doc chart:
 
