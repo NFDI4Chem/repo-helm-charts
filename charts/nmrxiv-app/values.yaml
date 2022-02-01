@@ -90,7 +90,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: 
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -99,7 +99,7 @@ resources:
     cpu: 500m
     memory: 50M
 
-mail: 
+mail:
   enabled: true
   host: 'smtp.uni-jena.de'
   port: 587
@@ -111,17 +111,17 @@ mail:
 
 postgresql:
   image:
-    tag: 11.14.0-debian-10-r17 # immutable tags are recommended
+    tag: 11.14.0-debian-10-r17   # immutable tags are recommended
   enabled: true
-  global:
-    storageClass: standard
-  host: ''
+  # global:
+  #   storageClass: standard
   connection: pgsql
   persistence:
     enabled: false
     existingClaim: ''
     size: 1Gi
-  port: 5432
+  # host: nmrxiv-postgresql
+  # port: 5432
   postgresqlDatabase: nmrxiv
   postgresqlPassword: secret
   postgresqlUsername: user
@@ -141,7 +141,7 @@ storage:
     enabled: true
     existingClaim: ''
     storage: 2Gi
-    storageClassName: ''
+    # storageClassName: standard
 
 autoscaling:
   enabled: false
