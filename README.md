@@ -15,6 +15,8 @@ repo-helm-charts` to see the charts.
 
 #### nmrXiv
 
+Before you install [generate your own application key](https://stackoverflow.com/questions/33370134/when-to-generate-a-new-application-key-in-laravel) and provide that value in the .Values.appProperties.key property.
+
 To install the nmrxiv-app chart:
 
     helm install my-nmrxiv-app repo-helm-charts/nmrxiv-app
@@ -24,8 +26,6 @@ To uninstall the chart:
     helm delete my-nmrxiv-app
 
 #### nmrXiv-doc
-
-Before you install [generate your own application key](https://stackoverflow.com/questions/33370134/when-to-generate-a-new-application-key-in-laravel) and provide that value in the .Values.appProperties.key property.
 
 To install the nmrxiv-doc chart:
 
