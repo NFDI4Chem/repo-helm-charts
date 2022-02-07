@@ -8,17 +8,20 @@ data:
   APP_ENV: {{ .Values.appProperties.env }}
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
+  
 #Log Properties
   LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
   LOG_LEVEL: {{ .Values.logProperties.logLevel }}
+
 #DB Properties
   DB_USERNAME: {{ required "A valid .Values.appProperties.key entry required!" .Values.postgresql.postgresqlUsername }}
   DB_CONNECTION: {{ required "A valid .Values.appProperties.connection entry required!" .Values.postgresql.connection }}
   DB_HOST: {{ printf "%s-postgresql" .Release.Name | quote }}
   DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
   DB_DATABASE: {{ required "A valid .Values.postgresql.postgresqlDatabase entry required!" .Values.postgresql.postgresqlDatabase }}
+
 #Mail Properties:
-  {{- if .Values.oauthProperties.enabled }}
+  {{- if .Values.mail.enabled }}
   MAIL_MAILER: {{ .Values.mail.mailer }}
   MAIL_HOST: {{ .Values.mail.host }}
   MAIL_PORT: "{{ .Values.mail.port }}"
@@ -26,6 +29,7 @@ data:
   MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
   MAIL_FROM_NAME: {{ .Values.mail.fromName }}
   {{- end -}}
+
 #OAuth Properties
   {{- if .Values.oauthProperties.enabled }}
   TWITTER_REDIRECT_URL: {{ required "A valid .Values.oauthProperties.twitterRedirectUrl entry required!" .Values.oauthProperties.twitterRedirectUrl }}
