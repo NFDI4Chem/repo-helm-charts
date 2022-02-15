@@ -137,6 +137,49 @@ postgresql:
     requests:
       cpu: 20m
       memory: 100Mi
+redis:
+  auth:
+    password: password
+  enabled: false
+  global:
+    storageClass: standard
+  #host: nmrxiv-redis-master
+  replica:
+    replicaCount: 1
+  persistence:
+    enabled: false
+    size: 1Gi
+  port: 6379
+  resources:
+    limits:
+      cpu: 50m
+      memory: 30Mi
+    requests:
+      cpu: 10m
+      memory: 30Mi
+
+rabbitmq: 
+  enabled: false
+  port: 5672
+  #host: nmrxiv-rabbitmq
+  auth: 
+    username: 'rabbitmq_user'
+    password: 'password'
+    #erlangCookie: 'erlangCookieerlangCookie'
+  global:
+    storageClass: 'standard'
+  metrics:
+    enabled: false
+  ingress:
+    enabled: false
+    path: '/'
+    hostname: ''
+
+meilisearch: 
+  enabled: false
+  #Replace the host name with yours.
+  host: 'nmrxiv-meilisearch:7700'
+  secretKey: secretkey
 
 storage:
   pvc:
