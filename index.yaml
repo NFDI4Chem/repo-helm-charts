@@ -3,6 +3,36 @@ entries:
   nmrxiv-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-04-22T08:25:47.188354724Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.13.11
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.6.3
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.24.12
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.1.22
+    description: A  Helm chart of nmrXiv-Laravel Application for K8S.
+    digest: 492d8791b19d0ffb541750ab78e16a2d3ec5198cb7d49ee149b5b01f988275b1
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-app-0.1.10/nmrxiv-app-0.1.10.tgz
+    version: 0.1.10
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-02-15T16:52:14.3337446Z"
     dependencies:
     - condition: database.enabled
@@ -240,6 +270,22 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-doc-0.1.0/nmrxiv-doc-0.1.0.tgz
     version: 0.1.0
+  pythonmicroservice:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-22T08:25:47.362738246Z"
+    description: A Helm chart for python microservice used as a subcharrt in nmrxiv-app.
+    digest: e98eb7961c7d5ba1c2dd25466624f4e3a89f3ca0c55311b2b1a698b49458eefa
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    - email: chandu.nainala@uni-jena.de
+      name: Chandu Nainala
+    name: pythonmicroservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/pythonmicroservice-0.1.0/pythonmicroservice-0.1.0.tgz
+    version: 0.1.0
   vibspecdb:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -272,4 +318,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-02-15T16:52:14.3339442Z"
+generated: "2022-04-22T08:25:47.362885149Z"
