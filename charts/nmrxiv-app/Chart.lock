@@ -11,6 +11,10 @@ dependencies:
 - name: meilisearch
   repository: https://meilisearch.github.io/meilisearch-kubernetes
   version: 0.1.22
-digest: sha256:4317e85fef2287a7ee7931ba9fec3f7687768cd9b4a81702155cbfb801734553
-generated: "2022-02-15T13:29:01.760086533Z"
+- name: pythonmicroservice
+  repository: https://nfdi4chem.github.io/repo-helm-charts
+  version: 0.1.0
+digest: sha256:2f8cb97b4fd334fd88607284d06cde5f20a35665b7216cbe150dfcf0c14e9f17
+generated: "2022-04-22T09:24:51.840044774Z"
+
 
