@@ -19,6 +19,10 @@ data:
   DB_HOST: {{ printf "%s-postgresql" .Release.Name | quote }}
   DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
   DB_DATABASE: {{ required "A valid .Values.postgresql.postgresqlDatabase entry required!" .Values.postgresql.postgresqlDatabase }}
+  
+#PYTHON MICROSERVICE Properties
+  PYTHON_WS_URL: {{ printf "%s-pythonmicroservice" .Release.Name }}
+  PYTHON_WS_PORT: {{ .Values.pythonmicroservice.service.port | default 80 | quote }}
 
 #Redis Properties
   {{ if .Values.redis.enabled }}
