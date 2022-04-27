@@ -14,7 +14,8 @@ dependencies:
 - name: pythonmicroservice
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:2f8cb97b4fd334fd88607284d06cde5f20a35665b7216cbe150dfcf0c14e9f17
-generated: "2022-04-22T09:24:51.840044774Z"
-
-
+- name: nmrium
+  repository: https://nfdi4chem.github.io/repo-helm-charts
+  version: 0.1.0
+digest: sha256:8b8b98a7b1b567572f18554bad2972b84c9d2d847ca66458e93026ac75783bbf
+generated: "2022-04-27T13:00:31.9348015+02:00"

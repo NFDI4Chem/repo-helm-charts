@@ -160,7 +160,6 @@ nmrium:
     type: LoadBalancer
     port: 80
 
-
 redis:
   auth:
     password: password
