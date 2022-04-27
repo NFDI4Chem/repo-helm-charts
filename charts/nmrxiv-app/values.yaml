@@ -149,6 +149,18 @@ pythonmicroservice:
     type: ClusterIP
     port: 80
 
+nmrium:
+  image:
+    name: nmrium
+    repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrium
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  service:
+    type: LoadBalancer
+    port: 80
+
+
 redis:
   auth:
     password: password
