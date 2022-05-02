@@ -10,7 +10,7 @@ appProperties:
   key:  
   env: development
   debug: true
-  url: https://<your-url>/
+  url: https://<your-url>
 
 logProperties:
   logChannel: stack
@@ -25,6 +25,10 @@ oauthProperties:
   githubClientID: 
   githubClientSecret: 
   githubRedirectUrl: 
+  orcidClientID: 
+  orcidClientSecret:
+  orcidRedirectUrl:
+  orcidEnvironment:
 
 appImage:
   name: php
@@ -137,7 +141,19 @@ postgresql:
     requests:
       cpu: 20m
       memory: 100Mi
-      
+
+fileStorage:
+# Below values are for file storage configuration.
+# You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
+  enabled: false
+  fileSystemDriver: 
+  awsAccessKeyID: 
+  awsSecretAccessKey: 
+  awsDefaultRegion: 
+  awsBucket: 
+  awsEndpoint:
+  awsURL: 
+
 pythonmicroservice:
   image:
     name: python-microservice
@@ -150,6 +166,7 @@ pythonmicroservice:
     port: 80
 
 nmrium:
+# You can use the nmrium hosted at our server or you can host one of your own and replace below values.
   image:
     name: nmrium
     repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrium
@@ -159,6 +176,7 @@ nmrium:
   service:
     type: LoadBalancer
     port: 80
+  nmriumURL: //nmriumdev.nmrxiv.org
 
 redis:
   auth:
@@ -183,6 +201,7 @@ redis:
 
 rabbitmq: 
   enabled: false
+  queueConnection: sync
   port: 5672
   #host: nmrxiv-rabbitmq
   auth: 
