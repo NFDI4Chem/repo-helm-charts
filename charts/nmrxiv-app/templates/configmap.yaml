@@ -58,8 +58,11 @@ data:
 
 #Meilisearch Properties
   {{ if .Values.meilisearch.enabled }}
-  SCOUT_DRIVER: meilisearch
+  SCOUT_DRIVER: {{ .Values.meilisearch.scout }}
+  SCOUT_PREFIX: {{ .Values.meilisearch.scoutPrefix }}
   MEILISEARCH_HOST: {{ required "A valid .Values.meilisearch.host entry required!" .Values.meilisearch.host }}
+  MEILISEARCH_KEY: {{ required "A valid .Values.meilisearch.searchKey entry required!" .Values.meilisearch.searchKey |b64enc | quote }}
+  MEILISEARCH_PUBLICKEY: {{ required "A valid .Values.meilisearch.publicKey entry required!" .Values.meilisearch.publicKey |b64enc | quote }}
   {{ end }}
 
 #Mail Properties:

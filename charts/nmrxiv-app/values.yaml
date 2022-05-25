@@ -220,8 +220,27 @@ rabbitmq:
 meilisearch: 
   enabled: false
   #Replace the host name with yours.
-  host: 'nmrxiv-meilisearch:7700'
-  secretKey: secretkey
+  host: 'https://msdev.nmrxiv.org'
+  # key used to generate search key and public key
+  masterKey: secret
+  # run below command to generate search key and public key 
+  # curl -H "Authorization: Bearer [masterKey]" -X GET 'https://msdev.nmrxiv.org/keys'
+  searchKey:
+  publicKey:
+  scoutPrefix: dev_
+  scout: meilisearch
+  # environment: 
+  #   MEILI_ENV: development
+  auth:
+    existingMasterKeySecret: 'meilisearch-master-key'
+  image:
+    tag: v0.27.1
+  persistence:
+    enabled: true
+    size: 5Gi
+    volume:
+      name: data
+      mountPath: /home/meili_data/data.ms
 
 storage:
   pvc:
