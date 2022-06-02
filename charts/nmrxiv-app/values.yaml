@@ -180,24 +180,27 @@ nmrium:
 
 redis:
   auth:
+    enabled: true
     password: password
   enabled: false
   global:
     storageClass: standard
-  #host: nmrxiv-redis-master
+  master:
+    persistence:
+      enabled: true
+      size: 1Gi
+  replica:
+    persistence:
+      enabled: true
+      size: 1Gi
   replica:
     replicaCount: 1
-  persistence:
-    enabled: false
-    size: 1Gi
   port: 6379
-  resources:
-    limits:
-      cpu: 50m
-      memory: 30Mi
-    requests:
-      cpu: 10m
-      memory: 30Mi
+  sessionDriver: redis
+  cacheDriver: redis
+  redisClient: predis
+  sessionLifetime: 120
+  memcachedHost: memcached
 
 rabbitmq: 
   enabled: false
