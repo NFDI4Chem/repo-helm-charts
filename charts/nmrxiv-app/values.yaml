@@ -196,11 +196,6 @@ redis:
   replica:
     replicaCount: 1
   port: 6379
-  sessionDriver: redis
-  cacheDriver: redis
-  redisClient: predis
-  sessionLifetime: 120
-  memcachedHost: memcached
 
 rabbitmq: 
   enabled: false

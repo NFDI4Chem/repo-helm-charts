@@ -38,11 +38,11 @@ data:
 
 #Redis Properties
   {{ if .Values.redis.enabled }}
-  SESSION_DRIVER: {{ .Values.redis.sessionDriver }}
-  CACHE_DRIVER: {{ .Values.redis.cacheDriver }}
-  REDIS_CLIENT: {{ .Values.redis.redisClient }}
-  SESSION_LIFETIME: {{ .Values.redis.sessionLifetime }}
-  MEMCACHED_HOST: {{ .Values.redis.memcachedHost }}
+  SESSION_DRIVER: "redis"
+  CACHE_DRIVER: "redis"
+  REDIS_CLIENT: "predis"
+  SESSION_LIFETIME: "120"
+  MEMCACHED_HOST: "memcached"
   REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
   {{ end }}
