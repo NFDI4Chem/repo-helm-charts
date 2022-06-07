@@ -178,24 +178,45 @@ nmrium:
     port: 80
   nmriumURL: //nmriumdev.nmrxiv.org
 
+# redis:
+#   auth:
+#     enabled: true
+#     password: password
+#   enabled: false
+#   global:
+#     storageClass: standard
+#   master:
+#     persistence:
+#       enabled: true
+#       size: 1Gi
+#   replica:
+#     persistence:
+#       enabled: true
+#       size: 1Gi
+#   replica:
+#     replicaCount: 1
+#   port: 6379
+
 redis:
   auth:
-    enabled: true
     password: password
   enabled: false
   global:
     storageClass: standard
-  master:
-    persistence:
-      enabled: true
-      size: 1Gi
-  replica:
-    persistence:
-      enabled: true
-      size: 1Gi
+  #host: nmrxiv-redis-master
   replica:
     replicaCount: 1
+  persistence:
+    enabled: false
+    size: 1Gi
   port: 6379
+  resources:
+    limits:
+      cpu: 50m
+      memory: 30Mi
+    requests:
+      cpu: 10m
+      memory: 30Mi
 
 rabbitmq: 
   enabled: false
