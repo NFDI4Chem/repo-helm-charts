@@ -278,6 +278,24 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+worker:
+  enabled: true
+  replicaCount: 1
+  autoscale:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 6
+    CPULimit: 70
+    MemoryLimit: 1568Mi
+  cmd: "php /app/artisan queue:work --sleep=3 --tries=3 --memory=128"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 150Mi
+    requests:
+      cpu: 10m
+      memory: 100Mi
+
 nodeSelector: {}
 
 tolerations: []
