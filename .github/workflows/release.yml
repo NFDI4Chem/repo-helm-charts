@@ -13,6 +13,7 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
+          helm repo add repo-helm-charts https://nfdi4chem.github.io/repo-helm-charts
           helm repo update
 
       - name: Checkout
@@ -26,6 +27,6 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
+        uses: helm/chart-releaser-action@v1.4.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
