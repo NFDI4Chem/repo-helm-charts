@@ -1,13 +1,13 @@
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 10.13.11
+  version: 10.16.2
 - name: redis
   repository: https://charts.bitnami.com/bitnami
-  version: 15.6.3
+  version: 16.9.0
 - name: rabbitmq
   repository: https://charts.bitnami.com/bitnami
-  version: 8.24.12
+  version: 9.0.0
 - name: meilisearch
   repository: https://meilisearch.github.io/meilisearch-kubernetes
   version: 0.1.33
@@ -17,5 +17,5 @@ dependencies:
 - name: nmrium
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:025c2129caf7d7986b257ded845e5619dc83589e743fa1cb3f3ac7ba6a3f257c
-generated: "2022-05-25T15:51:42.9594457+02:00"
+digest: sha256:b1cd3b14f95ab81353faf8e070a0261d764302a313021271a88286a700c5f265
+generated: "2022-06-13T11:19:19.300819664Z"
