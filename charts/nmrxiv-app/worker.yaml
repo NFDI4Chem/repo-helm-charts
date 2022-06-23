@@ -48,7 +48,7 @@ spec:
         command: ["/bin/sh", "-c", "{{ .Values.worker.cmd }}"]
         name: {{ printf "%s-worker" .Release.Name | quote }}
         resources:
-          {{ toYaml .Values.worker.resources | indent 10 }}
+{{ toYaml .Values.worker.resources | indent 10 }}
         volumeMounts:
           - name: logs
             mountPath: /var/www/html/storage/logs
