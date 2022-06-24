@@ -19,6 +19,42 @@ entries:
   nmrxiv-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-06-24T11:56:53.566333874Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.16.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.9.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.0.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.1.33
+    - name: pythonmicroservice
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - name: nmrium
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    description: A  Helm chart of nmrXiv-Laravel Application for K8S.
+    digest: 55fe258f3a9e0a2c05fbe2f1c60c354e9fe80cc213255088f0ea18397d51c912
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-app-0.2.9/nmrxiv-app-0.2.9.tgz
+    version: 0.2.9
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-06-13T11:34:28.477084069Z"
     dependencies:
     - condition: database.enabled
@@ -567,6 +603,37 @@ entries:
   vibspecdb:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2022-06-24T11:56:53.726702021Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.16.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.9.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.0.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.1.22
+    description: A Helm chart of Vibspec-Laravel Application for K8S
+    digest: 7146c870a4b669a9e453fb72e87e22e7ffa05c9157e2dbc3e94bf9d1ce224e91
+    home: https://vibspecdb.k8s.photonicdata.science
+    maintainers:
+    - email: nazar.stefaniuk@uni-jena.de
+      name: Nazar Stefaniuk
+    name: vibspecdb
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/vibspecdb-0.2.14/vibspecdb-0.2.14.tgz
+    version: 0.2.14
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2022-01-24T10:06:46.977955608Z"
     dependencies:
     - condition: postgresql.enabled
@@ -596,4 +663,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-06-13T11:34:28.477198574Z"
+generated: "2022-06-24T11:56:53.726826224Z"
