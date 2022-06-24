@@ -1,0 +1,78 @@
+{{- if .Values.worker.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-worker" .Release.Name | quote }}
+  labels:
+    {{ include "nmrxiv-app.workerLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "nmrxiv-app.workerLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "nmrxiv-app.workerLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+      {{ if .Values.redis.enabled }}
+      - name: redis-wait-ready
+        image: alpine
+        command:
+          - sh
+          - -c
+          - for i in $(seq 1 200); do nc -z -w3 $REDIS_HOST $REDIS_PORT && exit 0 || sleep 5; echo -n "." ; done; exit 1
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+      {{ end }}
+      {{ if .Values.rabbitmq.enabled }}
+      - name: rebbitmq-wait-ready
+        image: alpine
+        command:
+          - sh
+          - -c
+          - for i in $(seq 1 200); do nc -z -w3 $RABBITMQ_HOST $RABBITMQ_PORT && exit 0 || sleep 5; echo -n "." ; done; exit 1
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+      {{ end }}
+      containers:
+      - image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.appImage.pullPolicy }}
+        command: ["/bin/sh", "-c", "{{ .Values.worker.cmd }}"]
+        name: {{ printf "%s-worker" .Release.Name | quote }}
+        resources: {}
+        volumeMounts:
+          - name: logs
+            mountPath: /var/www/html/storage/logs
+          - name: cache
+            mountPath: /var/www/html/storage/framework/cache
+          - name: sessions
+            mountPath: /var/www/html/storage/framework/sessions
+          - name: views
+            mountPath: /var/www/html/storage/framework/views
+          - name: testing
+            mountPath: /var/www/html/storage/framework/testing
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+          - secretRef:
+              name: {{ .Values.EnvSecretRef.name }}
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: testing
+          emptyDir: {}
+        - name: sessions
+          emptyDir: {}
+        - name: views
+          emptyDir: {}
+{{- end }}
