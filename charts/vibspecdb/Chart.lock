@@ -4,12 +4,12 @@ dependencies:
   version: 10.16.2
 - name: redis
   repository: https://charts.bitnami.com/bitnami
-  version: 9.0.0
+  version: 16.9.0
 - name: rabbitmq
   repository: https://charts.bitnami.com/bitnami
-  version: 8.24.12
+  version: 9.0.0
 - name: meilisearch
   repository: https://meilisearch.github.io/meilisearch-kubernetes
   version: 0.1.22
-digest: sha256:9db237d706687d61b988168ade3b46ff4527fe9e93ecdc83e18b125d918a3375
-generated: "2021-12-22T14:39:56.8233639+01:00"
+digest: sha256:4576eb53630f466195ee555e214e9d2eb89cd9a76be180f29357ba0b9fb94be1
+generated: "2022-06-24T11:55:11.094527242Z"
