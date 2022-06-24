@@ -8,6 +8,7 @@ data:
   APP_ENV: {{ .Values.appProperties.env }}
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
+  QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   
 #Log Properties
   LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
@@ -38,10 +39,10 @@ data:
 
 #Redis Properties
   {{ if .Values.redis.enabled }}
-  SESSION_DRIVER: {{ .Values.redis.sessionDriver }}
+  SESSION_DRIVER: "{{ .Values.redis.sessionDriver }}"
   CACHE_DRIVER: {{ .Values.redis.cacheDriver }}
   REDIS_CLIENT: {{ .Values.redis.redisClient }}
-  SESSION_LIFETIME: {{ .Values.redis.sessionLifetime }}
+  SESSION_LIFETIME: "{{ .Values.redis.sessionLifetime }}"
   MEMCACHED_HOST: {{ .Values.redis.memcachedHost }}
   REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}

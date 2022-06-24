@@ -11,6 +11,7 @@ appProperties:
   env: development
   debug: true
   url: https://<your-url>
+  queueConnection: sync
 
 logProperties:
   logChannel: stack
@@ -272,14 +273,14 @@ worker:
     maxReplicas: 6
     CPULimit: 70
     MemoryLimit: 1568Mi
-  cmd: "php /app/artisan queue:work --sleep=3 --tries=3 --memory=128"
+  cmd: "php artisan horizon"
   resources:
     limits:
       cpu: 300m
-      memory: 150Mi
+      memory: 200Mi
     requests:
-      cpu: 10m
-      memory: 100Mi
+      cpu: 100m
+      memory: 150Mi
 
 nodeSelector: {}
 
