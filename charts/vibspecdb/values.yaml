@@ -50,7 +50,7 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   className: ""
   annotations: {}
   hosts:
@@ -100,7 +100,7 @@ postgresql:
   postgresqlPassword: "secret"
   postgresqlDatabase: "vibspecdb"
   port: "5432"
-  host: "postgresql"
+  host: "vibspecdb-postgresql"
   global:
     storageClass: 'longhorn'
   persistence:
@@ -116,9 +116,9 @@ postgresql:
       cpu: 200m
 
 rabbitmq:
-  enabled: true
+  enabled: false
   port: "5672"
-  host: "rabbitmq"
+  host: "vibspecdb-rabbitmq"
   auth:
     username: 'rabbitmq_user'
     password: 'password'
@@ -132,14 +132,14 @@ rabbitmq:
     hostname: hostnamehere.com
 
 meilisearch:
-  enabled: true
+  enabled: false
   host: 'meilisearch:7700'
   secretKey: meilikeyhere
 
 redis:
-  enabled: true
+  enabled: false
   port: "6379"
-  host: "redis-master"
+  host: "vibspecdb-redis-master"
   auth:
     password: 'redispasshere'
   global:
