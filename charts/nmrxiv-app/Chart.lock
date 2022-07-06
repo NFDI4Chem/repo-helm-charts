@@ -17,5 +17,5 @@ dependencies:
 - name: nmrium
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:be2e5c5d907d5a620e9d3a3e4f1b88961df18f1f800339cc8fb11823fcddff86
-generated: "2022-07-05T13:44:51.159913468Z"
+digest: sha256:5e09915edc33cc60fd6fc654122051fdcff2b63c18693a4eead94b9f71a58941
+generated: "2022-07-06T16:25:50.7738289+02:00"
