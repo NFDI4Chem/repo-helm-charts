@@ -15,12 +15,12 @@ data:
   LOG_LEVEL: {{ .Values.logProperties.logLevel }}
 
 #DB Properties
-  DB_USERNAME: {{ required "A valid .Values.appProperties.key entry required!" .Values.postgresql.postgresqlUsername }}
-  DB_CONNECTION: {{ required "A valid .Values.appProperties.connection entry required!" .Values.postgresql.connection }}
+  DB_USERNAME: {{ required "A valid Values.postgresql.auth.username entry required!" .Values.postgresql.auth.username }}
+  DB_CONNECTION: {{ required "A valid .Values.postgresql.connection entry required!" .Values.postgresql.connection }}
   DB_HOST: {{ printf "%s-postgresql" .Release.Name | quote }}
   DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
-  DB_DATABASE: {{ required "A valid .Values.postgresql.postgresqlDatabase entry required!" .Values.postgresql.postgresqlDatabase }}
-
+  DB_DATABASE: {{ required "A valid Values.postgresql.auth.database entry required!" .Values.postgresql.auth.database }}
+  
 #File Storage Properties
   {{ if .Values.fileStorage.enabled }}
   FILESYSTEM_DRIVER: {{ .Values.fileStorage.fileSystemDriver }}

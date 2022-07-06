@@ -120,8 +120,6 @@ mail:
 
 # DB properties
 postgresql:
-  image:
-    tag: 11.14.0-debian-10-r17   # immutable tags are recommended
   enabled: true
   # global:
   #   storageClass: standard
@@ -132,9 +130,11 @@ postgresql:
     size: 1Gi
   # host: nmrxiv-postgresql
   # port: 5432
-  postgresqlDatabase: nmrxiv
-  postgresqlPassword: secret
-  postgresqlUsername: user
+  auth:
+    username: pguser
+    password: secret
+    database: nmrxiv
+    postgresPassword: secret
   resources:
     limits:
       cpu: 200m

@@ -1,7 +1,7 @@
 dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
-  version: 10.16.2
+  version: 11.6.14
 - name: redis
   repository: https://charts.bitnami.com/bitnami
   version: 16.9.0
@@ -17,5 +17,5 @@ dependencies:
 - name: nmrium
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:b1cd3b14f95ab81353faf8e070a0261d764302a313021271a88286a700c5f265
-generated: "2022-06-13T11:19:19.300819664Z"
+digest: sha256:be2e5c5d907d5a620e9d3a3e4f1b88961df18f1f800339cc8fb11823fcddff86
+generated: "2022-07-05T13:44:51.159913468Z"
