@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "meilisearch.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "meilisearch.name" . }}
+    helm.sh/chart: {{ include "meilisearch.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.customLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ template "meilisearch.fullname" . }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "meilisearch.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "meilisearch.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- with .Values.customLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | default (include "meilisearch.fullname" .) }}
+      {{- if .Values.image.pullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
+      {{- end }}
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: {{ .Values.persistence.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ include "meilisearch.fullname" . }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: {{ .Values.persistence.volume.name }}
+              mountPath: {{ .Values.persistence.volume.mountPath }}
+          {{- end }}
+          envFrom:
+          - configMapRef:
+              name: {{ template "meilisearch.fullname" . }}-environment
+          {{- if or (eq (include "isProductionWithoutMasterKey" .) "true") .Values.auth.existingMasterKeySecret }}
+          - secretRef:
+              name: {{ template "secretMasterKeyName" . }}
+          {{- end }}
+          {{- if ne (len .Values.command) 0 }}
+          command:
+{{ toYaml .Values.command | indent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.container.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.livenessProbe.InitialDelaySeconds }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            initialDelaySeconds: {{ .Values.readinessProbe.InitialDelaySeconds }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
