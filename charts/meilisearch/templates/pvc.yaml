@@ -20,6 +20,7 @@ metadata:
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
+  persistentVolumeReclaimPolicy: Retain
   resources:
     requests:
       storage: {{ .Values.persistence.size | quote }}
