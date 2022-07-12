@@ -2,9 +2,14 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "meilisearch.fullname" . }}
-  namespace: {{ template "meilisearch.namespace" . }}
   labels:
-    {{- include "meilisearch.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "meilisearch.name" . }}
+    helm.sh/chart: {{ include "meilisearch.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- with .Values.customLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
