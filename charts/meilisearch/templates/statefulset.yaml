@@ -108,4 +108,3 @@ spec:
         {{- if .Values.persistence.storageClass }}
         storageClassName: {{ .Values.persistence.storageClass | quote }}
         {{- end}}
-  {{- end}}
