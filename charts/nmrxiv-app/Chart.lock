@@ -9,13 +9,13 @@ dependencies:
   repository: https://charts.bitnami.com/bitnami
   version: 9.0.0
 - name: meilisearch
-  repository: https://meilisearch.github.io/meilisearch-kubernetes
-  version: 0.1.33
+  repository: https://nfdi4chem.github.io/repo-helm-charts
+  version: 0.1.44
 - name: pythonmicroservice
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
 - name: nmrium
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:5e09915edc33cc60fd6fc654122051fdcff2b63c18693a4eead94b9f71a58941
-generated: "2022-07-06T16:25:50.7738289+02:00"
+digest: sha256:c3dc2050b1667d5647a4d6611c8baf729bb07ecebe535e63eff35e2b89b0bbde
+generated: "2022-07-13T09:24:01.308688851Z"
