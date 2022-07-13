@@ -18,4 +18,4 @@ dependencies:
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
 digest: sha256:c3dc2050b1667d5647a4d6611c8baf729bb07ecebe535e63eff35e2b89b0bbde
-generated: "2022-07-13T09:24:01.308688851Z"
+generated: "2022-07-13T11:36:59.6415194+02:00"

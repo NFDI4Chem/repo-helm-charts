@@ -12,6 +12,7 @@ appProperties:
   debug: true
   url: https://<your-url>
   queueConnection: sync
+  githubLicenseUrl: https://api.github.com/licenses
 
 logProperties:
   logChannel: stack
