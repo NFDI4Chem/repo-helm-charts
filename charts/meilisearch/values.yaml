@@ -68,7 +68,7 @@ ingress:
   #      - chart-example.local
 
 persistence:
-  enabled: false
+  enabled: true
   accessMode: ReadWriteOnce
   ## Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
@@ -78,7 +78,7 @@ persistence:
   ##   GKE, AWS & OpenStack)
   ##
   # storageClass: "-"
-  size: 10Gi
+  size: 5Gi
   annotations: {}
   volume:
     name: data

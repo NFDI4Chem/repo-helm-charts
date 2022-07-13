@@ -31,15 +31,15 @@ spec:
     {{- end }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name | default (include "meilisearch.fullname" .) }}
-      {{- if .Values.image.pullSecret }}
+      {{ if .Values.image.pullSecret }}
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+        - name: {{ .Values.image.pullSecret }} 
       {{- end }}
       {{- if .Values.persistence.enabled }}
       volumes:
-        - name: {{ .Values.persistence.volume.name }}
+        - name: data
           persistentVolumeClaim:
-            claimName: {{ include "meilisearch.fullname" . }}
+            claimName: data
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -47,8 +47,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.persistence.enabled }}
           volumeMounts:
-            - name: {{ .Values.persistence.volume.name }}
-              mountPath: {{ .Values.persistence.volume.mountPath }}
+          - mountPath: {{ .Values.persistence.volume.mountPath }}
+            name: data
           {{- end }}
           envFrom:
           - configMapRef:
@@ -93,18 +93,10 @@ spec:
     {{- end }}      
   volumeClaimTemplates:
     - metadata:
-        name: {{ include "meilisearch.fullname" . }}
-        {{- if .Values.persistence.annotations }}
-        annotations: {{- toYaml .Values.persistence.annotations | nindent 10 }}
-        {{- end }}
+        name: data
       spec:
-        accessModes:
-        {{- range .Values.persistence.accessModes }}
-          - {{ . | quote }}
-        {{- end }}
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "standard"
         resources:
           requests:
-            storage: {{ .Values.persistence.size | quote }}
-        {{- if .Values.persistence.storageClass }}
-        storageClassName: {{ .Values.persistence.storageClass | quote }}
-        {{- end}}
+            storage: {{ .Values.persistence.size }}

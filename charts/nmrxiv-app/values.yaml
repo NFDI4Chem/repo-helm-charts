@@ -124,10 +124,11 @@ postgresql:
   # global:
   #   storageClass: standard
   connection: pgsql
-  persistence:
-    enabled: false
-    existingClaim: ''
-    size: 1Gi
+  primary:
+    persistence:
+      enabled: false
+      existingClaim: ''
+      size: 1Gi
   # host: nmrxiv-postgresql
   # port: 5432
   auth:
@@ -238,14 +239,9 @@ meilisearch:
   #   MEILI_ENV: development
   auth:
     existingMasterKeySecret: 'meilisearch-master-key'
-  image:
-    tag: v0.27.1
   persistence:
     enabled: true
     size: 5Gi
-    volume:
-      name: data
-      mountPath: /home/meili_data/data.ms
 
 storage:
   pvc:
