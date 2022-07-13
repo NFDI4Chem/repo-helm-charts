@@ -3,6 +3,20 @@ entries:
   meilisearch:
   - apiVersion: v1
     appVersion: v0.27.1
+    created: "2022-07-13T09:12:53.809279823Z"
+    description: A Helm chart for the Meilisearch search engine
+    digest: 28020182a5f348d1548f5f95008f0f535a4cf1e7909bc298c2809d7914ee8297
+    home: https://github.com/meilisearch/meilisearch-kubernetes/charts
+    icon: https://res.cloudinary.com/meilisearch/image/upload/v1597822872/Logo/logo_img.svg
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: meilisearch
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/meilisearch-0.1.44/meilisearch-0.1.44.tgz
+    version: 0.1.44
+  - apiVersion: v1
+    appVersion: v0.27.1
     created: "2022-07-12T12:36:40.405752964Z"
     description: A Helm chart for the Meilisearch search engine
     digest: dda10340f14b88a78129b5086f56bc764aab1393e1b159ddb285a7e85d97a50e
@@ -116,6 +130,42 @@ entries:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrium-0.1.0/nmrium-0.1.0.tgz
     version: 0.1.0
   nmrxiv-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-07-13T09:12:53.98882861Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.14
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.9.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.0.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://meilisearch.github.io/meilisearch-kubernetes
+      version: 0.1.33
+    - name: pythonmicroservice
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - name: nmrium
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    description: A  Helm chart of nmrXiv-Laravel Application for K8S.
+    digest: 32591bba1cd617ad93f6f35b03d8620574cdbb1e256699463c9007060af25962
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-app-0.3.3/nmrxiv-app-0.3.3.tgz
+    version: 0.3.3
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-07-06T14:28:50.97227923Z"
@@ -834,4 +884,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-07-12T12:36:40.405916965Z"
+generated: "2022-07-13T09:12:53.989140512Z"
