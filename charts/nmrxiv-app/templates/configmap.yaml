@@ -29,12 +29,13 @@ data:
   AWS_BUCKET: {{ .Values.fileStorage.awsBucket }}
   AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint }}
   AWS_URL: {{ .Values.fileStorage.awsURL }}
+  AWS_BUCKET_PUBLIC: {{ .Values.fileStorage.awsBucketPublic }}
   {{ end }}
 
 #Nmrium Properties
   NMRIUM_URL: {{ required "A valid .Values.nmrium.nmriumURL entry required!" .Values.nmrium.nmriumURL }}
 
-#PYTHON MICROSERVICE Properties
+#Python Microservice Properties
   PYTHON_WS_URL: {{ printf "%s-pythonmicroservice" .Release.Name }}
   PYTHON_WS_PORT: {{ .Values.pythonmicroservice.service.port | default 80 | quote }}
 
@@ -49,7 +50,7 @@ data:
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
   {{ end }}
 
-#RabbitMQ Properties.
+#RabbitMQ Properties
   {{ if .Values.rabbitmq.enabled }}
   QUEUE_CONNECTION: {{ .Values.rabbitmq.queueConnection }}
   RABBITMQ_HOST: {{ printf "%s-rabbitmq" .Release.Name | quote }}
@@ -63,11 +64,9 @@ data:
   SCOUT_DRIVER: {{ .Values.meilisearch.scout }}
   SCOUT_PREFIX: {{ .Values.meilisearch.scoutPrefix }}
   MEILISEARCH_HOST: {{ required "A valid .Values.meilisearch.host entry required!" .Values.meilisearch.host }}
-  MEILISEARCH_KEY: {{ required "A valid .Values.meilisearch.searchKey entry required!" .Values.meilisearch.searchKey |b64enc | quote }}
-  MEILISEARCH_PUBLICKEY: {{ required "A valid .Values.meilisearch.publicKey entry required!" .Values.meilisearch.publicKey |b64enc | quote }}
   {{ end }}
 
-#Mail Properties:
+#Mail Properties
   {{ if .Values.mail.enabled }}
   MAIL_MAILER: {{ .Values.mail.mailer }}
   MAIL_HOST: {{ .Values.mail.host }}

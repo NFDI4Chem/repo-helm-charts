@@ -156,6 +156,7 @@ fileStorage:
   awsBucket: 
   awsEndpoint:
   awsURL: 
+  awsBucketPublic: 
 
 pythonmicroservice:
   image:
