@@ -73,7 +73,8 @@ spec:
             httpGet:
               path: /css/app.css
               port: 80
-          resources: {}
+          resources:
+            {{- toYaml .Values.resources.nginx | nindent 12 }}
           ports:
             - containerPort: 80
 
@@ -101,11 +102,6 @@ spec:
             - name: tmp 
               mountPath: /tmp
           resources:
-            limits:
-              cpu: 800m
-              memory: 500Mi
-            requests:
-              cpu: 500m
-              memory: 250Mi
+            {{- toYaml .Values.resources.app | nindent 12 }}
           ports:
             - containerPort: 9000
