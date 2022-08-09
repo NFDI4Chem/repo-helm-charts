@@ -13,6 +13,7 @@ appProperties:
   url: https://<your-url>
   queueConnection: sync
   githubLicenseUrl: https://api.github.com/licenses
+  getDetailsByDoiApi: https://api.crossref.org/works
 
 logProperties:
   logChannel: stack
