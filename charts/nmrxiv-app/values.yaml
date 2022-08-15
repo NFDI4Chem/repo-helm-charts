@@ -292,6 +292,11 @@ worker:
       cpu: 100m
       memory: 150Mi
 
+larabug:
+  enabled: false
+  lbKey: 
+  lbProjectKey:
+
 nodeSelector: {}
 
 tolerations: []
