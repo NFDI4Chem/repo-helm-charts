@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   name: nmrxiv-doc
-  repository: eu.gcr.io/nmrxiv/nmrxiv-docs
+  repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrxiv-doc
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
