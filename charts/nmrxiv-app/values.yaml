@@ -19,19 +19,38 @@ logProperties:
   logChannel: stack
   logLevel: debug
 
+
+# oauthProperties:
+#   enabled: false
+#   twitterClientID: 
+#   twitterClientSecret: 
+#   twitterRedirectUrl: 
+#   githubClientID: 
+#   githubClientSecret: 
+#   githubRedirectUrl: 
+#   orcidClientID: 
+#   orcidClientSecret:
+#   orcidRedirectUrl:
+#   orcidEnvironment:
+
 #Enable this properties for Single Sign-On follow the documentation for more info https://docs.nmrxiv.org/docs/developer-guides/configurations/oauth
 oauthProperties:
-  enabled: false
-  twitterClientID: 
-  twitterClientSecret: 
-  twitterRedirectUrl: 
-  githubClientID: 
-  githubClientSecret: 
-  githubRedirectUrl: 
-  orcidClientID: 
-  orcidClientSecret:
-  orcidRedirectUrl:
-  orcidEnvironment:
+  twitter:
+    enabled: false
+    clientID:
+    clientSecret:
+    redirectURL: 
+  github:
+    enabled: false
+    clientID:
+    clientSecret:
+    redirectURL:
+  orcid:
+    enabled: false
+    clientID:
+    clientSecret:
+    redirectURL:
+    environment:
 
 appImage:
   name: php

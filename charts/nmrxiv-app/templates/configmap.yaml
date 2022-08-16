@@ -78,9 +78,13 @@ data:
   {{ end }}
 
 #OAuth Properties
-  {{ if .Values.oauthProperties.enabled }}
-  TWITTER_REDIRECT_URL: {{ .Values.oauthProperties.twitterRedirectUrl }}
-  GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.githubRedirectUrl }}
-  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcidRedirectUrl }}
-  ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcidEnvironment }}
+  {{ if .Values.oauthProperties.twitter.enabled }}
+  TWITTER_REDIRECT_URL: {{ .Values.oauthProperties.twitter.redirectURL }}
+  {{ end }}
+  {{ if .Values.oauthProperties.github.enabled }}
+  GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.github.redirectURL }}
+  {{ end }}
+  {{ if .Values.oauthProperties.orcid.enabled }}
+  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.clientID }}
+  ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcid.environment }}
   {{ end }}
