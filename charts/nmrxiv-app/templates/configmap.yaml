@@ -10,7 +10,9 @@ data:
   APP_URL: {{ .Values.appProperties.url }}
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   GITHUB_LICENSE_URL: {{ .Values.appProperties.githubLicenseUrl }}
-  GET_DETAILS_BY_DOI_API: {{ .Values.appProperties.getDetailsByDoiApi }}
+
+#Web Services
+  EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
   
 #Log Properties
   LOG_CHANNEL: {{ .Values.logProperties.logChannel }}

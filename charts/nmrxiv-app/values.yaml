@@ -13,7 +13,9 @@ appProperties:
   url: https://<your-url>
   queueConnection: sync
   githubLicenseUrl: https://api.github.com/licenses
-  getDetailsByDoiApi: https://api.crossref.org/works
+
+webservices:
+  europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
 
 logProperties:
   logChannel: stack
