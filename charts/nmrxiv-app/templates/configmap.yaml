@@ -28,6 +28,7 @@ data:
 #File Storage Properties
   {{ if .Values.fileStorage.enabled }}
   FILESYSTEM_DRIVER: {{ .Values.fileStorage.fileSystemDriver }}
+  FILESYSTEM_DRIVER_PUBLIC: {{ .Values.fileStorage.fileSystemDriverPublic }}
   AWS_DEFAULT_REGION: {{ .Values.fileStorage.awsDefaultRegion }}
   AWS_BUCKET: {{ .Values.fileStorage.awsBucket }}
   AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint }}

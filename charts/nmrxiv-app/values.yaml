@@ -183,6 +183,7 @@ fileStorage:
 # You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
   enabled: false
   fileSystemDriver: 
+  fileSystemDriverPublic: 
   awsAccessKeyID: 
   awsSecretAccessKey: 
   awsDefaultRegion: 
