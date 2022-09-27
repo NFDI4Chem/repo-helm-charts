@@ -91,3 +91,7 @@ data:
   ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.clientID }}
   ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcid.environment }}
   {{ end }}
+
+#Datacite Properties
+  DATACITE_PREFIX: {{ .Values.datacite.prefix }}
+  DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}

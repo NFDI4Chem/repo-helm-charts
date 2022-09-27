@@ -319,6 +319,12 @@ larabug:
   lbKey: 
   lbProjectKey:
 
+datacite:
+  username: 
+  secret: 
+  prefix: 
+  endpoint: https://api.test.datacite.org
+
 nodeSelector: {}
 
 tolerations: []
