@@ -93,5 +93,5 @@ data:
   {{ end }}
 
 #Datacite Properties
-  DATACITE_PREFIX: {{ .Values.datacite.prefix }}
+  DATACITE_PREFIX: "{{ .Values.datacite.prefix }}"
   DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}
