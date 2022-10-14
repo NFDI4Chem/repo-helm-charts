@@ -10,7 +10,7 @@ data:
   APP_URL: {{ .Values.appProperties.url }}
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   GITHUB_LICENSE_URL: {{ .Values.appProperties.githubLicenseUrl }}
-  SCHEMA_VERSION: {{ .Values.appProperties.schemaVersion }}
+  SCHEMA_VERSION: "{{ .Values.appProperties.schemaVersion }}"
 
 #Web Services
   EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
