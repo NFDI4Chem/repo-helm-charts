@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.EnvConfigMapRef.name }}
+data:
+#App Properties
+  PORT: "{{ .Values.app.port }}"
+  HOST: 0.0.0.0
+  NODE_ENV: {{ .Values.app.node_env }}
+  DRIVE_DISK: {{ .Values.app.drive_disk }}
