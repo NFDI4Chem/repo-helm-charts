@@ -1358,6 +1358,22 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-doc-0.1.0/nmrxiv-doc-0.1.0.tgz
     version: 0.1.0
+  nmrxiv-nodejs-microservice:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-17T15:16:05.343313789Z"
+    description: A Helm chart for nodejs micoservice for nmrxiv.
+    digest: ddcb5473be7c56333968d10c87eef62c1bae477226a7ed30d396ce454820fde1
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    - email: chandu.nainala@uni-jena.de
+      name: Chandu Nainala
+    name: nmrxiv-nodejs-microservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-nodejs-microservice-0.1.0/nmrxiv-nodejs-microservice-0.1.0.tgz
+    version: 0.1.0
   pythonmicroservice:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -1437,4 +1453,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-10-14T14:22:59.674176309Z"
+generated: "2022-10-17T15:16:05.343925619Z"
