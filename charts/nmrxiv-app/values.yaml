@@ -321,6 +321,7 @@ larabug:
   lbProjectKey:
 
 datacite:
+  host: 
   username: 
   secret: 
   prefix: 

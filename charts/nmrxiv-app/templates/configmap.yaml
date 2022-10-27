@@ -96,3 +96,4 @@ data:
 #Datacite Properties
   DATACITE_PREFIX: "{{ .Values.datacite.prefix }}"
   DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}
+  DOI_HOST: {{ .Values.datacite.host }}
