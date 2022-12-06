@@ -11,6 +11,7 @@ data:
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   GITHUB_LICENSE_URL: {{ .Values.appProperties.githubLicenseUrl }}
   SCHEMA_VERSION: "{{ .Values.appProperties.schemaVersion }}"
+  COOL_OFF_PERIOD: "{{ .Values.appProperties.coolOffPeriod }}"
 
 #Web Services
   EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
