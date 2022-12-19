@@ -132,6 +132,42 @@ entries:
   nmrxiv-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-12-19T12:17:17.194080268Z"
+    dependencies:
+    - condition: database.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.14
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.9.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.0.0
+    - condition: meilisearch.enabled
+      name: meilisearch
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.44
+    - name: pythonmicroservice
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - name: nmrium
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    description: A  Helm chart of nmrXiv-Laravel Application for K8S.
+    digest: 75e685e1aee05a847a677ab43d6e8f3dacebbc5bca4fe1bf844f0de24a1e7f44
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-app-0.5.2/nmrxiv-app-0.5.2.tgz
+    version: 0.5.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-12-19T11:46:34.57689717Z"
     dependencies:
     - condition: database.enabled
@@ -1561,4 +1597,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2022-12-19T11:46:34.577254091Z"
+generated: "2022-12-19T12:17:17.194435373Z"
