@@ -316,6 +316,24 @@ worker:
       cpu: 100m
       memory: 150Mi
 
+scheduler:
+  enabled: false
+  replicaCount: 1
+  autoscale:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 6
+    MemoryLimit: 1568Mi
+  cmd: "php artisan schedule:work"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 125Mi
+    limits:
+      cpu: 200m
+      memory: 500Mi
+
+
 larabug:
   enabled: false
   lbKey: 

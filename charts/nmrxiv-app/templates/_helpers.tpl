@@ -68,3 +68,12 @@ Set chart labels for worker
 app: {{ printf "%s-%s" .Release.Name "worker" | trunc 63 | trimSuffix "-" }}
 release: {{ .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- end }}
+
+
+{{/*
+Set chart labels for scheduler
+*/}}
+{{- define "nmrxiv-app.schedulerLabels" -}}
+app: {{ printf "%s-%s" .Release.Name "scheduler" | trunc 63 | trimSuffix "-" }}
+release: {{ .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end }}
