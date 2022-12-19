@@ -24,8 +24,7 @@ spec:
         imagePullPolicy: {{ .Values.appImage.pullPolicy }}
         command: ["/bin/sh", "-c", "{{ .Values.scheduler.cmd }}"]
         name: {{ printf "%s-scheduler" .Release.Name | quote }}
-        resources:
-{{ toYaml .Values.scheduler.resources | indent 10 }}
+        resources: {}
         volumeMounts:
           - name: logs
             mountPath: /var/www/html/storage/logs
