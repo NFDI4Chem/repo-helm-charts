@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "coconut-app.fullname" . }}
+  labels:
+    {{- include "coconut-app.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "coconut-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      # annotations:
+      #   {{- toYaml . | nindent 8 }}
+      # {{- end }}
+      labels:
+        {{- include "coconut-app.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: testing
+          emptyDir: {}
+        - name: sessions
+          emptyDir: {}
+        - name: views
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+      #serviceAccountName: {{ include "coconut-app.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: postgres-wait-ready
+          image: alpine
+          command:
+            - sh
+            - -c
+            - for i in $(seq 1 200); do nc -z -w3 $DB_HOST $DB_PORT && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
+        - name: database-migrations
+          image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
+            - secretRef:
+                name: {{ .Values.EnvSecretRef.name }}
+          command:
+            - "php"
+          args:
+            - "artisan"
+            - "migrate"
+            - "--force"
+      containers:
+        - name: {{ .Values.nginxImage.name }}
+          imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
+          image: "{{ .Values.nginxImage.repository }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
+          livenessProbe:
+            httpGet:
+              path: /css/app.css
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /css/app.css
+              port: 80
+          resources:
+            {{- toYaml .Values.resources.nginx | nindent 12 }}
+          ports:
+            - containerPort: 80
+
+        - name: {{ .Values.appImage.name }}
+          imagePullPolicy: {{ .Values.appImage.pullPolicy }}
+          image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.EnvConfigMapRef.name }}
+            - secretRef:
+                name: {{ .Values.EnvSecretRef.name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          volumeMounts:
+            - name: logs
+              mountPath: /var/www/html/storage/logs
+            - name: cache
+              mountPath: /var/www/html/storage/framework/cache
+            - name: sessions
+              mountPath: /var/www/html/storage/framework/sessions
+            - name: views
+              mountPath: /var/www/html/storage/framework/views
+            - name: testing
+              mountPath: /var/www/html/storage/framework/testing
+            - name: tmp 
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.resources.app | nindent 12 }}
+          ports:
+            - containerPort: 9000

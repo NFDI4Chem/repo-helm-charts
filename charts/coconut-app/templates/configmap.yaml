@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.EnvConfigMapRef.name }}
+data:
+#App Properties
+  APP_NAME: {{ .Values.appProperties.name }}
+  APP_ENV: {{ .Values.appProperties.env }}
+  APP_DEBUG: "{{ .Values.appProperties.debug }}"
+  APP_URL: {{ .Values.appProperties.url }}
+  QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
+  
+#Log Properties
+  LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
+  LOG_LEVEL: {{ .Values.logProperties.logLevel }}
+
+#DB Properties
+  DB_USERNAME: {{ required "A valid Values.postgresql.auth.username entry required!" .Values.postgresql.auth.username }}
+  DB_CONNECTION: {{ required "A valid .Values.postgresql.connection entry required!" .Values.postgresql.connection }}
+  DB_HOST: {{ printf "%s-postgresql" .Release.Name | quote }}
+  DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
+  DB_DATABASE: {{ required "A valid Values.postgresql.auth.database entry required!" .Values.postgresql.auth.database }}
+  
+#Mail Properties
+  {{ if .Values.mail.enabled }}
+  MAIL_MAILER: {{ .Values.mail.mailer }}
+  MAIL_HOST: {{ .Values.mail.host }}
+  MAIL_PORT: "{{ .Values.mail.port }}"
+  MAIL_USERNAME: {{ .Values.mail.user }}
+  MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
+  MAIL_FROM_NAME: {{ .Values.mail.fromName }}
+  {{ end }}

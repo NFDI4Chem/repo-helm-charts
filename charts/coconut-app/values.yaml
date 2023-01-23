@@ -1,0 +1,296 @@
+# Default values for coconut-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+# Default app properties for laravel.
+appProperties:
+  name: coconut
+  key:  
+  env: development
+  debug: true
+  url: https://<your-url>
+  queueConnection: sync
+  githubLicenseUrl: https://api.github.com/licenses
+  schemaVersion: 1.0
+
+# webservices:
+#   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+
+logProperties:
+  logChannel: stack
+  logLevel: debug
+
+
+# oauthProperties:
+#   enabled: false
+#   twitterClientID: 
+#   twitterClientSecret: 
+#   twitterRedirectUrl: 
+#   githubClientID: 
+#   githubClientSecret: 
+#   githubRedirectUrl: 
+#   orcidClientID: 
+#   orcidClientSecret:
+#   orcidRedirectUrl:
+#   orcidEnvironment:
+
+#Enable this properties for Single Sign-On follow the documentation for more info https://docs.coconut.org/docs/developer-guides/configurations/oauth
+# oauthProperties:
+#   twitter:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL: 
+#   github:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL:
+#   orcid:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL:
+#     environment:
+
+appImage:
+  name: php
+  repository: europe-west3-docker.pkg.dev/coconut-366808/coconut-dev/coconut-app
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+nginxImage:
+  name: nginx
+  repository: europe-west3-docker.pkg.dev/coconut-366808/coconut-dev/coconut-nginx
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+EnvConfigMapRef:
+  name: "coconut-config-map"
+  enabled: true
+EnvSecretRef:
+  name: "coconut-secrets"
+  enabled: true
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {
+  fsGroup: 82
+}
+
+securityContext: {
+  runAsUser: 82,
+  readOnlyRootFilesystem: true
+}
+
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {
+    # kubernetes.io/ingress.global-static-ip-name: coconut-app-ip-address
+    # kubernetes.io/ingress.class: "nginx"
+  }
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  app:
+    limits:
+      cpu: 400m
+      memory: 250Mi
+    requests:
+      cpu: 250m
+      memory: 125Mi
+  nginx:
+    limits:
+      cpu: 400m
+      memory: 250Mi
+    requests:
+      cpu: 250m
+      memory: 125Mi
+
+# Uncomment below properties and replace it with your own smtp values to activate the mail server.
+mail:
+  enabled: false
+  # host: 'smtp.uni-jena.de'
+  # port: 587
+  # from: info.coconut@uni-jena.de
+  # fromName: "nmrXiv-dev"
+  # user: user
+  # password: secret
+  # mailer: smtp
+
+# DB properties
+postgresql:
+  enabled: true
+  # global:
+  #   storageClass: standard
+  connection: pgsql
+  primary:
+    persistence:
+      enabled: false
+      existingClaim: ''
+      size: 1Gi
+  # host: coconut-postgresql
+  # port: 5432
+  auth:
+    username: pguser
+    password: secret
+    database: coconut
+    postgresPassword: secret
+  resources:
+    limits:
+      cpu: 200m
+      memory: 150Mi
+    requests:
+      cpu: 20m
+      memory: 100Mi
+
+# fileStorage:
+# # Below values are for file storage configuration.
+# # You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
+#   enabled: false
+#   fileSystemDriver: 
+#   fileSystemDriverPublic: 
+#   awsAccessKeyID: 
+#   awsSecretAccessKey: 
+#   awsDefaultRegion: 
+#   awsBucket: 
+#   awsEndpoint:
+#   awsURL: 
+#   awsBucketPublic: 
+
+# pythonmicroservice:
+#   image:
+#     name: python-microservice
+#     repository: europe-west3-docker.pkg.dev/coconut/coconut-dev/coconut-python-microservice
+#     pullPolicy: Always
+#     # Overrides the image tag whose default is the chart appVersion.
+#     tag: latest
+#   service:
+#     type: ClusterIP
+#     port: 80
+
+# redis:
+#   auth:
+#     enabled: true
+#     password: password
+#   enabled: false
+#   global:
+#     storageClass: standard
+#   #host: coconut-redis-master
+#   master:
+#     persistence:
+#       enabled: true
+#       size: 1Gi
+#   replica:
+#     persistence:
+#       enabled: true
+#       size: 1Gi
+#   replica:
+#     replicaCount: 1
+#   port: 6379
+#   sessionDriver: redis
+#   cacheDriver: redis
+#   redisClient: predis
+#   sessionLifetime: 120
+#   memcachedHost: memcached
+
+# meilisearch: 
+#   enabled: false
+#   #Replace the host name with yours.
+#   host: 'https://msdev.coconut.org'
+#   # key used to generate search key and public key
+#   masterKey: secret
+#   # run below command to generate search key and public key 
+#   # curl -H "Authorization: Bearer [masterKey]" -X GET 'https://msdev.coconut.org/keys'
+#   searchKey:
+#   publicKey:
+#   scoutPrefix: dev_
+#   scout: meilisearch
+#   # environment: 
+#   #   MEILI_ENV: development
+#   auth:
+#     existingMasterKeySecret: 'meilisearch-master-key'
+#   persistence:
+#     enabled: true
+#     size: 5Gi
+
+# storage:
+#   pvc:
+#     accessModes:
+#       - ReadWriteOnce
+#     annotations: {}
+#     enabled: true
+#     existingClaim: ''
+#     storage: 2Gi
+#     # storageClassName: standard
+
+# autoscaling:
+#   enabled: false
+#   minReplicas: 1
+#   maxReplicas: 10
+#   targetCPUUtilizationPercentage: 80
+#   # targetMemoryUtilizationPercentage: 80
+
+# worker:
+#   enabled: true
+#   replicaCount: 1
+#   autoscale:
+#     enabled: false
+#     minReplicas: 2
+#     maxReplicas: 6
+#     CPULimit: 70
+#     MemoryLimit: 1568Mi
+#   cmd: "php artisan horizon"
+#   resources:
+#     limits:
+#       cpu: 300m
+#       memory: 200Mi
+#     requests:
+#       cpu: 100m
+#       memory: 150Mi
+
+# larabug:
+#   enabled: false
+#   lbKey: 
+#   lbProjectKey:
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
