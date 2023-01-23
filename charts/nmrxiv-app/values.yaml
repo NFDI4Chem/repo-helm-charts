@@ -18,6 +18,9 @@ appProperties:
 
 webservices:
   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+  orcidIdSearchApi: https://pub.orcid.org/v2.1/search
+  orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
+  orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
 
 logProperties:
   logChannel: stack
