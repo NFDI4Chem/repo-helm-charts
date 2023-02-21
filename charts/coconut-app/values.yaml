@@ -7,12 +7,11 @@ replicaCount: 1
 # Default app properties for laravel.
 appProperties:
   name: coconut
-  key:  
+  key: 
   env: development
   debug: true
-  url: https://<your-url>
+  url: https://coconut2.nmrxiv.org
   queueConnection: sync
-  githubLicenseUrl: https://api.github.com/licenses
   schemaVersion: 1.0
 
 # webservices:
@@ -22,38 +21,15 @@ logProperties:
   logChannel: stack
   logLevel: debug
 
-
-# oauthProperties:
-#   enabled: false
-#   twitterClientID: 
-#   twitterClientSecret: 
-#   twitterRedirectUrl: 
-#   githubClientID: 
-#   githubClientSecret: 
-#   githubRedirectUrl: 
-#   orcidClientID: 
-#   orcidClientSecret:
-#   orcidRedirectUrl:
-#   orcidEnvironment:
-
-#Enable this properties for Single Sign-On follow the documentation for more info https://docs.coconut.org/docs/developer-guides/configurations/oauth
-# oauthProperties:
-#   twitter:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL: 
-#   github:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL:
-#   orcid:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL:
-#     environment:
+#DB Properties
+postgresql:
+  enabled: true
+  username: test
+  connection: pgsql
+  password: secret
+  host: 0.0.0.0
+  port: 5432
+  database: test
 
 appImage:
   name: php
@@ -102,7 +78,7 @@ securityContext: {
 
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:
@@ -144,110 +120,57 @@ resources:
 
 # Uncomment below properties and replace it with your own smtp values to activate the mail server.
 mail:
-  enabled: false
-  # host: 'smtp.uni-jena.de'
-  # port: 587
-  # from: info.coconut@uni-jena.de
-  # fromName: "nmrXiv-dev"
-  # user: user
-  # password: secret
-  # mailer: smtp
+  enabled: true
+  host: 'smtp.uni-jena.de'
+  port: 587
+  from: info.coconut@uni-jena.de
+  fromName: "coconut-dev"
+  user: test
+  password: secret
+  mailer: smtp
 
-# DB properties
-# postgresql:
-#   enabled: true
-#   # global:
-#   #   storageClass: standard
-#   connection: pgsql
-#   primary:
-#     persistence:
-#       enabled: false
-#       existingClaim: ''
-#       size: 1Gi
-#   # host: coconut-postgresql
-#   # port: 5432
-  auth:
-    username: pguser
-    password: secret
-    database: coconut
-    postgresPassword: secret
-  resources:
-    limits:
-      cpu: 200m
-      memory: 150Mi
-    requests:
-      cpu: 20m
-      memory: 100Mi
+pythonmicroservice:
+  enabled: true
+  image:
+    name: python-microservice
+    repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrxiv-python-microservice
+    pullPolicy: Always
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80
 
-# fileStorage:
-# # Below values are for file storage configuration.
-# # You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
+# oauthProperties:
 #   enabled: false
-#   fileSystemDriver: 
-#   fileSystemDriverPublic: 
-#   awsAccessKeyID: 
-#   awsSecretAccessKey: 
-#   awsDefaultRegion: 
-#   awsBucket: 
-#   awsEndpoint:
-#   awsURL: 
-#   awsBucketPublic: 
+#   twitterClientID: 
+#   twitterClientSecret: 
+#   twitterRedirectUrl: 
+#   githubClientID: 
+#   githubClientSecret: 
+#   githubRedirectUrl: 
+#   orcidClientID: 
+#   orcidClientSecret:
+#   orcidRedirectUrl:
+#   orcidEnvironment:
 
-# pythonmicroservice:
-#   image:
-#     name: python-microservice
-#     repository: europe-west3-docker.pkg.dev/coconut/coconut-dev/coconut-python-microservice
-#     pullPolicy: Always
-#     # Overrides the image tag whose default is the chart appVersion.
-#     tag: latest
-#   service:
-#     type: ClusterIP
-#     port: 80
-
-# redis:
-#   auth:
-#     enabled: true
-#     password: password
-#   enabled: false
-#   global:
-#     storageClass: standard
-#   #host: coconut-redis-master
-#   master:
-#     persistence:
-#       enabled: true
-#       size: 1Gi
-#   replica:
-#     persistence:
-#       enabled: true
-#       size: 1Gi
-#   replica:
-#     replicaCount: 1
-#   port: 6379
-#   sessionDriver: redis
-#   cacheDriver: redis
-#   redisClient: predis
-#   sessionLifetime: 120
-#   memcachedHost: memcached
-
-# meilisearch: 
-#   enabled: false
-#   #Replace the host name with yours.
-#   host: 'https://msdev.coconut.org'
-#   # key used to generate search key and public key
-#   masterKey: secret
-#   # run below command to generate search key and public key 
-#   # curl -H "Authorization: Bearer [masterKey]" -X GET 'https://msdev.coconut.org/keys'
-#   searchKey:
-#   publicKey:
-#   scoutPrefix: dev_
-#   scout: meilisearch
-#   # environment: 
-#   #   MEILI_ENV: development
-#   auth:
-#     existingMasterKeySecret: 'meilisearch-master-key'
-#   persistence:
-#     enabled: true
-#     size: 5Gi
+#Enable this properties for Single Sign-On follow the documentation for more info https://docs.coconut.org/docs/developer-guides/configurations/oauth
+# oauthProperties:
+#   twitter:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL: 
+#   github:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL:
+#   orcid:
+#     enabled: false
+#     clientID:
+#     clientSecret:
+#     redirectURL:
+#     environment:
 
 # storage:
 #   pvc:
@@ -259,12 +182,12 @@ mail:
 #     storage: 2Gi
 #     # storageClassName: standard
 
-# autoscaling:
-#   enabled: false
-#   minReplicas: 1
-#   maxReplicas: 10
-#   targetCPUUtilizationPercentage: 80
-#   # targetMemoryUtilizationPercentage: 80
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 # worker:
 #   enabled: true

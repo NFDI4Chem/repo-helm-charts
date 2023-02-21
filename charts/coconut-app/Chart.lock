@@ -1,0 +1,6 @@
+dependencies:
+- name: pythonmicroservice
+  repository: https://nfdi4chem.github.io/repo-helm-charts
+  version: 0.1.0
+digest: sha256:7fb106706df48d85bde3fbb75425562735e2807f50e0aa1f6b91cd5f15bae44b
+generated: "2023-02-21T14:35:45.456695679Z"
