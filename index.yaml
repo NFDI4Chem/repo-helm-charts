@@ -3,6 +3,16 @@ entries:
   coconut-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-02-21T13:38:15.236784207Z"
+    description: A Helm chart for Kubernetes
+    digest: 71dd248563a88d9436ea068c58050300039908d78b7af8db5168bd43e5d3d25c
+    name: coconut-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/coconut-app-0.1.1/coconut-app-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-01-23T15:35:26.129945398Z"
     dependencies:
     - condition: database.enabled
@@ -1793,4 +1803,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-01-23T15:35:26.130058101Z"
+generated: "2023-02-21T13:38:15.236896812Z"
