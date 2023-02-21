@@ -154,18 +154,18 @@ mail:
   # mailer: smtp
 
 # DB properties
-postgresql:
-  enabled: true
-  # global:
-  #   storageClass: standard
-  connection: pgsql
-  primary:
-    persistence:
-      enabled: false
-      existingClaim: ''
-      size: 1Gi
-  # host: coconut-postgresql
-  # port: 5432
+# postgresql:
+#   enabled: true
+#   # global:
+#   #   storageClass: standard
+#   connection: pgsql
+#   primary:
+#     persistence:
+#       enabled: false
+#       existingClaim: ''
+#       size: 1Gi
+#   # host: coconut-postgresql
+#   # port: 5432
   auth:
     username: pguser
     password: secret

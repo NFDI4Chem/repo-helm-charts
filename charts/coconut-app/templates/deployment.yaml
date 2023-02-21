@@ -36,41 +36,41 @@ spec:
       #serviceAccountName: {{ include "coconut-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        - name: postgres-wait-ready
-          image: alpine
-          command:
-            - sh
-            - -c
-            - for i in $(seq 1 200); do nc -z -w3 $DB_HOST $DB_PORT && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.EnvConfigMapRef.name }}
-        - name: database-migrations
-          image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.EnvConfigMapRef.name }}
-            - secretRef:
-                name: {{ .Values.EnvSecretRef.name }}
-          command:
-            - "php"
-          args:
-            - "artisan"
-            - "migrate"
-            - "--force"
+      # initContainers:
+      #   - name: postgres-wait-ready
+      #     image: alpine
+      #     command:
+      #       - sh
+      #       - -c
+      #       - for i in $(seq 1 200); do nc -z -w3 $DB_HOST $DB_PORT && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
+      #     envFrom:
+      #       - configMapRef:
+      #           name: {{ .Values.EnvConfigMapRef.name }}
+      #   - name: database-migrations
+      #     image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+      #     envFrom:
+      #       - configMapRef:
+      #           name: {{ .Values.EnvConfigMapRef.name }}
+      #       - secretRef:
+      #           name: {{ .Values.EnvSecretRef.name }}
+      #     command:
+      #       - "php"
+      #     args:
+      #       - "artisan"
+      #       - "migrate"
+      #       - "--force"
       containers:
         - name: {{ .Values.nginxImage.name }}
           imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
           image: "{{ .Values.nginxImage.repository }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
-          livenessProbe:
-            httpGet:
-              path: /css/app.css
-              port: 80
-          readinessProbe:
-            httpGet:
-              path: /css/app.css
-              port: 80
+          # livenessProbe:
+          #   httpGet:
+          #     path: /css/app.css
+          #     port: 80
+          # readinessProbe:
+          #   httpGet:
+          #     path: /css/app.css
+          #     port: 80
           resources:
             {{- toYaml .Values.resources.nginx | nindent 12 }}
           ports:
@@ -99,7 +99,6 @@ spec:
               mountPath: /var/www/html/storage/framework/testing
             - name: tmp 
               mountPath: /tmp
-          resources:
-            {{- toYaml .Values.resources.app | nindent 12 }}
+          resources: {}
           ports:
             - containerPort: 9000
