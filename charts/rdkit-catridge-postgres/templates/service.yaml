@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "rdkit-catridge-postgres.fullname" . }}
+  labels:
+    {{- include "rdkit-catridge-postgres.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      name: {{ include "rdkit-catridge-postgres.fullname" . }}
+  selector:
+    {{- include "rdkit-catridge-postgres.selectorLabels" . | nindent 4 }}
+

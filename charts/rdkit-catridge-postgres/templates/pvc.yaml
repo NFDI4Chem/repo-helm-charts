@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "rdkit-catridge-postgres.fullname" . }}-claim
+  labels:
+    app: {{ include "rdkit-catridge-postgres.fullname" . }}
+spec:
+  storageClassName: {{ .Values.volume.storageClass }}
+  accessModes:
+    - {{ .Values.volume.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.volume.size }}
