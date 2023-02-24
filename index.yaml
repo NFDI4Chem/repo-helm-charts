@@ -1787,6 +1787,17 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/rdkitCatridgePostgres-0.1.0/rdkitCatridgePostgres-0.1.0.tgz
     version: 0.1.0
+  rdkitcatridgepostgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-24T11:50:53.740576754Z"
+    description: A Helm chart for Kubernetes
+    digest: 478ba291bddb969516fd6aa2ded14219f223f2e404bd5a6fb2079d3b04467c85
+    name: rdkitcatridgepostgres
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/rdkitcatridgepostgres-0.1.0/rdkitcatridgepostgres-0.1.0.tgz
+    version: 0.1.0
   vibspecdb:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -1850,4 +1861,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-02-24T09:57:47.48635307Z"
+generated: "2023-02-24T11:50:53.741009279Z"
