@@ -15,11 +15,11 @@ data:
   LOG_LEVEL: {{ .Values.logProperties.logLevel }}
 
 #DB Properties
-  DB_USERNAME: {{ required "A valid Values.postgresql.auth.username entry required!" .Values.postgresql.username }}
-  DB_CONNECTION: {{ required "A valid .Values.postgresql.connection entry required!" .Values.postgresql.connection }}
-  DB_HOST: {{ .Values.postgresql.host | quote }}
-  DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
-  DB_DATABASE: {{ required "A valid Values.postgresql.auth.database entry required!" .Values.postgresql.database }}
+  DB_USERNAME: {{ required "A valid .Values.rdkitcatridgepostgres.auth.user entry required!" .Values.rdkitcatridgepostgres.auth.user }}
+  DB_CONNECTION: {{ required "A valid .Values.rdkitcatridgepostgres.connection entry required!" .Values.rdkitcatridgepostgres.connection }}
+  DB_HOST: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
+  DB_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
+  DB_DATABASE: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
   
 #Mail Properties
   {{ if .Values.mail.enabled }}
