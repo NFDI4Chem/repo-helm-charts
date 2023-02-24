@@ -44,6 +44,7 @@ spec:
           volumeMounts:
           - name: {{ .Values.volume.name }}
             mountPath: {{ .Values.volume.mountpath }}
+            subPath: postgres
   volumeClaimTemplates:
   - metadata:
       name: {{ .Values.volume.name }}

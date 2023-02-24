@@ -79,7 +79,7 @@ resources: {}
 
 volume:
   name: postgres-data
-  mountpath: /var/lib/postgresql/coconut
+  mountpath: /var/lib/postgresql/data
   size: 5Gi
   accessModes: ReadWriteMany
   hostPath: /mnt/data
