@@ -30,3 +30,14 @@ data:
   MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
   MAIL_FROM_NAME: {{ .Values.mail.fromName }}
   {{ end }}
+
+#Redis Properties
+  {{ if .Values.redis.enabled }}
+  SESSION_DRIVER: "{{ .Values.redis.sessionDriver }}"
+  CACHE_DRIVER: {{ .Values.redis.cacheDriver }}
+  REDIS_CLIENT: {{ .Values.redis.redisClient }}
+  SESSION_LIFETIME: "{{ .Values.redis.sessionLifetime }}"
+  MEMCACHED_HOST: {{ .Values.redis.memcachedHost }}
+  REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
+  REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
+  {{ end }}

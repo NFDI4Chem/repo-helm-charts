@@ -5,5 +5,8 @@ dependencies:
 - name: rdkitcatridgepostgres
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
-digest: sha256:2763fb2fc61823b258e30930ad5e60ebe475fbbd4beb3786c2969c7af4095083
-generated: "2023-02-24T11:54:08.973997614Z"
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 17.6.0
+digest: sha256:cba64b6bc7a2cde81af7d253d0bf11a5afaf1839b0a307dc4820098baa891fc6
+generated: "2023-02-24T13:29:36.1183957+01:00"

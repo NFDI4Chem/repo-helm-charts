@@ -190,23 +190,51 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# worker:
-#   enabled: true
-#   replicaCount: 1
-#   autoscale:
-#     enabled: false
-#     minReplicas: 2
-#     maxReplicas: 6
-#     CPULimit: 70
-#     MemoryLimit: 1568Mi
-#   cmd: "php artisan horizon"
-#   resources:
-#     limits:
-#       cpu: 300m
-#       memory: 200Mi
-#     requests:
-#       cpu: 100m
-#       memory: 150Mi
+worker:
+  enabled: true
+  replicaCount: 1
+  autoscale:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 6
+    CPULimit: 70
+    MemoryLimit: 1568Mi
+  cmd: "php artisan horizon"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 200Mi
+    requests:
+      cpu: 100m
+      memory: 150Mi
+
+redis:
+  enabled: false
+  #architecture: standalone
+  auth:
+    enabled: true
+    password: secret
+  global:
+    storageClass: standard
+  #host: nmrxiv-redis-master
+  port: 6379
+  replica:
+    replicaCount: 1
+  master:
+    persistence:
+      enabled: true
+      size: 1Gi
+    service:
+      type: LoadBalancer
+  replica:
+    persistence:
+      enabled: true
+      size: 1Gi
+  sessionDriver: redis
+  cacheDriver: redis
+  redisClient: predis
+  sessionLifetime: 120
+  memcachedHost: memcached
 
 # larabug:
 #   enabled: false
