@@ -3,6 +3,28 @@ entries:
   coconut-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-02-24T12:53:20.003505823Z"
+    dependencies:
+    - condition: pythonmicroservice.enabled
+      name: pythonmicroservice
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - name: rdkitcatridgepostgres
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.6.0
+    description: A  Helm chart of coconut-Laravel Application for K8S.
+    digest: 931a704b8c9fae645c2357547ab1f29d75340c447ac0d25d2ae40fd86e1ada29
+    name: coconut-app
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/coconut-app-0.1.4/coconut-app-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-24T12:11:07.423549558Z"
     dependencies:
     - condition: pythonmicroservice.enabled
@@ -1879,4 +1901,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-02-24T12:11:07.42374676Z"
+generated: "2023-02-24T12:53:20.003718223Z"
