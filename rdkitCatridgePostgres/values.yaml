@@ -1,14 +1,14 @@
-# Default values for rdkitcatridgepostgres.
+# Default values for rdkitCatridgePostgres.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: informaticsmatters/rdkit-cartridge-debian
-  pullPolicy: Always
+  repository: nginx
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -37,17 +37,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
-  port: 5432
-
-EnvSecretRef:
-  name: rdkitcatridgepostgres-secret
-
-auth:
-  pgPassword: secret
-  db: test
-  user: test
-  postgresPassword: secret
+  type: ClusterIP
+  port: 80
 
 ingress:
   enabled: false
@@ -76,14 +67,6 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-
-volume:
-  name: postgres-data
-  mountpath: /var/lib/postgresql/data
-  size: 5Gi
-  accessModes: ReadWriteMany
-  hostPath: /mnt/data
-  storageClass: standard
 
 autoscaling:
   enabled: false

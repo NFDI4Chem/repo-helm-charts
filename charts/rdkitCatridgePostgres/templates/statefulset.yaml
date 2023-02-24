@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "rdkitCatridgePostgres.fullname" . }}
+  name: {{ include "rdkitcatridgepostgres.fullname" . }}
   labels:
-    {{- include "rdkitCatridgePostgres.labels" . | nindent 4 }}
+    {{- include "rdkitcatridgepostgres.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ include "rdkitCatridgePostgres.fullname" . }}
+  serviceName: {{ include "rdkitcatridgepostgres.fullname" . }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "rdkitCatridgePostgres.selectorLabels" . | nindent 6 }}
+      {{- include "rdkitcatridgepostgres.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,13 +19,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "rdkitCatridgePostgres.selectorLabels" . | nindent 8 }}
+        {{- include "rdkitcatridgepostgres.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "rdkitCatridgePostgres.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

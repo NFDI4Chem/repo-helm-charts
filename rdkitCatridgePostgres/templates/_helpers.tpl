@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rdkitcatridgepostgres.name" -}}
+{{- define "rdkitCatridgePostgres.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rdkitcatridgepostgres.fullname" -}}
+{{- define "rdkitCatridgePostgres.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rdkitcatridgepostgres.chart" -}}
+{{- define "rdkitCatridgePostgres.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "rdkitcatridgepostgres.labels" -}}
-helm.sh/chart: {{ include "rdkitcatridgepostgres.chart" . }}
-{{ include "rdkitcatridgepostgres.selectorLabels" . }}
+{{- define "rdkitCatridgePostgres.labels" -}}
+helm.sh/chart: {{ include "rdkitCatridgePostgres.chart" . }}
+{{ include "rdkitCatridgePostgres.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "rdkitcatridgepostgres.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "rdkitcatridgepostgres.name" . }}
+{{- define "rdkitCatridgePostgres.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "rdkitCatridgePostgres.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "rdkitcatridgepostgres.serviceAccountName" -}}
+{{- define "rdkitCatridgePostgres.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "rdkitcatridgepostgres.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "rdkitCatridgePostgres.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
