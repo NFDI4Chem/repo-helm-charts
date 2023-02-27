@@ -1,0 +1,56 @@
+{{- if .Values.scheduler.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-scheduler" .Release.Name | quote }}
+  labels:
+    {{ include "coconut-app.schedulerLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.scheduler.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "coconut-app.schedulerLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "coconut-app.schedulerLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.appImage.pullPolicy }}
+        command: ["/bin/sh", "-c", "{{ .Values.scheduler.cmd }}"]
+        name: {{ printf "%s-scheduler" .Release.Name | quote }}
+        resources:
+{{ toYaml .Values.scheduler.resources | indent 10 }}
+        volumeMounts:
+          - name: logs
+            mountPath: /var/www/html/storage/logs
+          - name: cache
+            mountPath: /var/www/html/storage/framework/cache
+          - name: sessions
+            mountPath: /var/www/html/storage/framework/sessions
+          - name: views
+            mountPath: /var/www/html/storage/framework/views
+          - name: testing
+            mountPath: /var/www/html/storage/framework/testing
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+          - secretRef:
+              name: {{ .Values.EnvSecretRef.name }}
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: testing
+          emptyDir: {}
+        - name: sessions
+          emptyDir: {}
+        - name: views
+          emptyDir: {}
+{{- end }}
