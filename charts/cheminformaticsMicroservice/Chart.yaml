@@ -1,6 +1,6 @@
 apiVersion: v2
-name: pythonmicroservice
-description: A Helm chart for python microservice.
+name: cheminformaticsMicroservice
+description: A Helm chart for cheminformatics microservice.
 maintainers:
   - name: Nisha Sharma
     email: nisha.sharma@uni-jena.de
