@@ -1848,6 +1848,21 @@ entries:
   pythonmicroservice:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-13T13:57:19.347359468Z"
+    description: A Helm chart for python microservice.
+    digest: 66be800f7fc02fa2007cc40a8573ddd76959a219ae41549994994918152fd8fe
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    - email: chandu.nainala@uni-jena.de
+      name: Chandu Nainala
+    name: pythonmicroservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/pythonmicroservice-0.1.1/pythonmicroservice-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-04-22T08:25:47.362738246Z"
     description: A Helm chart for python microservice used as a subcharrt in nmrxiv-app.
     digest: e98eb7961c7d5ba1c2dd25466624f4e3a89f3ca0c55311b2b1a698b49458eefa
@@ -1967,4 +1982,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-02-27T14:56:50.536257482Z"
+generated: "2023-03-13T13:57:19.347576982Z"
