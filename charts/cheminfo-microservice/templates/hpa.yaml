@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "cheminformaticsMicroservice.fullname" . }}
+  name: {{ include "cheminfo-microservice.fullname" . }}
   labels:
-    {{- include "cheminformaticsMicroservice.labels" . | nindent 4 }}
+    {{- include "cheminfo-microservice.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "cheminformaticsMicroservice.fullname" . }}
+    name: {{ include "cheminfo-microservice.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
