@@ -253,10 +253,10 @@ scheduler:
       cpu: 200m
       memory: 500Mi
 
-# larabug:
-#   enabled: false
-#   lbKey: 
-#   lbProjectKey:
+larabug:
+  enabled: false
+  lbKey: 
+  lbProjectKey:
 
 nodeSelector: {}
 
