@@ -29,7 +29,6 @@ data:
   AWS_BUCKET: {{ .Values.fileStorage.awsBucket }}
   AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint }}
   AWS_URL: {{ .Values.fileStorage.awsURL }}
-  AWS_BUCKET_PUBLIC: {{ .Values.fileStorage.awsBucketPublic }}
   {{ end }}
   
 #Mail Properties
