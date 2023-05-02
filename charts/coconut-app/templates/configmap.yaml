@@ -20,6 +20,17 @@ data:
   DB_HOST: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
   DB_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
   DB_DATABASE: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
+
+#File Storage Properties
+  {{ if .Values.fileStorage.enabled }}
+  FILESYSTEM_DRIVER: {{ .Values.fileStorage.fileSystemDriver }}
+  FILESYSTEM_DRIVER_PUBLIC: {{ .Values.fileStorage.fileSystemDriverPublic }}
+  AWS_DEFAULT_REGION: {{ .Values.fileStorage.awsDefaultRegion }}
+  AWS_BUCKET: {{ .Values.fileStorage.awsBucket }}
+  AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint }}
+  AWS_URL: {{ .Values.fileStorage.awsURL }}
+  AWS_BUCKET_PUBLIC: {{ .Values.fileStorage.awsBucketPublic }}
+  {{ end }}
   
 #Mail Properties
   {{ if .Values.mail.enabled }}
@@ -41,3 +52,10 @@ data:
   REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
   {{ end }}
+
+#Web Services
+  EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
+  ORCID_ID_SEARCH_API: {{ .Values.webservices.orcidIdSearchApi }}
+  ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi }}
+  ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
+

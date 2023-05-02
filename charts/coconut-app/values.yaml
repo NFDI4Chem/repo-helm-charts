@@ -14,8 +14,12 @@ appProperties:
   queueConnection: sync
   schemaVersion: 1.0
 
-# webservices:
-#   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+webservices:
+  europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+  orcidIdSearchApi: https://pub.orcid.org/v2.1/search
+  orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
+  orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
+
 
 logProperties:
   logChannel: stack
@@ -257,6 +261,19 @@ larabug:
   enabled: false
   lbKey: 
   lbProjectKey:
+
+fileStorage:
+# Below values are for file storage configuration.
+# You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
+  enabled: false
+  fileSystemDriver: 
+  fileSystemDriverPublic: 
+  awsAccessKeyID: 
+  awsSecretAccessKey: 
+  awsDefaultRegion: 
+  awsBucket: 
+  awsEndpoint:
+  awsURL: 
 
 nodeSelector: {}
 
