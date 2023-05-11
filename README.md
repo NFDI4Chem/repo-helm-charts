@@ -44,3 +44,15 @@ To install the vibspecdb chart:
 To uninstall the chart:
 
     helm delete my-vibspecdb-app
+
+#### coconut-2.0
+
+Before you install [generate your own application key](https://stackoverflow.com/questions/33370134/when-to-generate-a-new-application-key-in-laravel) and provide that value in the .Values.appProperties.key property.
+
+To install the coconut-app chart:
+
+    helm install my-coconut-app repo-helm-charts/coconut-app
+
+To uninstall the chart:
+
+    helm delete my-coconut-app
