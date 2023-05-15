@@ -436,6 +436,19 @@ entries:
   nmr-predict:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-05-15T13:53:12.890539848Z"
+    description: A Helm chart for nmr-predict service.
+    digest: fda9b3a37d2109d058bb25e1e706c91f3f255cd24082557b5264294e0e0c0faf
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmr-predict
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmr-predict-0.1.1/nmr-predict-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-05-15T13:22:12.744760862Z"
     description: A Helm chart for nmr-predict service.
     digest: 53112ea416600d57def1b4c4766126c713ffe46723573e17a5a4a6ab42459050
@@ -2180,4 +2193,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-05-15T13:22:12.744927263Z"
+generated: "2023-05-15T13:53:12.890787151Z"
