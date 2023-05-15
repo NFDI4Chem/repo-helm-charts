@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rdkit-catridge-postgres.name" -}}
+{{- define "nmr-predict.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rdkit-catridge-postgres.fullname" -}}
+{{- define "nmr-predict.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rdkit-catridge-postgres.chart" -}}
+{{- define "nmr-predict.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "rdkit-catridge-postgres.labels" -}}
-helm.sh/chart: {{ include "rdkit-catridge-postgres.chart" . }}
-{{ include "rdkit-catridge-postgres.selectorLabels" . }}
+{{- define "nmr-predict.labels" -}}
+helm.sh/chart: {{ include "nmr-predict.chart" . }}
+{{ include "nmr-predict.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "rdkit-catridge-postgres.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "rdkit-catridge-postgres.name" . }}
+{{- define "nmr-predict.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "nmr-predict.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "rdkit-catridge-postgres.serviceAccountName" -}}
+{{- define "nmr-predict.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "rdkit-catridge-postgres.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "nmr-predict.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

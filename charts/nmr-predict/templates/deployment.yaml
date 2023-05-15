@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "rdkit-catridge-postgres.fullname" . }}
+  name: {{ include "nmr-predict.fullname" . }}
   labels:
-    {{- include "rdkit-catridge-postgres.labels" . | nindent 4 }}
+    {{- include "nmr-predict.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "rdkit-catridge-postgres.selectorLabels" . | nindent 6 }}
+      {{- include "nmr-predict.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,17 +18,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "rdkit-catridge-postgres.selectorLabels" . | nindent 8 }}
+        {{- include "nmr-predict.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "rdkit-catridge-postgres.serviceAccountName" . }}
+      serviceAccountName: {{ include "nmr-predict.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Values.image.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

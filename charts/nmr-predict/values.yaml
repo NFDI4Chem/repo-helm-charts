@@ -1,14 +1,15 @@
-# Default values for rdkit-catridge-postgres.
+# Default values for nmr-predict.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: nmr-predict
+  repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmr-predict-dev
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
