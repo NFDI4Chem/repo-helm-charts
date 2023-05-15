@@ -433,6 +433,20 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/meilisearch-0.1.37/meilisearch-0.1.37.tgz
     version: 0.1.37
+  nmr-predict:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-15T13:22:12.744760862Z"
+    description: A Helm chart for nmr-predict service.
+    digest: 53112ea416600d57def1b4c4766126c713ffe46723573e17a5a4a6ab42459050
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmr-predict
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmr-predict-0.1.0/nmr-predict-0.1.0.tgz
+    version: 0.1.0
   nmrium:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -2166,4 +2180,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-05-15T08:54:33.542496693Z"
+generated: "2023-05-15T13:22:12.744927263Z"
