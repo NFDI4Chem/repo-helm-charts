@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   name: nmr-predict
   repository: nmr-predict
-  repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmr-predict-dev
+  repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmr-predict
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
