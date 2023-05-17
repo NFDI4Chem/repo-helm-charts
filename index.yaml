@@ -3,6 +3,19 @@ entries:
   cheminfo-microservice:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-05-17T11:24:02.646530523Z"
+    description: A Helm chart for cheminformatics microservice.
+    digest: a3573be48ab77128c5e8275cbc92d101afa9d5976cf458fb1c46332884a4455e
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: cheminfo-microservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminfo-microservice-0.1.4/cheminfo-microservice-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-03-13T14:40:12.101209232Z"
     description: A Helm chart for cheminformatics microservice.
     digest: ceaf57abadaefa04c0f04a87ecd25ef430659ca981f52a7ae316636aa8715979
@@ -2206,4 +2219,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-05-15T13:57:44.962450972Z"
+generated: "2023-05-17T11:24:02.646784526Z"
