@@ -9,7 +9,6 @@ data:
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
-  GITHUB_LICENSE_URL: {{ .Values.appProperties.githubLicenseUrl }}
   SCHEMA_VERSION: "{{ .Values.appProperties.schemaVersion }}"
   COOL_OFF_PERIOD: "{{ .Values.appProperties.coolOffPeriod }}"
 

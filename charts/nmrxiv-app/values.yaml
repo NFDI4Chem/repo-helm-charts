@@ -12,7 +12,6 @@ appProperties:
   debug: true
   url: https://<your-url>
   queueConnection: sync
-  githubLicenseUrl: https://api.github.com/licenses
   schemaVersion: 1.0
   coolOffPeriod: 30
 
