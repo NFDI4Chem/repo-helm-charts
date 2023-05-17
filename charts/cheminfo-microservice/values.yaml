@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   name: chem-py-microservice
-  repository: europe-west3-docker.pkg.dev/coconut-366808/cheminformatics-python-microservice/chem-py-microservice
+  repository: europe-west3-docker.pkg.dev/coconut-366808/cheminformatics-python-microservice-dev/chem-py-microservice-dev
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
