@@ -56,3 +56,13 @@ To install the coconut-app chart:
 To uninstall the chart:
 
     helm delete my-coconut-app
+
+#### cheminfo-microservice
+
+To install the cheminfo-microservice chart:
+
+    helm install my-cheminf-app repo-helm-charts/cheminfo-microservice
+
+To uninstall the chart:
+
+    helm delete my-cheminf-app
