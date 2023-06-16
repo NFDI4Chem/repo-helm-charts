@@ -8,6 +8,7 @@ data:
   APP_ENV: {{ .Values.appProperties.env }}
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
+  APP_DESCRIPTION: {{ .Values.appProperties.description }}
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   
 #Log Properties
@@ -57,4 +58,8 @@ data:
   ORCID_ID_SEARCH_API: {{ .Values.webservices.orcidIdSearchApi }}
   ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi }}
   ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
+
+#DOI Properties
+  DOI_HOST: {{ .Values.doi.doiHost }}
+  DOI_PROVIDER: {{ .Values.doi.doiProvider }}
 

@@ -13,6 +13,7 @@ appProperties:
   url: https://coconut2.nmrxiv.org
   queueConnection: sync
   schemaVersion: 1.0
+  description: "COCONUT Online is an open-source project that stores, searches, and analyzes Natural Products (NPs). The database contains over 50 open NP resources, and the data is accessible free of charge and without any restrictions. Each entry corresponds to a "flat" NP structure and is associated with their known stereochemical forms, literature, organisms that produce them, natural geographic presence, and precomputed molecular properties if available"
 
 webservices:
   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
@@ -239,6 +240,10 @@ redis:
   redisClient: predis
   sessionLifetime: 120
   memcachedHost: memcached
+
+doi:
+  doiHost: datacite
+  doiProvider: datacite
 
 scheduler:
   enabled: false
