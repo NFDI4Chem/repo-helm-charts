@@ -8,7 +8,7 @@ data:
   APP_ENV: {{ .Values.appProperties.env }}
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
   APP_URL: {{ .Values.appProperties.url }}
-  APP_DESCRIPTION: {{ .Values.appProperties.description }}
+  APP_DESCRIPTION: "{{ .Values.appProperties.description }}"
   QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
   
 #Log Properties
