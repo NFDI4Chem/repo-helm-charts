@@ -35,16 +35,6 @@ To uninstall the chart:
 
     helm delete my-nmrxiv-doc
     
-#### vibspecdb
-
-To install the vibspecdb chart:
-
-    helm install my-vibspecdb-app repo-helm-charts/vibspecdb
-
-To uninstall the chart:
-
-    helm delete my-vibspecdb-app
-
 #### coconut-2.0
 
 Before you install [generate your own application key](https://stackoverflow.com/questions/33370134/when-to-generate-a-new-application-key-in-laravel) and provide that value in the .Values.appProperties.key property.
