@@ -3,6 +3,28 @@ entries:
   cheminfo-microservice:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-22T13:07:36.462227774Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.4.5
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 22.6.5
+    description: A Helm chart for cheminformatics microservice.
+    digest: 0f0314deae452bb5a1f9d545fa11b3493684448d37c0f222360b8174feacde9f
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: cheminfo-microservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminfo-microservice-0.1.5/cheminfo-microservice-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-05-17T11:24:02.646530523Z"
     description: A Helm chart for cheminformatics microservice.
     digest: a3573be48ab77128c5e8275cbc92d101afa9d5976cf458fb1c46332884a4455e
@@ -2299,4 +2321,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-06-16T13:46:24.105301454Z"
+generated: "2023-06-22T13:07:36.462389365Z"
