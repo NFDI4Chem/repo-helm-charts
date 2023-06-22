@@ -14,6 +14,7 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
           helm repo add repo-helm-charts https://nfdi4chem.github.io/repo-helm-charts
+          helm repo add prometheus https://prometheus-community.github.io/helm-charts
           helm repo update
 
       - name: Checkout
