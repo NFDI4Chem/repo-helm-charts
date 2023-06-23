@@ -101,6 +101,17 @@ entries:
   cheminformaticsmicroservice:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-23T14:30:07.070656535Z"
+    deprecated: true
+    description: Deprecated
+    digest: 039bd3b05b0b03caed798f316c5be75d469fc310dc74c5053523e97d955bbc16
+    name: cheminformaticsmicroservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminformaticsmicroservice-0.1.4/cheminformaticsmicroservice-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-23T14:24:43.694011317Z"
     deprecated: true
     description: A Helm chart for cheminformatics microservice
@@ -2355,4 +2366,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-06-23T14:24:43.694227628Z"
+generated: "2023-06-23T14:30:07.070947247Z"
