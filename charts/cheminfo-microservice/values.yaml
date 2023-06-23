@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   name: chem-py-microservice
-  repository: europe-west3-docker.pkg.dev/coconut-366808/cheminformatics-python-microservice-dev/chem-py-microservice-dev
+  repository: caffeinejena/cheminformatics-python-microservice
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: dev-latest
 
 imagePullSecrets: []
 nameOverride: ""
@@ -80,7 +80,7 @@ grafana:
   enabled: true
   admin:
     user: admin
-    password: cheminfo2023@steinbeck-lab
+    password: secret
   grafana:
     persistence:
       enabled: true
@@ -91,6 +91,10 @@ grafana:
 
 prometheus:
   enabled: true
+  alertmanager.enabled: true
+  kube-state-metrics.enabled: false
+  prometheus-node-exporter.enabled: false
+  prometheus-pushgateway.enabled: false
   server:
     service:
       type: LoadBalancer
@@ -103,14 +107,12 @@ prometheus:
     evaluation_interval: 15s
   # adds additional scrape configs to prometheus.yml
   # must be a string so you have to add a | after extraScrapeConfigs:
-  # example adds prometheus-blackbox-exporter scrape config
   extraScrapeConfigs: |
     - job_name: 'cheminformatics-python-microservice'
       scrape_interval: 10s
       metrics_path: /metrics
       static_configs:
-        - targets: 
-          - http://your-domain 
+        - targets: ['cheminf-cheminfo-microservice:80'] 
 
 
 nodeSelector: {}
