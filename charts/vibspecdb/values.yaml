@@ -103,7 +103,7 @@ migrate:
 postgresql:
   enabled: true
   image:
-    tag: 14.3.0-debian-10-r17 # immutable tags are recommended
+    tag: 14.3.0-debian-10-r17
   auth:
     username: "psguser"
     password: "secret"
@@ -150,13 +150,10 @@ meilisearch:
     tag: 'latest'
   host: 'meilisearch:7700'
   masterKey: 'meilikeymasterhere.1'
-  # run below command to generate search key and public key 
-  # curl -H "Authorization: Bearer [masterKey]" -X GET 'meilisearchhost'
   searchKey: '123'
   publicKey: '123'
   scoutPrefix: 'dev_'
   scoutdriver: 'meilisearch'
-  # # production / development
   environment:
     MEILI_ENV: 'development'
   auth:
