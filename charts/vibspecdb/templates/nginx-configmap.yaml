@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  default.conf: |-
+    server {
+      listen  80 default_server;
+      listen [::]:80 default_server;
+      server_name vibspecdb.k8s.photonicdata.science;
+      server_tokens off;
+      client_max_body_size 200M;
+
+      root /var/www/html;
+
+      add_header X-XSS-Protection "1; mode=block";
+      add_header X-Content-Type-Options "nosniff";
+      
+      charset utf-8;
+      location / {
+          try_files $uri $uri/ /public/index.php?$query_string;
+
+          # Allow the use of websockets
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+
+      }
+      
+      index /public/index.html /public/index.htm /public/index.php;
+      error_page 404 /public/index.php;
+
+      location ~ \.php$ {
+          fastcgi_pass 127.0.0.1:9000;
+          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+          fastcgi_split_path_info ^(.+\.php)(/.+)$;
+          fastcgi_pass_header on;
+          fastcgi_index index.php;
+          include fastcgi_params;
+          fastcgi_read_timeout 300;
+      }
+      
+      location ~* \.(png|jpg|jpeg|gif|svg|ico|woff2|woff)$ {
+          expires 7d;
+      }
+
+      location ~ /\.(?!well-known).* {
+          deny all;
+      }
+    }

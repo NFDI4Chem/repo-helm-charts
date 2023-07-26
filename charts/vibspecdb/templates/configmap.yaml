@@ -18,11 +18,7 @@ data:
   DB_DATABASE: {{ .Values.postgresql.postgresqlDatabase }}
   BROADCAST_DRIVER: "log"
   FILESYSTEM_DRIVER: "local"
-  QUEUE_CONNECTION: "rabbitmq"
-  RABBITMQ_HOST: {{ .Values.rabbitmq.host }}
-  RABBITMQ_PORT: "{{ .Values.rabbitmq.port }}"
-  RABBITMQ_USER: {{ .Values.rabbitmq.auth.username }}
-  RABBITMQ_QUEUE: jobs
+  QUEUE_CONNECTION: "redis"
   SCOUT_DRIVER: meilisearch
   MEILISEARCH_HOST: {{ .Values.meilisearch.host }}
   SESSION_DRIVER: "redis"

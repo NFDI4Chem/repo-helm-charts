@@ -18,9 +18,17 @@ persistence:
   storage: 2Gi
 
 image:
-  repository: privated.docker.registry/vibspecdb_laravel_backend
-  pullPolicy: Always
-  tag: v0.1.0
+  app: 
+    image: docker.photonicdata.science/app_laravel_backend
+    tag: v0.1.0
+    name: fpm-server
+    pullPolicy: Always
+    postStart: "&& echo 'Hello from the postStart handler' > /usr/share/message"
+  nginx: 
+    image: docker.photonicdata.science/app_nginx
+    tag: v0.1.0
+    name: nginx-server
+    pullPolicy: Always
 
 imagePullSecrets:
   - name: registrypullsecret
@@ -95,12 +103,14 @@ migrate:
 postgresql:
   enabled: true
   image:
-    tag: 11.14.0-debian-10-r17
-  postgresqlUsername: "psguser"
-  postgresqlPassword: "secret"
-  postgresqlDatabase: "vibspecdb"
+    tag: 14.3.0-debian-10-r17 # immutable tags are recommended
+  auth:
+    username: "psguser"
+    password: "secret"
+    database: "laravelapp"
+    postgresPassword: "adminSecret"
   port: "5432"
-  host: "vibspecdb-postgresql"
+  host: "postgresql"
   global:
     storageClass: 'longhorn'
   persistence:
@@ -115,32 +125,60 @@ postgresql:
       memory: 150Mi
       cpu: 200m
 
-rabbitmq:
-  enabled: false
-  port: "5672"
-  host: "vibspecdb-rabbitmq"
-  auth:
-    username: 'rabbitmq_user'
-    password: 'password'
-  global:
-    storageClass: 'longhorn'
-  metrics:
+worker:
+  enabled: true
+  replicaCount: 1
+  autoscale:
     enabled: false
-  ingress:
-    enabled: false
-    path: '/'
-    hostname: hostnamehere.com
+    minReplicas: 2
+    maxReplicas: 6
+    CPULimit: 70
+    MemoryLimit: 1568Mi
+  cmd: "php /app/artisan queue:work --sleep=3 --tries=3 --memory=128"
+  resources:
+    limits:
+      cpu: 300m
+      memory: 150Mi
+    requests:
+      cpu: 10m
+      memory: 100Mi
 
-meilisearch:
+meilisearch: 
   enabled: false
+  image:
+    repository: 'getmeili/meilisearch'
+    tag: 'latest'
   host: 'meilisearch:7700'
-  secretKey: meilikeyhere
+  masterKey: 'meilikeymasterhere.1'
+  # run below command to generate search key and public key 
+  # curl -H "Authorization: Bearer [masterKey]" -X GET 'meilisearchhost'
+  searchKey: '123'
+  publicKey: '123'
+  scoutPrefix: 'dev_'
+  scoutdriver: 'meilisearch'
+  # # production / development
+  environment:
+    MEILI_ENV: 'development'
+  auth:
+    existingMasterKeySecret: 'meili-master-key'
+  persistence:
+    enabled: false
+    size: 5Gi
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
 
 redis:
-  enabled: false
+  enabled: true
   port: "6379"
-  host: "vibspecdb-redis-master"
-  auth:
+  host: "redis-master"
+  client: "predis"
+  prefix: ''
+  auth: 
     password: 'redispasshere'
   global:
     storageClass: 'longhorn'

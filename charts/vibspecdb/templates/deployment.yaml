@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "vibspecdb.fullname" . }}
+  name: {{ printf "%s-api" .Release.Name | quote }}
   labels:
     {{- include "vibspecdb.labels" . | nindent 4 }}
 spec:
@@ -16,6 +16,7 @@ spec:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- end }}
       labels:
         {{- include "vibspecdb.selectorLabels" . | nindent 8 }}
@@ -27,26 +28,64 @@ spec:
       serviceAccountName: {{ include "vibspecdb.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.persistence.enabled }}
       initContainers:
-      - name: storage-permissions
-        image: busybox
-        command: ["sh", "-c", "chmod 777 /storage"]
-        volumeMounts:
-        - name: storage
-          mountPath: /storage
+      - name: postgres-wait-ready
+        image: alpine
+        command:
+          - sh
+          - -c
+          - for i in $(seq 1 200); do nc -z -w3 $DB_HOST $DB_PORT && exit 0 || sleep 5; echo -n "." ; done; exit 1
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+      {{- if .Values.migrate.enabled }}
+      - name: database-migrations
+        image: "{{ .Values.image.app.image }}:{{ .Values.image.app.tag | default .Chart.AppVersion }}"
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+          - secretRef:
+              name: {{ .Values.EnvSecretRef.name }}
+        command: 
+          - sh
+          - -c 
+          - {{ .Values.migrate.cmd }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Values.image.nginx.name }}
+          imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}
+          image: "{{ .Values.image.nginx.image }}:{{ .Values.image.nginx.tag | default .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /css/app.css
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /css/app.css
+              port: http
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: nginx-proxy-config
+              mountPath: /etc/nginx/conf.d
+        - name: {{ .Values.image.app.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.image.app.image }}:{{ .Values.image.app.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.app.pullPolicy }}
           volumeMounts:
             {{- if .Values.persistence.enabled }}
-            - mountPath: {{ .Values.directory }}/{{ .Values.persistence.path }}
+            - mountPath: {{ .Values.app.directory }}/{{ .Values.persistence.path }}
               name: storage
             {{- end }}
+            # - name: logs
+            #   mountPath: {{ .Values.app.directory }}/storage/logs
           envFrom:
             - configMapRef:
                 name: {{ .Values.EnvConfigMapRef.name }}
@@ -55,18 +94,12 @@ spec:
             - secretRef:
                 name: {{ .Values.EnvSecretRefServices.name }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          {{- if not .Values.livenessProbe.enabled }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            - containerPort: 9000
+          {{- if .Values.persistence.enabled }}
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "mkdir -p {{ .Values.app.directory }}/{{ .Values.persistence.path }}/public || true && ln -sf {{ .Values.app.directory }}/{{ .Values.persistence.path }}/public {{ .Values.app.directory }}/public/storage {{ .Values.image.app.postStart }}"]
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -74,17 +107,10 @@ spec:
         {{- if .Values.persistence.enabled }}
         - name: storage
           persistentVolumeClaim:
-            claimName: {{ .Values.persistence.existingClaim | default (printf "%s-storage" (include "vibspecdb.fullname" .)) }}
+            claimName: {{ .Values.persistence.existingClaim | default (printf "%s-storage" .Release.Name) }}
         {{- end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: logs
+          emptyDir: {}
+        - name: nginx-proxy-config
+          configMap:
+            name: nginx-conf

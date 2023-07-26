@@ -51,6 +51,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Set chart labels for worker
+*/}}
+{{- define "vibspecdb.workerLabels" -}}
+app: {{ printf "%s-%s" .Release.Name "worker" | trunc 63 | trimSuffix "-" }}
+release: {{ .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end }}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "vibspecdb.serviceAccountName" -}}
