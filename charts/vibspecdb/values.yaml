@@ -18,13 +18,13 @@ persistence:
   storage: 2Gi
 
 image:
-  app: 
+  app:
     image: docker.photonicdata.science/app_laravel_backend
     tag: v0.1.0
     name: fpm-server
     pullPolicy: Always
     postStart: "&& echo 'Hello from the postStart handler' > /usr/share/message"
-  nginx: 
+  nginx:
     image: docker.photonicdata.science/app_nginx
     tag: v0.1.0
     name: nginx-server
@@ -143,7 +143,7 @@ worker:
       cpu: 10m
       memory: 100Mi
 
-meilisearch: 
+meilisearch:
   enabled: false
   image:
     repository: 'getmeili/meilisearch'
@@ -178,7 +178,7 @@ redis:
   host: "redis-master"
   client: "predis"
   prefix: ''
-  auth: 
+  auth:
     password: 'redispasshere'
   global:
     storageClass: 'longhorn'

@@ -36,7 +36,7 @@ dependencies:
 - name: redis
   version: "17.6.0"
   repository: https://charts.bitnami.com/bitnami
-  condition: redis.enabled  
+  condition: redis.enabled
 - name: meilisearch
   version: "0.1.22"
   repository: https://meilisearch.github.io/meilisearch-kubernetes
