@@ -1,0 +1,59 @@
+{{- if .Values.worker.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-worker" .Release.Name | quote }}
+  labels:
+    {{ include "vibspecdb.workerLabels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "vibspecdb.workerLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "vibspecdb.workerLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+      {{ if .Values.redis.enabled }}
+      - name: redis-wait-ready
+        image: alpine
+        command:
+          - sh
+          - -c
+          - for i in $(seq 1 200); do nc -z -w3 $REDIS_HOST $REDIS_PORT && exit 0 || sleep 5; echo -n "." ; done; exit 1
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+      {{ end }}
+      containers:
+      - image: "{{ .Values.image.app.image }}:{{ .Values.image.app.tag }}"
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c", "{{ .Values.worker.cmd }}"]
+        name: {{ printf "%s-worker" .Release.Name | quote }}
+        resources:
+{{ toYaml .Values.worker.resources | indent 10 }}
+        volumeMounts:
+          {{- if .Values.persistence.enabled }}
+          - mountPath: {{ .Values.app.directory }}/{{ .Values.persistence.path }}
+            name: storage
+          {{- end }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.EnvConfigMapRef.name }}
+          - secretRef:
+              name: {{ .Values.EnvSecretRef.name }}
+          - secretRef:
+              name: {{ .Values.EnvSecretRefServices.name }}
+      volumes:
+        {{- if .Values.persistence.enabled }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (printf "%s-storage" .Release.Name) }}
+        {{- end }}
+{{- end }}

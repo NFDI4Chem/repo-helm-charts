@@ -11,18 +11,14 @@ data:
   APP_URL: "https://vibspecdb.k8s.photonicdata.science/"
   ASSET_URL: "https://vibspecdb.k8s.photonicdata.science/"
   LOG_CHANNEL: "stdout"
-  DB_USERNAME: {{ .Values.postgresql.postgresqlUsername }}
+  DB_USERNAME: {{ .Values.postgresql.auth.username }}
   DB_CONNECTION: "pgsql"
-  DB_HOST: {{ .Values.postgresql.host }}
-  DB_PORT: "{{ .Values.postgresql.port }}"
-  DB_DATABASE: {{ .Values.postgresql.postgresqlDatabase }}
+  DB_HOST: {{ printf "%s-%s" .Release.Name .Values.postgresql.host | quote }}
+  DB_PORT: {{ .Values.postgresql.port | default 5432 | quote }}
+  DB_DATABASE: {{ .Values.postgresql.auth.database }}
   BROADCAST_DRIVER: "log"
   FILESYSTEM_DRIVER: "local"
-  QUEUE_CONNECTION: "rabbitmq"
-  RABBITMQ_HOST: {{ .Values.rabbitmq.host }}
-  RABBITMQ_PORT: "{{ .Values.rabbitmq.port }}"
-  RABBITMQ_USER: {{ .Values.rabbitmq.auth.username }}
-  RABBITMQ_QUEUE: jobs
+  QUEUE_CONNECTION: "redis"
   SCOUT_DRIVER: meilisearch
   MEILISEARCH_HOST: {{ .Values.meilisearch.host }}
   SESSION_DRIVER: "redis"
