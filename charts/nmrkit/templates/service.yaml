@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "nmr-predict.fullname" . }}
+  name: {{ include "nmrkit.fullname" . }}
   labels:
-    {{- include "nmr-predict.labels" . | nindent 4 }}
+    {{- include "nmrkit.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "nmr-predict.selectorLabels" . | nindent 4 }}
+    {{- include "nmrkit.selectorLabels" . | nindent 4 }}
