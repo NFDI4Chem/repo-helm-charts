@@ -635,6 +635,20 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrium-0.1.0/nmrium-0.1.0.tgz
     version: 0.1.0
+  nmrkit:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-04T13:05:10.07940726Z"
+    description: A Helm chart for nmrkit service.
+    digest: 10bd1f1a5d0c90352a12239e400d47de28e3d6ad2e0801800cf2e5f4c5e21071
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrkit
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrkit-0.1.3/nmrkit-0.1.3.tgz
+    version: 0.1.3
   nmrxiv-app:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -2415,4 +2429,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-08-03T08:58:34.328215753Z"
+generated: "2023-08-04T13:05:10.079842661Z"
