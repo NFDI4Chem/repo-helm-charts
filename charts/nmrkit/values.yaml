@@ -76,6 +76,89 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+#DB Properties
+rdkitcatridgepostgres:
+  enabled: true
+  auth:
+    pgPassword: secret
+    db: nmrkit
+    user: test
+    postgresPassword: secret
+  connection: pgsql
+  port: 5432
+
+redis:
+  enabled: false
+  #architecture: standalone
+  auth:
+    enabled: true
+    password: secret
+  global:
+    storageClass: standard
+  #host: nmrxiv-redis-master
+  port: 6379
+  replica:
+    replicaCount: 1
+  master:
+    persistence:
+      enabled: true
+      size: 1Gi
+    service:
+      type: LoadBalancer
+  replica:
+    persistence:
+      enabled: true
+      size: 1Gi
+
+grafana:
+  enabled: false
+  admin:
+    user: admin
+    password: secret
+  grafana:
+    persistence:
+      enabled: true
+      storageClass: standard
+      size: 5Gi
+  service:
+    type: LoadBalancer
+
+prometheus:
+  enabled: false
+  alertmanager.enabled: true
+  kube-state-metrics.enabled: false
+  prometheus-node-exporter.enabled: false
+  prometheus-pushgateway.enabled: false
+  server:
+    service:
+      type: LoadBalancer
+    global:
+    ## How frequently to scrape targets by default
+    scrape_interval: 15s
+    ## How long until a scrape request times out
+    scrape_timeout: 10s
+    ## How frequently to evaluate rules
+    evaluation_interval: 15s
+  # adds additional scrape configs to prometheus.yml
+  # must be a string so you have to add a | after extraScrapeConfigs:
+  # update the job name and targets according to your configuration
+  extraScrapeConfigs: |
+    - job_name: 'nmr-kit'
+      scrape_interval: 10s
+      metrics_path: /metrics
+      static_configs:
+        - targets: ['nmrkit-nmrkit:80']
+
+minio:
+  enabled: false
+  auth:
+    rootUser: minio
+    rootPassword: password
+  persistence:
+    enabled: true 
+    storageClass: standard
+    size: 1Gi
+
 nodeSelector: {}
 
 tolerations: []
