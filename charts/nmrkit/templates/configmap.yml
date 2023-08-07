@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.EnvConfigMapRef.name }}
+data:
+#DB Properties
+  {{- if .Values.rdkitcatridgepostgres.enabled }}
+  POSTGRES_USER: {{ required "A valid .Values.rdkitcatridgepostgres.auth.user entry required!" .Values.rdkitcatridgepostgres.auth.user }}
+  #POSTGRES_CONNECTION: {{ required "A valid .Values.rdkitcatridgepostgres.connection entry required!" .Values.rdkitcatridgepostgres.connection }}
+  POSTGRES_SERVER: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
+  POSTGRES_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
+  POSTGRES_DB: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
+  {{- end -}}
