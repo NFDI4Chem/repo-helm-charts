@@ -94,6 +94,16 @@ rdkitcatridgepostgres:
   connection: pgsql
   port: 5432
 
+#Specify the values if you intend to configure the application with an existing database. 
+#Please ensure that you disable (by setting 'enabled' to 'false') the 'rdkitcatridgepostgres' option when using an existing database instead.
+postgres:
+  auth:
+    user: user
+    db: 
+    pgPassword: 
+  server: 
+  port: 5432
+
 redis:
   enabled: false
   #architecture: standalone

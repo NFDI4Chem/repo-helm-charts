@@ -6,8 +6,14 @@ data:
 #DB Properties
   {{- if .Values.rdkitcatridgepostgres.enabled }}
   POSTGRES_USER: {{ required "A valid .Values.rdkitcatridgepostgres.auth.user entry required!" .Values.rdkitcatridgepostgres.auth.user }}
-  #POSTGRES_CONNECTION: {{ required "A valid .Values.rdkitcatridgepostgres.connection entry required!" .Values.rdkitcatridgepostgres.connection }}
   POSTGRES_SERVER: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
   POSTGRES_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
   POSTGRES_DB: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
+
+  {{- else}}
+  POSTGRES_USER: {{ required "A valid .Values.postgres.auth.user entry required!" .Values.postgres.auth.user }}
+  POSTGRES_SERVER: {{ required "A valid .Values.postgres.server entry required!" .Values.postgres.server  }}
+  POSTGRES_PORT: {{ .Values.postgres.port | default 5432 | quote }}
+  POSTGRES_DB: {{ required "A valid .Values.postgres.auth.db entry required!" .Values.postgres.auth.db }}
+
   {{- end -}}
