@@ -60,6 +60,16 @@ To uninstall the chart:
 
     helm delete my-coconut-app
 
+#### cheminformatics-microservice
+
+To install the cheminformatics-microservice chart:
+
+    helm install cheminformatics-microservice-app repo-helm-charts/cheminformatics-microservice
+
+To uninstall the chart:
+
+    helm delete cheminformatics-microservice-app
+
 
 ## Maintained by
 This project is developed and maintained by the [NFDI4Chem partners](https://www.nfdi4chem.de/) at the [Friedrich Schiller University](https://www.uni-jena.de/en/) Jena, Germany. 

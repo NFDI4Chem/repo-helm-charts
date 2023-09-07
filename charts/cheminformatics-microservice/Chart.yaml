@@ -1,7 +1,6 @@
 apiVersion: v2
-name: cheminfo-microservice
-deprecated: true
-description: Deprecated
+name: cheminformatics-microservice
+description: A Helm chart for cheminformatics microservice.
 maintainers:
   - name: Nisha Sharma
     email: nisha.sharma@uni-jena.de
