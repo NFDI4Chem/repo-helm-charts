@@ -1,4 +1,4 @@
-#### This repository packages the [nmrxiv-app](https://github.com/NFDI4Chem/nmrxiv), [nmrxiv-doc](https://github.com/NFDI4Chem/nmrxiv-docs), [coconut-2.0](https://github.com/Steinbeck-Lab/coconut-2.0) and vibspecdb repositories application as Helm charts for Kubernetes and is published via [Github Pages](https://nfdi4chem.github.io/repo-helm-charts/).
+#### This repository packages the [nmrxiv-app](https://github.com/NFDI4Chem/nmrxiv), [nmrxiv-doc](https://github.com/NFDI4Chem/nmrxiv-docs), [coconut-2.0](https://github.com/Steinbeck-Lab/coconut-2.0) and vibspecdb repositories application as Helm charts for Kubernetes and is published via [Github Pages](https://nfdi4chem.github.io/repo-helm-charts/). 
 
 ## Usage
 
@@ -59,6 +59,7 @@ To install the coconut-app chart:
 To uninstall the chart:
 
     helm delete my-coconut-app
+
 
 ## Maintained by
 This project is developed and maintained by the [NFDI4Chem partners](https://www.nfdi4chem.de/) at the [Friedrich Schiller University](https://www.uni-jena.de/en/) Jena, Germany. 
