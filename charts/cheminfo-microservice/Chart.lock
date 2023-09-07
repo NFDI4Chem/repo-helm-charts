@@ -1,9 +1,0 @@
-dependencies:
-- name: grafana
-  repository: https://charts.bitnami.com/bitnami
-  version: 8.4.5
-- name: prometheus
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 22.6.5
-digest: sha256:e3c75279030139bf7845f2985c860173d21ae6657aeee299173c5c50bca79e3e
-generated: "2023-06-19T12:45:30.954341386Z"
