@@ -3,6 +3,29 @@ entries:
   cheminfo-microservice:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-09-07T12:56:58.796592169Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.4.5
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 22.6.5
+    deprecated: true
+    description: Deprecated
+    digest: bd52b237763efe8f3231f1b08a1abfc9819052e00d50722ae212c6daead7bcf6
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: cheminfo-microservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminfo-microservice-0.1.7/cheminfo-microservice-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-23T14:24:43.440777252Z"
     dependencies:
     - condition: grafana.enabled
@@ -71,6 +94,29 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminfo-microservice-0.1.3/cheminfo-microservice-0.1.3.tgz
     version: 0.1.3
+  cheminformatics-microservice:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-09-07T12:56:59.039987601Z"
+    dependencies:
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.4.5
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 22.6.5
+    description: A Helm chart for cheminformatics microservice.
+    digest: 8e79016a05eb9f21dfc862a919fbc9f81c860ce59c09862add3e255a49afbe73
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: cheminformatics-microservice
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/cheminformatics-microservice-0.1.7/cheminformatics-microservice-0.1.7.tgz
+    version: 0.1.7
   cheminformaticsMicroservice:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -2606,4 +2652,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-08-28T14:35:41.380916674Z"
+generated: "2023-09-07T12:56:59.040151101Z"
