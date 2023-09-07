@@ -47,11 +47,11 @@ To uninstall the chart:
 
     helm delete my-coconut-app
 
-#### cheminfo-microservice
+#### cheminformatics-microservice
 
-To install the cheminfo-microservice chart:
+To install the cheminformatics-microservice chart:
 
-    helm install my-cheminf-app repo-helm-charts/cheminfo-microservice
+    helm install my-cheminf-app repo-helm-charts/cheminformatics-microservice
 
 To uninstall the chart:
 
