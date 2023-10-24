@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   name: nmrxiv-nodejs
-  repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrxiv-nodejs-microservice
+  repository: nfdi4chem/nodejs-microservice
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: dev-latest
 
 app:
   key:
