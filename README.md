@@ -24,16 +24,6 @@ To install the nmrxiv-app chart:
 To uninstall the chart:
 
     helm delete my-nmrxiv-app
-
-#### nmrXiv-doc
-
-To install the nmrxiv-doc chart:
-
-    helm install my-nmrxiv-doc repo-helm-charts/nmrxiv-doc
-
-To uninstall the chart:
-
-    helm delete my-nmrxiv-doc
     
 #### coconut-2.0
 
