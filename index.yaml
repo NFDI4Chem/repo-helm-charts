@@ -2479,6 +2479,20 @@ entries:
   nmrxiv-doc:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-10-24T13:14:48.839419737Z"
+    deprecated: true
+    description: Deprecated
+    digest: fca6a9bdcb84c6355ad46d294d331cfa8c8b48937e2244bf9cdf9eb7f6a5e47f
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrxiv-doc
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrxiv-doc-0.1.6/nmrxiv-doc-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-08-16T11:23:07.976570828Z"
     description: A Helm chart of nmrXiv-doc Application for K8S.
     digest: 87e31f5452d95f770d4609400ec215f7d83eb2cfb94a0886af7b638af53dacd9
@@ -2746,4 +2760,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-10-18T12:05:19.024528656Z"
+generated: "2023-10-24T13:14:48.839651138Z"
