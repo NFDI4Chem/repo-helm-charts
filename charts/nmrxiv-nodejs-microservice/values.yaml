@@ -16,6 +16,8 @@ app:
   port: 3333
   node_env: production
   drive_disk: local
+  nmrium_dev_url: https://nmriumdev.nmrxiv.org
+  nmrium_prod_url: https://nmrium.nmrxiv.org/
 
 EnvSecretRef:
   name: nodejs-secrets

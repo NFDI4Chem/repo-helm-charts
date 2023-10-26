@@ -8,3 +8,5 @@ data:
   HOST: 0.0.0.0
   NODE_ENV: {{ .Values.app.node_env }}
   DRIVE_DISK: {{ .Values.app.drive_disk }}
+  NMRIUM_DEV_URL: {{ .Values.app.nmrium_dev_url }}
+  NMRIUM_PROD_URL: {{ .Values.app.nmrium_prod_url }}
