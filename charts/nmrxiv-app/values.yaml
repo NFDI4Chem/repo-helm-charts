@@ -157,30 +157,41 @@ mail:
   # mailer: smtp
 
 # DB properties
-postgresql:
+# postgresql:
+#   enabled: true
+#   # global:
+#   #   storageClass: standard
+#   connection: pgsql
+#   primary:
+#     persistence:
+#       enabled: false
+#       existingClaim: ''
+#       size: 1Gi
+#   # host: nmrxiv-postgresql
+#   # port: 5432
+#   auth:
+#     username: pguser
+#     password: secret
+#     database: nmrxiv
+#     postgresPassword: secret
+#   resources:
+#     limits:
+#       cpu: 200m
+#       memory: 150Mi
+#     requests:
+#       cpu: 20m
+#       memory: 100Mi
+
+#DB Properties
+rdkitcatridgepostgres:
   enabled: true
-  # global:
-  #   storageClass: standard
-  connection: pgsql
-  primary:
-    persistence:
-      enabled: false
-      existingClaim: ''
-      size: 1Gi
-  # host: nmrxiv-postgresql
-  # port: 5432
   auth:
-    username: pguser
-    password: secret
-    database: nmrxiv
+    pgPassword: secret
+    db: test
+    user: test
     postgresPassword: secret
-  resources:
-    limits:
-      cpu: 200m
-      memory: 150Mi
-    requests:
-      cpu: 20m
-      memory: 100Mi
+  connection: pgsql
+  port: 5432
 
 fileStorage:
 # Below values are for file storage configuration.
