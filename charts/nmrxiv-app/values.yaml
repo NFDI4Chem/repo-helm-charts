@@ -20,6 +20,7 @@ webservices:
   orcidIdSearchApi: https://pub.orcid.org/v2.1/search
   orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
   orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
+  cmApi: https://api.naturalproducts.net/latest/
 
 logProperties:
   logChannel: stack
