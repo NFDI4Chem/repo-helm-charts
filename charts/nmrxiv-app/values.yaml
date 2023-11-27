@@ -21,6 +21,7 @@ webservices:
   orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
   orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
   cmApi: https://api.naturalproducts.net/latest/
+  crossrefApi: https://api.crossref.org/works/
 
 logProperties:
   logChannel: stack

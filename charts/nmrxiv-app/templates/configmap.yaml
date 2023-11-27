@@ -18,6 +18,7 @@ data:
   ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi }}
   ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
   CM_API: {{ .Values.webservices.cmApi }}
+  CROSSREF_API: {{ .Values.webservices.crossrefApi }}
   
 #Log Properties
   LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
