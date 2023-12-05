@@ -717,6 +717,40 @@ entries:
   nmrkit:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-12-05T10:16:24.273527452Z"
+    dependencies:
+    - condition: rdkitcatridgepostgres.enabled
+      name: rdkitcatridgepostgres
+      repository: https://nfdi4chem.github.io/repo-helm-charts
+      version: 0.1.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.14.5
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.4.5
+    - condition: prometheus.enabled
+      name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 22.6.5
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.12
+    description: A Helm chart for nmrkit service.
+    digest: a69ed71b8be746e141b1684f4fc7d4500797cd8937a585389661c315c58571b9
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: nmrkit
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/nmrkit-0.2.0/nmrkit-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-08-28T14:35:41.380586667Z"
     dependencies:
     - condition: rdkitcatridgepostgres.enabled
@@ -2938,4 +2972,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2023-11-27T14:17:24.860677039Z"
+generated: "2023-12-05T10:16:24.273758043Z"
