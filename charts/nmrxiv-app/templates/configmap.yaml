@@ -45,10 +45,6 @@ data:
 #Nmrium Properties
   NMRIUM_URL: {{ required "A valid .Values.nmrium.nmriumURL entry required!" .Values.nmrium.nmriumURL }}
 
-#Python Microservice Properties
-  PYTHON_WS_URL: {{ printf "%s-pythonmicroservice" .Release.Name }}
-  PYTHON_WS_PORT: {{ .Values.pythonmicroservice.service.port | default 80 | quote }}
-
 #Redis Properties
   {{ if .Values.redis.enabled }}
   SESSION_DRIVER: "{{ .Values.redis.sessionDriver }}"
