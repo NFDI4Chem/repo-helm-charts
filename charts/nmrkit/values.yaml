@@ -85,7 +85,7 @@ autoscaling:
 
 #DB Properties
 rdkitcatridgepostgres:
-  enabled: true
+  enabled: false
   auth:
     pgPassword: secret
     db: nmrkit
