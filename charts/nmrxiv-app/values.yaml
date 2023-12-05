@@ -361,6 +361,18 @@ datacite:
   prefix: 
   endpoint: https://api.test.datacite.org
 
+nmrkit:
+  enabled: false
+  image:
+    name: nmrkit
+    repository: nfdi4chem/nmrkit
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: dev-latest
+  service:
+    type: LoadBalancer
+    port: 80
+
 nodeSelector: {}
 
 tolerations: []
