@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   name: nmrkit
-  repository: nfdi4chem/nmrkit:dev-latest
+  repository: nfdi4chem/nmrkit
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: dev-latest
 
 imagePullSecrets: []
 nameOverride: ""
