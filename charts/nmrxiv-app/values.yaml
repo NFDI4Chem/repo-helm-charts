@@ -209,17 +209,6 @@ fileStorage:
   awsURL: 
   awsBucketPublic: 
 
-pythonmicroservice:
-  image:
-    name: python-microservice
-    repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrxiv-python-microservice
-    pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: latest
-  service:
-    type: ClusterIP
-    port: 80
-
 nmrium:
 # You can use the nmrium hosted at our server or you can host one of your own and replace below values.
   image:
