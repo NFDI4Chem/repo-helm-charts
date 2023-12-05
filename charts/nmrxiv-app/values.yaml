@@ -337,7 +337,6 @@ scheduler:
       cpu: 200m
       memory: 500Mi
 
-
 larabug:
   enabled: false
   lbKey: 
@@ -351,7 +350,7 @@ datacite:
   endpoint: https://api.test.datacite.org
 
 nmrkit:
-  enabled: false
+  enabled: true
   image:
     name: nmrkit
     repository: nfdi4chem/nmrkit
@@ -361,6 +360,15 @@ nmrkit:
   service:
     type: LoadBalancer
     port: 80
+  rdkitcatridgepostgres:
+    enabled: false
+  postgres:
+    auth:
+      user: nmrxiv
+      db: nmrxiv
+      pgPassword: secret
+    server: nmrxiv-postgresql
+    port: 5432
 
 nodeSelector: {}
 

@@ -19,6 +19,6 @@ dependencies:
   version: 0.1.0
 - name: nmrkit
   repository: https://nfdi4chem.github.io/repo-helm-charts
-  version: 0.2.0
-digest: sha256:b7bc0d908850f5d51309c22266145bedd62f550899dd6d3f33bb3d479fd0f700
-generated: "2023-12-05T11:24:35.7742514+01:00"
+  version: 0.2.1
+digest: sha256:9feccf730bd94fa6d5fbe062ba25b446f123c56391dc32c24411a55d49997e10
+generated: "2023-12-05T12:45:44.7005121+01:00"
