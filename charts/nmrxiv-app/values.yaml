@@ -14,6 +14,7 @@ appProperties:
   queueConnection: sync
   schemaVersion: 1.0
   coolOffPeriod: 30
+  xFrameOptions: ALLOW-FROM *
 
 webservices:
   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
