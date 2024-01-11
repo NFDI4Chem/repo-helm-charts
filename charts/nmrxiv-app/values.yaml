@@ -14,7 +14,6 @@ appProperties:
   queueConnection: sync
   schemaVersion: 1.0
   coolOffPeriod: 30
-  xFrameOptions: ALLOW-FROM *
 
 webservices:
   europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
@@ -195,6 +194,9 @@ rdkitcatridgepostgres:
     postgresPassword: secret
   connection: pgsql
   port: 5432
+  primary:
+    persistence:
+      size: 5Gi
 
 fileStorage:
 # Below values are for file storage configuration.
