@@ -20,6 +20,7 @@ spec:
       labels:
         {{- include "nmrkit.selectorLabels" . | nindent 8 }}
     spec:
+      shareProcessNamespace: true
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -49,17 +50,35 @@ spec:
             initialDelaySeconds: 40  # Delay before starting the probe
             periodSeconds: 60        # How often to perform the probe
             failureThreshold: 10
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+          volumeMounts:
+          # - name: app-volume
+          #   mountPath: /code/app
+          - name: docker-socket-volume
+            mountPath: "/var/run/docker.sock"
+          - name: shared-data-volume
+            mountPath: /shared
+        - name: {{ .Values.nmrCli.name }}
+          image: "{{ .Values.nmrCli.repository }}:{{ .Values.nmrCli.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.nmrCli.pullPolicy }}
+          command: ["/bin/sh"]
+          stdin: true
+          tty: true
+        - name: {{ .Values.nmrRespredict.name }}
+          image: "{{ .Values.nmrRespredict.repository }}:{{ .Values.nmrRespredict.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.nmrRespredict.pullPolicy }}
+          command: ["/bin/sh"]
+          stdin: true
+          tty: true
+          volumeMounts:
+            - name: shared-data-volume
+              mountPath: /shared
+      volumes:
+      # - name: app-volume
+      #   hostPath:
+      #     path: ./app
+      - name: docker-socket-volume
+        hostPath:
+          path: /var/run/docker.sock
+      - name: shared-data-volume
+        persistentVolumeClaim:
+          claimName: shared-data-claim

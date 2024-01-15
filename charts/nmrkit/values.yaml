@@ -11,6 +11,18 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: dev-latest
 
+nmr-cli:
+  name: nmr-converter
+  repository: nfdi4chem/nmr-cli
+  pullPolicy: Always
+  tag: dev-latest
+
+nmr-respredict:
+  name: nmr-respredict
+  repository: nfdi4chem/nmr-respredict
+  pullPolicy: Always
+  tag: dev-latest
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
