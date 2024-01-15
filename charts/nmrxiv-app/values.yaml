@@ -223,7 +223,7 @@ nmrium:
   service:
     type: LoadBalancer
     port: 80
-  nmriumURL: //nmriumdev.nmrxiv.org
+  nmriumURL: https://nmrium.nmrxiv.org/?defaultEmptyMessage=loading&workspace=nmrxiv
 
 redis:
   auth:
