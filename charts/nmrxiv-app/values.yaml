@@ -22,6 +22,7 @@ webservices:
   orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
   cmApi: https://api.naturalproducts.net/latest/
   crossrefApi: https://api.crossref.org/works/
+  dataciteApi: https://api.datacite.org/
 
 logProperties:
   logChannel: stack

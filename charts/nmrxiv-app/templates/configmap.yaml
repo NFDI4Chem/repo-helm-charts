@@ -19,6 +19,7 @@ data:
   ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
   CM_API: {{ .Values.webservices.cmApi }}
   CROSSREF_API: {{ .Values.webservices.crossrefApi }}
+  DATACITE_API: {{ .Values.webservices.dataciteApi }}
   
 #Log Properties
   LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
