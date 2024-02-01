@@ -289,6 +289,19 @@ meilisearch:
     enabled: true
     size: 5Gi
 
+keycloak:
+  enabled: false
+  auth:
+    adminUser: nmrxiv_keycloak
+    adminPassword: secret
+  postgresql:
+    enabled: true 
+    auth:
+      username: keycloak_nmrxiv
+      password: secret
+  service:
+    type: LoadBalancer
+
 storage:
   pvc:
     accessModes:

@@ -20,5 +20,8 @@ dependencies:
 - name: nmrkit
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.2.1
-digest: sha256:f89813103bea31a24a4cb99ff0ac621cbbbf3d5f4a748449ee5abe857c729380
-generated: "2024-02-01T14:22:36.741693962+01:00"
+- name: keycloak
+  repository: https://charts.bitnami.com/bitnami
+  version: 18.3.3
+digest: sha256:286a0b5ffae7f1770758e305ff935d0012a44578c5fed9ee47ffeb2b93abc54f
+generated: "2024-02-01T15:17:34.970094053+01:00"
