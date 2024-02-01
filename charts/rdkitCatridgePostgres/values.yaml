@@ -45,8 +45,8 @@ EnvSecretRef:
 
 auth:
   pgPassword: secret
-  db: test
-  user: test
+  db: db
+  user: user
   postgresPassword: secret
 
 ingress:
@@ -81,9 +81,11 @@ volume:
   name: postgres-data
   mountpath: /var/lib/postgresql/data
   size: 5Gi
-  accessModes: ReadWriteMany
   hostPath: /mnt/data
-  storageClass: standard
+
+## Name of an existing PVC to use.
+persistence:
+  existingClaim:
 
 autoscaling:
   enabled: false

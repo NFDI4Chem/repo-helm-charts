@@ -27,6 +27,12 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+{{- if .Values.persistence.existingClaim }}
+      volumes:
+      - name: {{ .Values.volume.name }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim }}
+{{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -44,11 +50,15 @@ spec:
           - name: {{ .Values.volume.name }}
             mountPath: {{ .Values.volume.mountpath }}
             subPath: postgres
+{{- if not .Values.persistence.existingClaim }}
   volumeClaimTemplates:
-  - metadata:
-      name: {{ .Values.volume.name }}
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+        name: {{ .Values.volume.name }}
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadWriteOnce" ] 
       resources:
         requests:
           storage: {{ .Values.volume.size }}
+{{- end }}
