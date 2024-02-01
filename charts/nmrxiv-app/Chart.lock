@@ -16,9 +16,9 @@ dependencies:
   version: 0.1.0
 - name: rdkitcatridgepostgres
   repository: https://nfdi4chem.github.io/repo-helm-charts
-  version: 0.1.0
+  version: 0.2.0
 - name: nmrkit
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.2.1
-digest: sha256:9feccf730bd94fa6d5fbe062ba25b446f123c56391dc32c24411a55d49997e10
-generated: "2023-12-05T12:45:44.7005121+01:00"
+digest: sha256:f89813103bea31a24a4cb99ff0ac621cbbbf3d5f4a748449ee5abe857c729380
+generated: "2024-02-01T14:22:36.741693962+01:00"
