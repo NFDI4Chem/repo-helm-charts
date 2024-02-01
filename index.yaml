@@ -3270,6 +3270,19 @@ entries:
   rdkitcatridgepostgres:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-02-01T13:12:12.768627362Z"
+    description: A Helm chart for Kubernetes
+    digest: 6b936b9c08686deb09d4e085d3b23ab1dd3ad5ac45ae9dc1eb8fde2d16648432
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: rdkitcatridgepostgres
+    type: application
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/rdkitcatridgepostgres-0.2.0/rdkitcatridgepostgres-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-24T11:50:53.740576754Z"
     description: A Helm chart for Kubernetes
     digest: 478ba291bddb969516fd6aa2ded14219f223f2e404bd5a6fb2079d3b04467c85
@@ -3368,4 +3381,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2024-01-23T09:49:11.809755704Z"
+generated: "2024-02-01T13:12:12.768826953Z"
