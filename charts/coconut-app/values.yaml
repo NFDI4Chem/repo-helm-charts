@@ -20,12 +20,13 @@ appProperties:
     literature, organisms that produce them, natural geographic presence, and precomputed molecular properties if available.
 
 webservices:
-  europemcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+  europepmcApi: https://www.ebi.ac.uk/europepmc/webservices/rest/search
+  crossrefApi: https://api.crossref.org/works/
+  dataciteApi: https://api.datacite.org/dois/
   orcidIdSearchApi: https://pub.orcid.org/v2.1/search
   orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
   orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
   cmApi: https://dev.api.naturalproducts.net/v1/
-
 
 logProperties:
   logChannel: stack

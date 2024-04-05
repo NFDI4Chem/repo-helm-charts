@@ -54,7 +54,9 @@ data:
   {{ end }}
 
 #Web Services
-  EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
+  EUROPEPMC_WS_API: {{ .Values.webservices.europepmcApi }}
+  CROSSREF_WS_API: {{ .Values.webservices.crossrefApi }}
+  DATACITE_WS_API: {{ .Values.webservices.dataciteApi }}
   ORCID_ID_SEARCH_API: {{ .Values.webservices.orcidIdSearchApi }}
   ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi }}
   ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
