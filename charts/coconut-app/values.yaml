@@ -8,9 +8,9 @@ replicaCount: 1
 appProperties:
   name: coconut
   key: 
-  env: development
+  env: production
   debug: true
-  url: https://coconut2.nmrxiv.org
+  url: https://coconut.naturalproducts.net/
   queueConnection: sync
   schemaVersion: 1.0
   description: |
@@ -26,7 +26,7 @@ webservices:
   orcidIdSearchApi: https://pub.orcid.org/v2.1/search
   orcidIdEmploymentApi: https://pub.orcid.org/v3.0/{orcid_id}/employments
   orcidIdPersonApi: https://pub.orcid.org/v3.0/{orcid_id}/person
-  cmApi: https://dev.api.naturalproducts.net/v1/
+  cmApi: https://api.naturalproducts.net/v1/
 
 logProperties:
   logChannel: stack
@@ -45,14 +45,14 @@ rdkitcatridgepostgres:
 
 appImage:
   name: php
-  repository: europe-west3-docker.pkg.dev/coconut-366808/coconut-dev/coconut-app
+  repository: nfdi4chem/coconut
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
 nginxImage:
   name: nginx
-  repository: europe-west3-docker.pkg.dev/coconut-366808/coconut-dev/coconut-nginx
+  repository: nfdi4chem/coconut
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -136,7 +136,7 @@ mail:
   host: 'smtp.uni-jena.de'
   port: 587
   from: info.coconut@uni-jena.de
-  fromName: "coconut-dev"
+  fromName: "coconut"
   user: test
   password: secret
   mailer: smtp
@@ -145,7 +145,7 @@ cheminfo-microservice:
   enabled: false
   image:
     name: chem-py-microservice
-    repository: europe-west3-docker.pkg.dev/coconut-366808/cheminformatics-python-microservice/chem-py-microservice
+    repository: nfdi4chem/cheminformatics-microservice
     pullPolicy: Always
     tag: latest
   service:
