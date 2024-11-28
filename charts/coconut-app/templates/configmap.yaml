@@ -66,3 +66,14 @@ data:
   DOI_HOST: {{ .Values.doi.doiHost }}
   DOI_PROVIDER: {{ .Values.doi.doiProvider }}
 
+#Datacite Properties
+  DATACITE_PREFIX: "{{ .Values.datacite.prefix }}"
+  DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}
+
+#OAuth Properties
+  {{ if .Values.oauthProperties.github.enabled }}
+  GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.github.redirectURL }}
+  {{ end }}
+  {{ if .Values.oauthProperties.google.enabled }}
+  GOOGLE_REDIRECT_URL: {{ .Values.oauthProperties.google.redirectURL }}
+  {{ end }}

@@ -7,16 +7,16 @@ replicaCount: 1
 # Default app properties for laravel.
 appProperties:
   name: coconut
-  key: 
+  key: base64:88Td66VUaLDIea0DEgJQVdoXU1WolK+kdoEPBepQYH0=
   env: production
   debug: true
   url: https://coconut.naturalproducts.net/
   queueConnection: sync
   schemaVersion: 1.0
   description: |
-    COCONUT Online is an open-source project that stores, searches, and analyzes Natural Products (NPs). 
-    The database contains over 50 open NP resources, and the data is accessible free of charge and without any restrictions. 
-    Each entry corresponds to a "flat" NP structure and is associated with their known stereochemical forms, 
+    COCONUT Online is an open-source project that stores, searches, and analyzes Natural Products (NPs).
+    The database contains over 50 open NP resources, and the data is accessible free of charge and without any restrictions.
+    Each entry corresponds to a "flat" NP structure and is associated with their known stereochemical forms,
     literature, organisms that produce them, natural geographic presence, and precomputed molecular properties if available.
 
 webservices:
@@ -32,7 +32,7 @@ logProperties:
   logChannel: stack
   logLevel: debug
 
-#DB Properties
+# DB Properties
 rdkitcatridgepostgres:
   enabled: true
   auth:
@@ -110,7 +110,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: 
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -152,37 +152,18 @@ cheminfo-microservice:
     type: ClusterIP
     port: 80
 
-# oauthProperties:
-#   enabled: false
-#   twitterClientID: 
-#   twitterClientSecret: 
-#   twitterRedirectUrl: 
-#   githubClientID: 
-#   githubClientSecret: 
-#   githubRedirectUrl: 
-#   orcidClientID: 
-#   orcidClientSecret:
-#   orcidRedirectUrl:
-#   orcidEnvironment:
-
-#Enable this properties for Single Sign-On follow the documentation for more info https://docs.coconut.org/docs/developer-guides/configurations/oauth
-# oauthProperties:
-#   twitter:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL: 
-#   github:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL:
-#   orcid:
-#     enabled: false
-#     clientID:
-#     clientSecret:
-#     redirectURL:
-#     environment:
+# Enable this properties for Single Sign-On follow the documentation for more info https://docs.coconut.org/docs/developer-guides/configurations/oauth
+oauthProperties:
+  google:
+    enabled: false
+    clientID:
+    clientSecret:
+    redirectURL:
+  github:
+    enabled: false
+    clientID:
+    clientSecret:
+    redirectURL:
 
 # storage:
 #   pvc:
@@ -221,16 +202,14 @@ worker:
 
 redis:
   enabled: false
-  #architecture: standalone
+  # architecture: standalone
   auth:
     enabled: true
     password: secret
   global:
     storageClass: standard
-  #host: nmrxiv-redis-master
+  # host: nmrxiv-redis-master
   port: 6379
-  replica:
-    replicaCount: 1
   master:
     persistence:
       enabled: true
@@ -238,6 +217,7 @@ redis:
     service:
       type: LoadBalancer
   replica:
+    replicaCount: 1
     persistence:
       enabled: true
       size: 1Gi
@@ -270,21 +250,47 @@ scheduler:
 
 larabug:
   enabled: false
-  lbKey: 
+  lbKey:
   lbProjectKey:
+
+datacite:
+  enabled: false
+  host:
+  username:
+  secret:
+  prefix:
+  endpoint: https://api.test.datacite.org
+
+rabbitmq:
+  enabled: false
+  queueConnection: sync
+  port: 5672
+  # host: nmrxiv-rabbitmq
+  auth:
+    username: 'rabbitmq_user'
+    password: 'password'
+    # erlangCookie: 'erlangCookieerlangCookie'
+  global:
+    storageClass: 'standard'
+  metrics:
+    enabled: false
+  ingress:
+    enabled: false
+    path: '/'
+    hostname: ''
 
 fileStorage:
 # Below values are for file storage configuration.
 # You can have desired S3 compatible driver of your choice. Follow to read more https://laravel.com/docs/9.x/filesystem
   enabled: false
-  fileSystemDriver: 
-  fileSystemDriverPublic: 
-  awsAccessKeyID: 
-  awsSecretAccessKey: 
-  awsDefaultRegion: 
-  awsBucket: 
+  fileSystemDriver:
+  fileSystemDriverPublic:
+  awsAccessKeyID:
+  awsSecretAccessKey:
+  awsDefaultRegion:
+  awsBucket:
   awsEndpoint:
-  awsURL: 
+  awsURL:
 
 nodeSelector: {}
 
