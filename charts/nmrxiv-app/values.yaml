@@ -29,19 +29,6 @@ logProperties:
   logLevel: debug
 
 
-# oauthProperties:
-#   enabled: false
-#   twitterClientID: 
-#   twitterClientSecret: 
-#   twitterRedirectUrl: 
-#   githubClientID: 
-#   githubClientSecret: 
-#   githubRedirectUrl: 
-#   orcidClientID: 
-#   orcidClientSecret:
-#   orcidRedirectUrl:
-#   orcidEnvironment:
-
 #Enable this properties for Single Sign-On follow the documentation for more info https://docs.nmrxiv.org/docs/developer-guides/configurations/oauth
 oauthProperties:
   twitter:
@@ -63,17 +50,17 @@ oauthProperties:
 
 appImage:
   name: php
-  repository: eu.gcr.io/nmrxiv/app
+  repository: nfdi4chem/nmrxiv
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
-nginxImage:
-  name: nginx
-  repository: eu.gcr.io/nmrxiv/nginx
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+# nginxImage:
+#   name: nginx
+#   repository: nfdi4chem/nmrxiv
+#   pullPolicy: Always
+#   # Overrides the image tag whose default is the chart appVersion.
+#   tag: latest
 
 EnvConfigMapRef:
   name: "nmrxiv-config-map"
@@ -158,6 +145,7 @@ mail:
   # user: user
   # password: secret
   # mailer: smtp
+  # encryption: tls
 
 # DB properties
 # postgresql:
@@ -188,6 +176,7 @@ mail:
 #DB Properties
 rdkitcatridgepostgres:
   enabled: true
+  version: "15.4"
   auth:
     pgPassword: secret
     db: test
@@ -219,6 +208,7 @@ nmrium:
     name: nmrium
     repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrium
     pullPolicy: Always
+    enabled: false
     # Overrides the image tag whose default is the chart appVersion.
     tag: latest
   service:
@@ -386,6 +376,30 @@ nmrkit:
       pgPassword: secret
     server: nmrxiv-postgresql
     port: 5432
+
+auth:
+  disabled: false
+
+proxy:
+  httpProxy: "http://internet4nzm.rz.uni-jena.de:3128"
+  httpsProxy: "http://internet4nzm.rz.uni-jena.de:3128"
+  noProxy: "localhost,127.0.0.1,meilisearch"
+
+horizon:
+  prefix: "nmrxiv_horizon"
+  balance: "auto"
+
+octane:
+  server: "frankenphp"
+  #supervisorCommand: "/usr/local/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=frankenphp --host=0.0.0.0 --port=80 --watch"
+  supervisorCommand: "/usr/local/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=frankenphp --host=0.0.0.0 --admin-port=2019 --port=80"
+
+pusher:
+  enabled: false
+  appId: ""
+  appKey: "dummy"
+  appSecret: ""
+  appCluster: "mt1"
 
 nodeSelector: {}
 

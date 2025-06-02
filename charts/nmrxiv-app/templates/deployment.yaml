@@ -62,22 +62,6 @@ spec:
             - "migrate"
             - "--force"
       containers:
-        - name: {{ .Values.nginxImage.name }}
-          imagePullPolicy: {{ .Values.nginxImage.pullPolicy }}
-          image: "{{ .Values.nginxImage.repository }}:{{ .Values.nginxImage.tag | default .Chart.AppVersion }}"
-          livenessProbe:
-            httpGet:
-              path: /css/app.css
-              port: 80
-          readinessProbe:
-            httpGet:
-              path: /css/app.css
-              port: 80
-          resources:
-            {{- toYaml .Values.resources.nginx | nindent 12 }}
-          ports:
-            - containerPort: 80
-
         - name: {{ .Values.appImage.name }}
           imagePullPolicy: {{ .Values.appImage.pullPolicy }}
           image: "{{ .Values.appImage.repository }}:{{ .Values.appImage.tag | default .Chart.AppVersion }}"
@@ -101,7 +85,9 @@ spec:
               mountPath: /var/www/html/storage/framework/testing
             - name: tmp 
               mountPath: /tmp
-          resources:
-            {{- toYaml .Values.resources.app | nindent 12 }}
+            - name: caddy_config
+              mountPath: /config/caddy
+          # resources:
+          #   {{- toYaml .Values.resources.app | nindent 12 }}
           ports:
-            - containerPort: 9000
+            - containerPort: 80

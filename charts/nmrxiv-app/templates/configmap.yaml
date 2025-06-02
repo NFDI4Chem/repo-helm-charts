@@ -31,6 +31,7 @@ data:
   DB_HOST: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
   DB_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
   DB_DATABASE: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
+  DB_VERSION: {{ .Values.rdkitcatridgepostgres.version | default "15.4" }}
   
 #File Storage Properties
   {{ if .Values.fileStorage.enabled }}
@@ -81,6 +82,7 @@ data:
   MAIL_USERNAME: {{ .Values.mail.user }}
   MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
   MAIL_FROM_NAME: {{ .Values.mail.fromName }}
+  MAIL_ENCRYPTION: {{ .Values.mail.encryption | default "tls" }}
   {{ end }}
 
 #OAuth Properties
@@ -91,7 +93,7 @@ data:
   GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.github.redirectURL }}
   {{ end }}
   {{ if .Values.oauthProperties.orcid.enabled }}
-  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.clientID }}
+  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.redirectURL }}
   ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcid.environment }}
   {{ end }}
 
@@ -99,3 +101,24 @@ data:
   DATACITE_PREFIX: "{{ .Values.datacite.prefix }}"
   DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}
   DOI_HOST: {{ .Values.datacite.host }}
+
+#HTTP_PROXY Properties
+  HTTP_PROXY: {{ .Values.proxy.proxy | default "" }}
+  HTTPS_PROXY: {{ .Values.proxy.httpsProxy | default "" }}
+  NO_PROXY: {{ .Values.proxy.noProxy | default "" }}
+
+#HORIZON Properties
+  HORIZON_PREFIX: {{ .Values.horizon.prefix | default "nmrxiv_horizon" }}
+  HORIZON_BALANCE: {{ .Values.horizon.balance | default "auto" }}
+
+#Octane Properties
+  OCTANE_SERVER: {{ .Values.octane.server | default "frankenphp" }}
+  SUPERVISOR_PHP_COMMAND: {{ .Values.octane.supervisorCommand | quote }}
+
+#Pusher Configuration
+  PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster | default "mt1" }}
+  VITE_PUSHER_APP_KEY: {{ .Values.pusher.appKey | quote }}
+  VITE_PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster | quote }}
+
+#Auth Properties
+  AUTH_DISABLED: "{{ .Values.auth.disabled | default false }}"
