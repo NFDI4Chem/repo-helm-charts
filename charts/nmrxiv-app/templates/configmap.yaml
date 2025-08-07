@@ -4,119 +4,119 @@ metadata:
   name: {{ .Values.EnvConfigMapRef.name }}
 data:
 #App Properties
-  APP_NAME: {{ .Values.appProperties.name }}
-  APP_ENV: {{ .Values.appProperties.env }}
+  APP_NAME: {{ .Values.appProperties.name | quote }}
+  APP_ENV: {{ .Values.appProperties.env | quote }}
   APP_DEBUG: "{{ .Values.appProperties.debug }}"
-  APP_URL: {{ .Values.appProperties.url }}
-  QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection }}
+  APP_URL: {{ .Values.appProperties.url | quote }}
+  QUEUE_CONNECTION: {{ .Values.appProperties.queueConnection | quote }}
   SCHEMA_VERSION: "{{ .Values.appProperties.schemaVersion }}"
   COOL_OFF_PERIOD: "{{ .Values.appProperties.coolOffPeriod }}"
 
 #Web Services
-  EUROPEMC_WS_API: {{ .Values.webservices.europemcApi }}
-  ORCID_ID_SEARCH_API: {{ .Values.webservices.orcidIdSearchApi }}
-  ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi }}
-  ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi }}
-  CM_API: {{ .Values.webservices.cmApi }}
-  CROSSREF_API: {{ .Values.webservices.crossrefApi }}
-  DATACITE_API: {{ .Values.webservices.dataciteApi }}
+  EUROPEMC_WS_API: {{ .Values.webservices.europemcApi | quote }}
+  ORCID_ID_SEARCH_API: {{ .Values.webservices.orcidIdSearchApi | quote }}
+  ORCID_ID_EMPLOYMENT_API: {{ .Values.webservices.orcidIdEmploymentApi | quote }}
+  ORCID_ID_PERSON_API: {{ .Values.webservices.orcidIdPersonApi | quote }}
+  CM_API: {{ .Values.webservices.cmApi | quote }}
+  CROSSREF_API: {{ .Values.webservices.crossrefApi | quote }}
+  DATACITE_API: {{ .Values.webservices.dataciteApi | quote }}
   
 #Log Properties
-  LOG_CHANNEL: {{ .Values.logProperties.logChannel }}
-  LOG_LEVEL: {{ .Values.logProperties.logLevel }}
+  LOG_CHANNEL: {{ .Values.logProperties.logChannel | quote }}
+  LOG_LEVEL: {{ .Values.logProperties.logLevel | quote }}
 
 #DB Properties
-  DB_USERNAME: {{ required "A valid .Values.rdkitcatridgepostgres.auth.user entry required!" .Values.rdkitcatridgepostgres.auth.user }}
-  DB_CONNECTION: {{ required "A valid .Values.rdkitcatridgepostgres.connection entry required!" .Values.rdkitcatridgepostgres.connection }}
+  DB_USERNAME: {{ required "A valid .Values.rdkitcatridgepostgres.auth.user entry required!" .Values.rdkitcatridgepostgres.auth.user | quote }}
+  DB_CONNECTION: {{ required "A valid .Values.rdkitcatridgepostgres.connection entry required!" .Values.rdkitcatridgepostgres.connection | quote }}
   DB_HOST: {{ printf "%s-rdkitcatridgepostgres" .Release.Name | quote }}
   DB_PORT: {{ .Values.rdkitcatridgepostgres.port | default 5432 | quote }}
-  DB_DATABASE: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db }}
-  DB_VERSION: {{ .Values.rdkitcatridgepostgres.version | default "15.4" }}
+  DB_DATABASE: {{ required "A valid .Values.rdkitcatridgepostgres.auth.db entry required!" .Values.rdkitcatridgepostgres.auth.db | quote }}
+  DB_VERSION: {{ .Values.rdkitcatridgepostgres.version | default "15.4" | quote }}
   
 #File Storage Properties
   {{ if .Values.fileStorage.enabled }}
-  FILESYSTEM_DRIVER: {{ .Values.fileStorage.fileSystemDriver }}
-  FILESYSTEM_DRIVER_PUBLIC: {{ .Values.fileStorage.fileSystemDriverPublic }}
-  AWS_DEFAULT_REGION: {{ .Values.fileStorage.awsDefaultRegion }}
-  AWS_BUCKET: {{ .Values.fileStorage.awsBucket }}
-  AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint }}
-  AWS_URL: {{ .Values.fileStorage.awsURL }}
-  AWS_BUCKET_PUBLIC: {{ .Values.fileStorage.awsBucketPublic }}
+  FILESYSTEM_DRIVER: {{ .Values.fileStorage.fileSystemDriver | quote }}
+  FILESYSTEM_DRIVER_PUBLIC: {{ .Values.fileStorage.fileSystemDriverPublic | quote }}
+  AWS_DEFAULT_REGION: {{ .Values.fileStorage.awsDefaultRegion | quote }}
+  AWS_BUCKET: {{ .Values.fileStorage.awsBucket | quote }}
+  AWS_ENDPOINT: {{ .Values.fileStorage.awsEndpoint | quote }}
+  AWS_URL: {{ .Values.fileStorage.awsURL | quote }}
+  AWS_BUCKET_PUBLIC: {{ .Values.fileStorage.awsBucketPublic | quote }}
   {{ end }}
 
 #Nmrium Properties
-  NMRIUM_URL: {{ required "A valid .Values.nmrium.nmriumURL entry required!" .Values.nmrium.nmriumURL }}
+  NMRIUM_URL: {{ required "A valid .Values.nmrium.nmriumURL entry required!" .Values.nmrium.nmriumURL | quote }}
 
 #Redis Properties
   {{ if .Values.redis.enabled }}
-  SESSION_DRIVER: "{{ .Values.redis.sessionDriver }}"
-  CACHE_DRIVER: {{ .Values.redis.cacheDriver }}
-  REDIS_CLIENT: {{ .Values.redis.redisClient }}
+  SESSION_DRIVER: {{ .Values.redis.sessionDriver | quote }}
+  CACHE_DRIVER: {{ .Values.redis.cacheDriver | quote }}
+  REDIS_CLIENT: {{ .Values.redis.redisClient | quote }}
   SESSION_LIFETIME: "{{ .Values.redis.sessionLifetime }}"
-  MEMCACHED_HOST: {{ .Values.redis.memcachedHost }}
+  MEMCACHED_HOST: {{ .Values.redis.memcachedHost | quote }}
   REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
   {{ end }}
 
 #RabbitMQ Properties
   {{ if .Values.rabbitmq.enabled }}
-  QUEUE_CONNECTION: {{ .Values.rabbitmq.queueConnection }}
+  QUEUE_CONNECTION: {{ .Values.rabbitmq.queueConnection | quote }}
   RABBITMQ_HOST: {{ printf "%s-rabbitmq" .Release.Name | quote }}
   RABBITMQ_PORT: {{ .Values.rabbitmq.port | default 5672 | quote }}
-  RABBITMQ_USER: {{ required "A valid .Values.rabbitmq.auth.username entry required!" .Values.rabbitmq.auth.username }}
-  RABBITMQ_QUEUE: jobs
+  RABBITMQ_USER: {{ required "A valid .Values.rabbitmq.auth.username entry required!" .Values.rabbitmq.auth.username | quote }}
+  RABBITMQ_QUEUE: "jobs"
   {{ end }}
 
 #Meilisearch Properties
   {{ if .Values.meilisearch.enabled }}
-  SCOUT_DRIVER: {{ .Values.meilisearch.scout }}
-  SCOUT_PREFIX: {{ .Values.meilisearch.scoutPrefix }}
-  MEILISEARCH_HOST: {{ required "A valid .Values.meilisearch.host entry required!" .Values.meilisearch.host }}
+  SCOUT_DRIVER: {{ .Values.meilisearch.scout | quote }}
+  SCOUT_PREFIX: {{ .Values.meilisearch.scoutPrefix | quote }}
+  MEILISEARCH_HOST: {{ required "A valid .Values.meilisearch.host entry required!" .Values.meilisearch.host | quote }}
   {{ end }}
 
 #Mail Properties
   {{ if .Values.mail.enabled }}
-  MAIL_MAILER: {{ .Values.mail.mailer }}
-  MAIL_HOST: {{ .Values.mail.host }}
+  MAIL_MAILER: {{ .Values.mail.mailer | quote }}
+  MAIL_HOST: {{ .Values.mail.host | quote }}
   MAIL_PORT: "{{ .Values.mail.port }}"
-  MAIL_USERNAME: {{ .Values.mail.user }}
-  MAIL_FROM_ADDRESS: {{ .Values.mail.from }}
-  MAIL_FROM_NAME: {{ .Values.mail.fromName }}
-  MAIL_ENCRYPTION: {{ .Values.mail.encryption | default "tls" }}
+  MAIL_USERNAME: {{ .Values.mail.user | quote }}
+  MAIL_FROM_ADDRESS: {{ .Values.mail.from | quote }}
+  MAIL_FROM_NAME: {{ .Values.mail.fromName | quote }}
+  MAIL_ENCRYPTION: {{ .Values.mail.encryption | default "tls" | quote }}
   {{ end }}
 
 #OAuth Properties
   {{ if .Values.oauthProperties.twitter.enabled }}
-  TWITTER_REDIRECT_URL: {{ .Values.oauthProperties.twitter.redirectURL }}
+  TWITTER_REDIRECT_URL: {{ .Values.oauthProperties.twitter.redirectURL | quote }}
   {{ end }}
   {{ if .Values.oauthProperties.github.enabled }}
-  GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.github.redirectURL }}
+  GITHUB_REDIRECT_URL: {{ .Values.oauthProperties.github.redirectURL | quote }}
   {{ end }}
   {{ if .Values.oauthProperties.orcid.enabled }}
-  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.redirectURL }}
-  ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcid.environment }}
+  ORCID_REDIRECT_URL: {{ .Values.oauthProperties.orcid.redirectURL | quote }}
+  ORCID_ENVIRONMENT: {{ .Values.oauthProperties.orcid.environment | quote }}
   {{ end }}
 
 #Datacite Properties
   DATACITE_PREFIX: "{{ .Values.datacite.prefix }}"
-  DATACITE_ENDPOINT: {{ .Values.datacite.endpoint }}
-  DOI_HOST: {{ .Values.datacite.host }}
+  DATACITE_ENDPOINT: {{ .Values.datacite.endpoint | quote }}
+  DOI_HOST: {{ .Values.datacite.host | quote }}
 
 #HTTP_PROXY Properties
-  HTTP_PROXY: {{ .Values.proxy.proxy | default "" }}
-  HTTPS_PROXY: {{ .Values.proxy.httpsProxy | default "" }}
-  NO_PROXY: {{ .Values.proxy.noProxy | default "" }}
+  HTTP_PROXY: {{ .Values.proxy.httpProxy | default "" | quote }}
+  HTTPS_PROXY: {{ .Values.proxy.httpsProxy | default "" | quote }}
+  NO_PROXY: {{ .Values.proxy.noProxy | default "" | quote }}
 
 #HORIZON Properties
-  HORIZON_PREFIX: {{ .Values.horizon.prefix | default "nmrxiv_horizon" }}
-  HORIZON_BALANCE: {{ .Values.horizon.balance | default "auto" }}
+  HORIZON_PREFIX: {{ .Values.horizon.prefix | default "nmrxiv_horizon" | quote }}
+  HORIZON_BALANCE: {{ .Values.horizon.balance | default "auto" | quote }}
 
 #Octane Properties
-  OCTANE_SERVER: {{ .Values.octane.server | default "frankenphp" }}
+  OCTANE_SERVER: {{ .Values.octane.server | default "frankenphp" | quote }}
   SUPERVISOR_PHP_COMMAND: {{ .Values.octane.supervisorCommand | quote }}
 
 #Pusher Configuration
-  PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster | default "mt1" }}
+  PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster | default "mt1" | quote }}
   VITE_PUSHER_APP_KEY: {{ .Values.pusher.appKey | quote }}
   VITE_PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster | quote }}
 
