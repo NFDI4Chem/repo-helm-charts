@@ -35,7 +35,7 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
-        - name: caddy_data
+        - name: caddy-data
           emptyDir: {}
       #serviceAccountName: {{ include "nmrxiv-app.serviceAccountName" . }}
       securityContext:
@@ -87,7 +87,7 @@ spec:
               mountPath: /var/www/html/storage/framework/testing
             - name: tmp 
               mountPath: /tmp
-            - name: caddy_data
+            - name: caddy-data
               mountPath: /data/caddy
           ports:
             - containerPort: 80
