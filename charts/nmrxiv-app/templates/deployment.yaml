@@ -35,6 +35,8 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
+        - name: caddy_data
+          emptyDir: {}
       #serviceAccountName: {{ include "nmrxiv-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -85,7 +87,7 @@ spec:
               mountPath: /var/www/html/storage/framework/testing
             - name: tmp 
               mountPath: /tmp
-            - name: caddy_config
-              mountPath: /config/caddy
+            - name: caddy_data
+              mountPath: /data/caddy
           ports:
             - containerPort: 80
