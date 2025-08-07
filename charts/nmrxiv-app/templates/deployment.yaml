@@ -87,7 +87,5 @@ spec:
               mountPath: /tmp
             - name: caddy_config
               mountPath: /config/caddy
-          # resources:
-          #   {{- toYaml .Values.resources.app | nindent 12 }}
           ports:
             - containerPort: 80
