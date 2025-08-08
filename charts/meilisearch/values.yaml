@@ -78,6 +78,7 @@ persistence:
   ##   GKE, AWS & OpenStack)
   ##
   # storageClass: "-"
+  storageClassName: ""
   size: 5Gi
   annotations: {}
   volume:
