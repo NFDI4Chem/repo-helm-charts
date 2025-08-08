@@ -603,6 +603,20 @@ entries:
   meilisearch:
   - apiVersion: v1
     appVersion: v0.27.1
+    created: "2025-08-08T09:20:09.989202581Z"
+    description: A Helm chart for the Meilisearch search engine
+    digest: db32c3dbc27547e76ffff61621b4005b1881107bf46814df9e3e09ef3e267a70
+    home: https://github.com/meilisearch/meilisearch-kubernetes/charts
+    icon: https://res.cloudinary.com/meilisearch/image/upload/v1597822872/Logo/logo_img.svg
+    maintainers:
+    - email: nisha.sharma@uni-jena.de
+      name: Nisha Sharma
+    name: meilisearch
+    urls:
+    - https://github.com/NFDI4Chem/repo-helm-charts/releases/download/meilisearch-0.1.45/meilisearch-0.1.45.tgz
+    version: 0.1.45
+  - apiVersion: v1
+    appVersion: v0.27.1
     created: "2022-07-13T09:12:53.809279823Z"
     description: A Helm chart for the Meilisearch search engine
     digest: 28020182a5f348d1548f5f95008f0f535a4cf1e7909bc298c2809d7914ee8297
@@ -3743,4 +3757,4 @@ entries:
     urls:
     - https://github.com/NFDI4Chem/nmrxiv-helm-chart/releases/download/vibspecdb-0.2.13/vibspecdb-0.2.13.tgz
     version: 0.2.13
-generated: "2025-08-07T11:12:25.384415915Z"
+generated: "2025-08-08T09:20:09.989526137Z"
