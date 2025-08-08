@@ -7,7 +7,7 @@ dependencies:
   version: 11.5.0
 - name: meilisearch
   repository: https://nfdi4chem.github.io/repo-helm-charts
-  version: 0.1.44
+  version: 0.1.46
 - name: nmrium
   repository: https://nfdi4chem.github.io/repo-helm-charts
   version: 0.1.0
@@ -20,5 +20,5 @@ dependencies:
 - name: keycloak
   repository: https://charts.bitnami.com/bitnami
   version: 18.3.3
-digest: sha256:2dab4462cf8ade0bfe161595f7d40945e2083281911791d1ff92b3b45dc0f504
-generated: "2025-06-02T13:10:31.825058691+02:00"
+digest: sha256:4f9dbae443494792ca00076fc424ad8cb49c36e1307fdb7bb10fc560780908ea
+generated: "2025-08-08T11:32:40.237131+02:00"

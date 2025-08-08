@@ -53,7 +53,7 @@ appImage:
   repository: nfdi4chem/nmrxiv
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: app-dev-latest
 
 # nginxImage:
 #   name: nginx
@@ -204,9 +204,10 @@ fileStorage:
 
 nmrium:
 # You can use the nmrium hosted at our server or you can host one of your own and replace below values.
+  enabled: false
   image:
     name: nmrium
-    repository: europe-west3-docker.pkg.dev/nmrxiv/nmrxiv-dev/nmrium
+    repository: nfdi4chem/nmrium-react-wrapper:latest
     pullPolicy: Always
     enabled: false
     # Overrides the image tag whose default is the chart appVersion.
@@ -278,6 +279,8 @@ meilisearch:
   persistence:
     enabled: true
     size: 5Gi
+    storageClassName: ""
+
 
 keycloak:
   enabled: false
