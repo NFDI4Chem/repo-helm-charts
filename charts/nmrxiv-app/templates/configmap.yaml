@@ -56,7 +56,24 @@ data:
   MEMCACHED_HOST: {{ .Values.redis.memcachedHost | quote }}
   REDIS_HOST: {{ printf "%s-redis-master" .Release.Name  | quote }}
   REDIS_PORT: {{ .Values.redis.port | default 6379 | quote }}
+  {{ else }}
+  SESSION_DRIVER: {{ .Values.sessionDriver | default "database" | quote }}
+  SESSION_LIFETIME: "{{ .Values.sessionLifetime | default 120 }}"
   {{ end }}
+
+#Session Security Properties
+  SESSION_SECURE_COOKIE: "{{ .Values.session.secureCookie | default true }}"
+  SESSION_SAME_SITE: {{ .Values.session.sameSite | default "lax" | quote }}
+  SESSION_COOKIE: {{ .Values.session.cookieName | default "nmrxiv_session" | quote }}
+
+#Trusted Proxies for CSRF Protection
+  TRUSTED_PROXIES: {{ .Values.trustedProxies | default "*" | quote }}
+
+#CSRF Configuration  
+  SANCTUM_STATEFUL_DOMAINS: {{ .Values.sanctum.statefulDomains | default .Values.appProperties.url | quote }}
+
+#Force HTTPS for URL generation (important in Kubernetes with ingress)
+  FORCE_HTTPS: "{{ .Values.forceHttps | default true }}"
 
 #RabbitMQ Properties
   {{ if .Values.rabbitmq.enabled }}
